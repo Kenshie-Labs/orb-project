@@ -126,6 +126,32 @@ date: 2024-01-01
 - Create subdirectories for deeper organization
 - The sidebar automatically groups content by directory structure
 
+### The boundries on displaying content subfolder names
+
+Maximum is two levels deep.
+
+more than that will not be considered/included in the left sidebar list, will be ignored for the take down only no matter how deep the folder tree is, in the end it will be considered as part of the second level sub folder.
+
+Example :
+
+```text
+│   ├── content/                         # Content directory Collections
+│   │   └── academics/                    # As root notes title
+│   │       ├── introduction.md           # root markdown (available on left sidebar)
+│   │       ├── algebra/                    # subfolder notes title
+│   │       │   └── 01-fundamentals.md
+│   │       │   └── 02-formula.md             # subfolder markdown (available on left sidebar)
+│   │       ├── pythagoras/
+│   │       │   └── 01-fundamentals.md   
+│   │       │   └── 01-formula.md
+│   │       │   └── third-folder/
+│   │       │       └── fourth-folder/
+│   │       │           └── fifth-folder/
+│   │       │               └── silly.md      # (available) but not considered an independent child path 
+```
+
+You might find that the path home / note / .. / ... is there (a nested subfolder path) in the breadcrumb, but when you try to click it, it will produce nothing but an astro error from the developer mode testing side.
+
 ## Customization
 
 ### Theme Colors
@@ -164,3 +190,5 @@ See LICENSE file for details.
 - [ ] create a path-based generator and markdown generator folder via npm commands that rely on native node js parameters
 - [ ] (Optional) create a simple i8n from locales which is useful for static id/en buttons to change the specified base language e.g. {..title}
 - [ ] (Optional) create a smooth scroll animation when a section (Right: in this guide) is clicked
+- [ ] (Optional) create translation id/en button that toggles between languages with google translate engine
+- [ ] Frontend: change hover to active pseudo-element when media queries is mobile/tablet in global css
