@@ -4,7 +4,7 @@
   // 'slide' digunakan sebagai Svelte transition directive di template (transition:slide)
   // Warning Vite adalah false positive — Svelte compiler menangani ini secara internal
   void slide;
-  import { IconGridDots, IconSun, IconMoon, IconX } from "@tabler/icons-svelte";
+  import { Grid3x3, Sun, Moon, X } from "@lucide/svelte";
 
   // --- State (Svelte 5 runes) ---
   let isDark = $state(false);
@@ -82,7 +82,7 @@
       class="flex items-center gap-2 font-petrona font-bold text-lg tracking-wide
              text-orb-dark dark:text-orb-tan"
     >
-      <img src="/favicon.svg" alt="Orb logo" class="w-7 h-7" />
+      <img src="/favicon.svg" alt="Orb logo" width="28" height="28" class="w-7 h-7" />
       ORB Knownrie
     </a>
 
@@ -104,7 +104,7 @@
             ? 'text-orb-dark/40 dark:text-orb-tan/30'
             : 'bg-orb-dark text-orb-tan'}"
         >
-          <IconSun size={13} />
+          <Sun size={13} strokeWidth={2} />
         </span>
         <!-- Moon (active in dark) -->
         <span
@@ -113,7 +113,7 @@
             ? 'bg-orb-tan text-orb-dark'
             : 'text-orb-dark/40 dark:text-orb-tan/30'}"
         >
-          <IconMoon size={13} />
+          <Moon size={13} strokeWidth={2} />
         </span>
       </button>
 
@@ -162,9 +162,9 @@
 
           <!-- Icon: grid atau X -->
           {#if isMenuOpen}
-            <IconX size={16} />
+            <X size={16} strokeWidth={2} />
           {:else}
-            <IconGridDots size={16} />
+            <Grid3x3 size={16} strokeWidth={2} />
           {/if}
         </div>
 
