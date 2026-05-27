@@ -33,12 +33,12 @@ const title = (category ?? "").replace(/-/g, " ");
 ---
 
 <DocsLayout title={title} category={category ?? ""}>
-  <p class="text-lg text-orb-dark/60 font-light mb-2 not-prose">
+  <p class="text-lg text-orb-dark/60 font-light mb-2 not-prose dark:text-orb-tan">
     {totalEntries} {totalEntries === 1 ? "note" : "notes"} in this category.
   </p>
 
   {hasSubcategories && (
-    <p class="text-sm text-orb-dark/40 mb-8 not-prose">
+    <p class="text-sm text-orb-dark/40 mb-8 not-prose dark:text-orb-tan">
       Organized into {Object.keys(grouped).filter((k) => k !== "_root").length} subcategories.
     </p>
   )}
@@ -47,23 +47,23 @@ const title = (category ?? "").replace(/-/g, " ");
   {grouped["_root"] && grouped["_root"].length > 0 && (
     <div class="mb-10 not-prose">
       {hasSubcategories && (
-        <p class="text-xs font-bold uppercase tracking-widest text-orb-dark/40 mb-4">General</p>
+        <p class="text-xs font-bold uppercase tracking-widest text-orb-dark/60 mb-4 dark:text-orb-tan">General</p>
       )}
       <ul class="space-y-3">
         {grouped["_root"].map((entry) => (
           <li>
             <a
               href={`/notes/${entry.id}`}
-              class="flex items-start gap-4 p-4 border-2 border-orb-dark hover:shadow-brutal transition-shadow group"
+              class="flex items-start gap-4 p-4 border-2 border-orb-dark hover:shadow-brutal transition-shadow group dark:border-orb-tan dark:hover:shadow-brutal-onDarkMode"
             >
-              <span class="text-orange-400 mt-0.5 text-lg leading-none shrink-0">→</span>
+              <span class="text-blue-400 mt-0.5 text-lg leading-none shrink-0">→</span>
               <div class="min-w-0">
                 <div class="font-semibold group-hover:underline">{entry.data.title}</div>
                 {entry.data.excerpt && (
-                  <p class="text-sm text-orb-dark/55 mt-1 font-light">{entry.data.excerpt}</p>
+                  <p class="text-sm text-orb-dark/55 mt-1 font-light dark:text-orb-tan">{entry.data.excerpt}</p>
                 )}
                 {entry.data.date && (
-                  <time class="text-xs text-orb-dark/35 mt-1 block">
+                  <time class="text-xs text-orb-dark/35 mt-1 block dark:text-orb-tan">
                     {entry.data.date.toLocaleDateString("id-ID", {
                       year: "numeric",
                       month: "long",
@@ -84,33 +84,36 @@ const title = (category ?? "").replace(/-/g, " ");
     .filter(([k]) => k !== "_root")
     .map(([subcat, entries]) => (
       <div class="mb-10 not-prose">
+        <!-- category of subcategories -->
         <div class="flex items-center gap-3 mb-4">
-          <span class="w-3 h-3 bg-orange-400 inline-block shrink-0"></span>
+          <span class="w-3 h-3 bg-purple-400 inline-block shrink-0"></span>
           <a
             href={`/notes/${category}/${subcat}`}
-            class="text-xs font-bold uppercase tracking-widest text-orb-dark/60 hover:text-orb-dark transition-colors"
+            class="text-xs font-bold uppercase tracking-widest text-orb-dark/60 hover:text-orb-dark transition-colors dark:text-orb-tan"
           >
             {subcat.replace(/-/g, " ")}
           </a>
-          <span class="text-xs text-orb-dark/30 border border-orb-dark/20 px-1.5 py-0.5 rounded-sm">
+          <span class="text-xs text-orb-dark/30 border border-orb-dark/20 px-1.5 py-0.5 rounded-sm dark:border-orb-tan dark:text-orb-tan">
             {entries.length}
           </span>
         </div>
+        
+        <!-- Subcategory entries links -->
         <ul class="space-y-3">
           {entries.map((entry) => (
             <li>
               <a
                 href={`/notes/${entry.id}`}
-                class="flex items-start gap-4 p-4 border-2 border-orb-dark hover:shadow-brutal transition-shadow group"
+                class="flex items-start gap-4 p-4 border-2 border-orb-dark hover:shadow-brutal transition-shadow group dark:border-orb-tan dark:text-orb-tan dark:hover:shadow-brutal-onDarkMode"
               >
-                <span class="text-orange-400 mt-0.5 text-lg leading-none shrink-0">→</span>
+                <span class="text-orange-400 mt-0.5 text-xl leading-none shrink-0">→</span>
                 <div class="min-w-0">
                   <div class="font-semibold group-hover:underline">{entry.data.title}</div>
                   {entry.data.excerpt && (
-                    <p class="text-sm text-orb-dark/55 mt-1 font-light">{entry.data.excerpt}</p>
+                    <p class="text-sm text-orb-dark/55 mt-1 font-light dark:text-orb-tan">{entry.data.excerpt}</p>
                   )}
                   {entry.data.date && (
-                    <time class="text-xs text-orb-dark/35 mt-1 block">
+                    <time class="text-xs text-orb-dark/35 mt-1 block dark:text-orb-tan">
                       {entry.data.date.toLocaleDateString("id-ID", {
                         year: "numeric",
                         month: "long",

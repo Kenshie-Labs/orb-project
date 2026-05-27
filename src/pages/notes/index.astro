@@ -1,13 +1,15 @@
 ---
 import { getCollection } from "astro:content";
 import "../../styles/global.css";
+import Navbar from "../../components/Navbar.svelte";
+import ThemeInit from "../../components/ThemeInit.astro";
+import { ClientRouter } from "astro:transitions";
 
 const allEntries = await getCollection("content");
 
-// Ambil nama folder root saja, lalu deduplikasi
-const categories = [...new Set(
-  allEntries.map((entry) => entry.id.split("/")[0])
-)].sort();
+const categories = [
+  ...new Set(allEntries.map((entry) => entry.id.split("/")[0])),
+].sort();
 ---
 
 <html lang="en">
@@ -17,26 +19,16 @@ const categories = [...new Set(
     <link rel="icon" href="/favicon.ico" />
     <meta name="viewport" content="width=device-width" />
     <title>Archive — Orb</title>
+    <ThemeInit />
+    <ClientRouter />
   </head>
   <body class="min-h-screen">
 
-    <!-- Navigation Panel -->
-    <header class="sticky top-0 z-50 border-b-2 border-orb-dark bg-orb-tan">
-      <div class="max-w-screen-xl mx-auto px-6 h-14 flex items-center justify-between">
-        <a href="/" class="flex items-center gap-2 font-petrona font-bold text-lg tracking-wide">
-          <img src="/favicon.svg" alt="Orb logo" class="w-7 h-7" />
-          ORB Knownrie
-        </a>
-        <nav class="flex gap-6 text-sm">
-          <a href="/notes" class="hover:underline">Notes</a>
-          <a href="/" class="hover:underline">About</a>
-        </nav>
-      </div>
-    </header>
-    
+    <Navbar client:load transition:persist="navbar" />
+
     <main class="max-w-5xl mx-auto px-7 py-14">
 
-      <h1 class="text-center text-5xl text-orb-dark m-10">
+      <h1 class="text-center text-5xl text-orb-dark dark:text-orb-tan m-10">
         archive of our knowledge
       </h1>
 
@@ -44,7 +36,12 @@ const categories = [...new Set(
         {categories.map((cat) => (
           <a
             href={`/notes/${cat}`}
-            class="px-6 py-3 border border-orb-dark rounded-lg capitalize text-orb-dark hover:shadow-brutal transition-shadow duration-150 hover:bg-orange-400"
+            data-astro-prefetch
+            class="px-6 py-3 border border-orb-dark dark:border-orb-tan
+                   rounded-lg capitalize
+                   text-orb-dark dark:text-orb-tan
+                   hover:shadow-brutal dark:hover:shadow-brutal-onDarkMode
+                   transition-shadow duration-150 hover:bg-orange-400"
           >
             {cat}
           </a>

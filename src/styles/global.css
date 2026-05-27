@@ -2,8 +2,10 @@
 @import url("https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,200..900;1,200..900&display=swap");
 @import "tailwindcss";
 
-@plugin "@tailwindcss/typography";
+/* Dark mode: class-based — default is ALWAYS light, dark hanya dari toggle */
+@custom-variant dark (&:is(.dark, .dark *));
 
+@plugin "@tailwindcss/typography";
 
 @theme {
   /*Global palette set*/
@@ -24,8 +26,9 @@
 @layer base {
   body {
     @apply bg-orb-tan text-orb-dark;
+    @apply dark:bg-orb-dark dark:text-orb-tan;
   }
-  
+
   h1,
   h2,
   h3 {
@@ -44,6 +47,48 @@
 
   p {
     @apply font-light font-source-sans;
+  }
+}
+
+/* Dark mode prose override */
+@utility prose-dark {
+  --tw-prose-body: var(--color-orb-tan);
+  --tw-prose-headings: var(--color-orb-tan);
+  --tw-prose-lead: color-mix(in srgb, var(--color-orb-tan) 70%, transparent);
+  --tw-prose-links: var(--color-orb-tan);
+  --tw-prose-bold: var(--color-orb-tan);
+  --tw-prose-counters: color-mix(
+    in srgb,
+    var(--color-orb-tan) 60%,
+    transparent
+  );
+  --tw-prose-bullets: color-mix(in srgb, var(--color-orb-tan) 40%, transparent);
+  --tw-prose-hr: color-mix(in srgb, var(--color-orb-tan) 20%, transparent);
+  --tw-prose-quotes: var(--color-orb-tan);
+  --tw-prose-quote-borders: color-mix(
+    in srgb,
+    var(--color-orb-tan) 30%,
+    transparent
+  );
+  --tw-prose-captions: color-mix(
+    in srgb,
+    var(--color-orb-tan) 60%,
+    transparent
+  );
+  --tw-prose-code: var(--color-orb-tan);
+  --tw-prose-th-borders: color-mix(
+    in srgb,
+    var(--color-orb-tan) 30%,
+    transparent
+  );
+  --tw-prose-td-borders: color-mix(
+    in srgb,
+    var(--color-orb-tan) 20%,
+    transparent
+  );
+
+  code {
+    background-color: rgba(255, 255, 255, 0.08);
   }
 }
 

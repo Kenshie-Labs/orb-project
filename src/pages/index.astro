@@ -1,5 +1,7 @@
 ---
 import "../styles/global.css";
+import ThemeInit from "../components/ThemeInit.astro";
+import { ClientRouter } from "astro:transitions";
 ---
 
 <html lang="en">
@@ -10,9 +12,11 @@ import "../styles/global.css";
     <meta name="viewport" content="width=device-width" />
     <meta name="generator" content={Astro.generator} />
     <title>Orb Knownrie</title>
+    <ThemeInit />
+    <ClientRouter />
   </head>
   <body>
     <h1>Lorem ipsum dolor sit amet.</h1>
-    <a href="/notes">→ Notes</a>
+    <a href="/notes" data-astro-prefetch>→ Notes</a>
   </body>
 </html>

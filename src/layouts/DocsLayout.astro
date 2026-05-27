@@ -1,6 +1,9 @@
 ---
 import { getCollection, type CollectionEntry } from "astro:content";
 import "../styles/global.css";
+import Navbar from "../components/Navbar.svelte";
+import ThemeInit from "../components/ThemeInit.astro";
+import { ClientRouter } from "astro:transitions";
 
 interface Props {
   title: string;
@@ -47,39 +50,37 @@ if (currentId) {
     <link rel="icon" href="/favicon.ico" />
     <meta name="viewport" content="width=device-width" />
     <title>{title} — Orb</title>
+    <!-- FOUC prevention: apply dark class sebelum paint -->
+    <ThemeInit />
+    <!-- Client-side navigation antar halaman (eliminasi full page reload) -->
+    <ClientRouter />
   </head>
   <body class="min-h-screen">
 
-    <!-- Header -->
-    <header class="sticky top-0 z-50 border-b-2 border-orb-dark bg-orb-tan">
-      <div class="max-w-screen-xl mx-auto px-6 h-14 flex items-center justify-between">
-        <a href="/" class="flex items-center gap-2 font-petrona font-bold text-lg tracking-wide">
-          <img src="/favicon.svg" alt="Orb logo" class="w-7 h-7" />
-          ORB Knownrie
-        </a>
-        <nav class="flex gap-6 text-sm">
-          <a href="/notes" class="hover:underline">Notes</a>
-          <a href="/" class="hover:underline">About</a>
-        </nav>
-      </div>
-    </header>
+    <!-- Navbar: persisted across navigations agar tidak re-hydrate setiap pindah halaman -->
+    <Navbar client:load transition:persist="navbar" />
 
     <!-- 3-column docs body -->
     <div class="max-w-screen-xl mx-auto flex min-h-[calc(100vh-3.5rem)]">
 
       <!-- LEFT SIDEBAR -->
-      <aside class="hidden lg:flex flex-col w-64 shrink-0 border-r-2 border-orb-dark sticky top-14 h-[calc(100vh-3.5rem)] overflow-y-auto">
+      <aside class="hidden lg:flex flex-col w-64 shrink-0 border-r-2
+                    border-orb-dark dark:border-orb-tan
+                    sticky top-14 h-[calc(100vh-3.5rem)] overflow-y-auto">
         <div class="p-5">
 
           <!-- Back link -->
           <a
             href="/notes"
-            class="flex items-center gap-1 text-xs text-orb-dark/50 hover:text-orb-dark mb-5 uppercase tracking-widest"
+            class="flex items-center gap-1 text-xs mb-5 uppercase tracking-widest
+                   text-orb-dark/50 hover:text-orb-dark
+                   dark:text-orb-tan/50 dark:hover:text-orb-tan"
           >
             ← All Notes
           </a>
 
-          <p class="text-xs font-bold uppercase tracking-widest text-orb-dark/40 mb-3">
+          <p class="text-xs font-bold uppercase tracking-widest mb-3
+                    text-orb-dark/40 dark:text-orb-tan/40">
             Browse {category.replace(/-/g, " ")}
           </p>
 
@@ -92,8 +93,8 @@ if (currentId) {
                 class:list={[
                   "block px-3 py-2 text-sm transition-colors mb-1 border-l-2",
                   isActive
-                    ? "border-orange-400 bg-orb-dark text-orb-tan font-semibold"
-                    : "border-transparent hover:border-orb-dark hover:bg-orb-dark/5",
+                    ? "border-orange-400 bg-orb-dark text-orb-tan dark:bg-orb-tan dark:text-orb-dark font-semibold"
+                    : "border-transparent text-orb-dark dark:text-orb-tan hover:border-orb-dark dark:hover:border-orb-tan hover:bg-orb-dark/5 dark:hover:bg-orb-tan/5",
                 ]}
               >
                 {entry.data.title}
@@ -110,8 +111,10 @@ if (currentId) {
                   href={`/notes/${category}/${subcat}`}
                   class="flex items-center gap-2 mb-2 px-1 group"
                 >
-                  <span class="w-2 h-2 bg-blue-400 shrink-0 inline-block"></span>
-                  <span class="text-xs font-bold uppercase tracking-widest text-orb-dark/60 group-hover:text-orb-dark transition-colors">
+                  <span class="w-2 h-2 bg-orange-400 shrink-0 inline-block"></span>
+                  <span class="text-xs font-bold uppercase tracking-widest transition-colors
+                               text-orb-dark/60 group-hover:text-orb-dark
+                               dark:text-orb-tan/60 dark:group-hover:text-orb-tan">
                     {subcat.replace(/-/g, " ")}
                   </span>
                 </a>
@@ -123,8 +126,8 @@ if (currentId) {
                       class:list={[
                         "block px-3 py-2 text-sm transition-colors mb-1 border-l-2",
                         isActive
-                          ? "border-orange-400 bg-orb-dark text-orb-tan font-semibold"
-                          : "border-transparent hover:border-orb-dark hover:bg-orb-dark/5",
+                          ? "border-orange-400 bg-orb-dark text-orb-tan dark:bg-orb-tan dark:text-orb-dark font-semibold"
+                          : "border-transparent text-orb-dark dark:text-orb-tan hover:border-orb-dark dark:hover:border-orb-tan hover:bg-orb-dark/5 dark:hover:bg-orb-tan/5",
                       ]}
                     >
                       {entry.data.title}
@@ -140,18 +143,20 @@ if (currentId) {
       <main class="flex-1 min-w-0 px-8 py-10 max-w-3xl">
 
         <!-- Breadcrumb -->
-        <nav class="flex flex-wrap items-center gap-1.5 text-sm text-orb-dark/50 mb-6">
-          <a href="/" class="hover:text-orb-dark">Home</a>
+        <nav class="flex flex-wrap items-center gap-1.5 text-sm mb-6
+                    text-orb-dark/50 dark:text-orb-tan/50">
+          <a href="/" class="hover:text-orb-dark dark:hover:text-orb-tan">Home</a>
           <span>/</span>
-          <a href="/notes" class="hover:text-orb-dark">Notes</a>
+          <a href="/notes" class="hover:text-orb-dark dark:hover:text-orb-tan">Notes</a>
           <span>/</span>
-          <a href={`/notes/${category}`} class="capitalize hover:text-orb-dark">
+          <a href={`/notes/${category}`}
+             class="capitalize hover:text-orb-dark dark:hover:text-orb-tan">
             {category.replace(/-/g, " ")}
           </a>
           {breadcrumbMiddle.map((seg) => (
             <>
               <span>/</span>
-              <a href={seg.href} class="capitalize hover:text-orb-dark">
+              <a href={seg.href} class="capitalize hover:text-orb-dark dark:hover:text-orb-tan">
                 {seg.label}
               </a>
             </>
@@ -159,36 +164,48 @@ if (currentId) {
           {currentId && (
             <>
               <span>/</span>
-              <span class="text-orb-dark font-medium">{title}</span>
+              <span class="font-medium text-orb-dark dark:text-orb-tan">{title}</span>
             </>
           )}
         </nav>
 
         <!-- Category chip -->
-        <span class="inline-block px-3 py-1 text-xs font-bold uppercase border-2 border-orb-dark bg-orange-400 mb-5 tracking-widest">
+        <span class="inline-block px-3 py-1 text-xs font-bold uppercase mb-5 tracking-widest
+                     border-2 border-orb-dark bg-orange-400 dark:border-orb-tan">
           {category.replace(/-/g, " ")}
         </span>
 
         <!-- Page title -->
-        <h1 class="text-5xl font-petrona font-light leading-tight mb-3">{title}</h1>
+        <h1 class="text-5xl font-petrona font-light leading-tight mb-3
+                   text-orb-dark dark:text-orb-tan">
+          {title}
+        </h1>
 
         {excerpt && (
-          <p class="text-orb-dark/60 text-lg mb-2 font-light">{excerpt}</p>
+          <p class="text-lg mb-2 font-light text-orb-dark/60 dark:text-orb-tan/60">
+            {excerpt}
+          </p>
         )}
 
         <!-- Markdown content -->
-        <div class="prose prose-neutral prose-brutal max-w-none mt-8 pt-8 border-t-2 border-orb-dark/20">
+        <div class="prose prose-neutral prose-brutal dark:prose-dark max-w-none
+                    mt-8 pt-8 border-t-2 border-orb-dark/20 dark:border-orb-tan/20">
           <slot />
         </div>
       </main>
 
       <!-- RIGHT SIDEBAR (Table of Contents) -->
       {headings.filter((h) => h.depth <= 3).length > 0 && (
-        <aside class="hidden xl:flex flex-col w-52 shrink-0 border-l-2 border-orb-dark sticky top-14 h-[calc(100vh-3.5rem)] overflow-y-auto">
+        <aside class="hidden xl:flex flex-col w-52 shrink-0 border-l-2
+                      border-orb-dark dark:border-orb-tan
+                      sticky top-14 h-[calc(100vh-3.5rem)] overflow-y-auto">
           <div class="p-5">
             <div class="flex items-center gap-2 mb-4">
-              <span class="w-2 h-2 bg-orange-400 shrink-0 inline-block"></span>
-              <span class="text-xs font-bold uppercase tracking-widest">In This Guide</span>
+              <span class="w-2 h-2 bg-green-400 shrink-0 inline-block"></span>
+              <span class="text-xs font-bold uppercase tracking-widest
+                           text-orb-dark dark:text-orb-tan">
+                In This Guide
+              </span>
             </div>
             <nav class="space-y-1">
               {headings
@@ -197,7 +214,8 @@ if (currentId) {
                   <a
                     href={`#${h.slug}`}
                     class:list={[
-                      "block text-orb-dark/55 hover:text-orb-dark transition-colors py-1 border-l-2 border-transparent hover:border-orange-400",
+                      "block transition-colors py-1 border-l-2 border-transparent hover:border-orange-400",
+                      "text-orb-dark/55 hover:text-orb-dark dark:text-orb-tan/55 dark:hover:text-orb-tan",
                       h.depth === 2 ? "pl-2 text-sm" : "pl-5 text-xs",
                     ]}
                   >
