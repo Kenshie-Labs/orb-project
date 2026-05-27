@@ -15,6 +15,7 @@ const categories = [
 <html lang="en">
   <head>
     <meta charset="utf-8" />
+
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="icon" href="/favicon.ico" />
     <meta name="viewport" content="width=device-width" />
@@ -24,7 +25,7 @@ const categories = [
   </head>
   <body class="min-h-screen">
 
-    <Navbar client:load transition:persist="navbar" />
+    <Navbar client:idle transition:persist="navbar" />
 
     <main class="max-w-5xl mx-auto px-7 py-14">
 

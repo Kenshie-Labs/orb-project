@@ -46,6 +46,7 @@ if (currentId) {
 <html lang="en">
   <head>
     <meta charset="utf-8" />
+
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="icon" href="/favicon.ico" />
     <meta name="viewport" content="width=device-width" />
@@ -58,7 +59,7 @@ if (currentId) {
   <body class="min-h-screen">
 
     <!-- Navbar: persisted across navigations agar tidak re-hydrate setiap pindah halaman -->
-    <Navbar client:load transition:persist="navbar" />
+    <Navbar client:idle transition:persist="navbar" />
 
     <!-- 3-column docs body -->
     <div class="max-w-screen-xl mx-auto flex min-h-[calc(100vh-3.5rem)]">
