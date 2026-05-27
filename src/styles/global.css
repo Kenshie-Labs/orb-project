@@ -86,10 +86,6 @@
     var(--color-orb-tan) 20%,
     transparent
   );
-
-  code {
-    background-color: rgba(255, 255, 255, 0.08);
-  }
 }
 
 /* Customize Markdown Text to fit the Neo-Brutalism style */
