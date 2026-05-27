@@ -1,0 +1,14 @@
+{
+  "id": {
+    "switch_lang": "EN",
+    "hero_title": "Observatory of Research & Brainstorming",
+    "hero_subtitle": "Memetakan kekacauan menjadi pengetahuan terstruktur untuk persiapan ujian.",
+    "cta_button": "Mulai Menjelajah"
+  },
+  "en": {
+    "switch_lang": "ID",
+    "hero_title": "Observatory of Research & Brainstorming",
+    "hero_subtitle": "Mapping chaos into structured knowledge for academic exam preparation.",
+    "cta_button": "Start Exploring"
+  }
+}
