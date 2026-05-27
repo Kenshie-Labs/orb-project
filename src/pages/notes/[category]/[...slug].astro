@@ -1,0 +1,138 @@
+---
+import { getCollection, render, type CollectionEntry } from "astro:content";
+import DocsLayout from "../../../layouts/DocsLayout.astro";
+
+type DocEntry = CollectionEntry<"content">;
+
+interface DocProps {
+  type: "doc";
+  entry: DocEntry;
+}
+
+interface SubcategoryProps {
+  type: "subcategory";
+  subcategory: string;
+  subcatEntries: DocEntry[];
+}
+
+type PageProps = DocProps | SubcategoryProps;
+
+export async function getStaticPaths() {
+  const allEntries = await getCollection("content");
+
+  const paths: {
+    params: { category: string; slug: string };
+    props: PageProps;
+  }[] = [];
+
+  const subcategorySet = new Set<string>();
+
+  // Generate a path for every individual markdown file
+  for (const entry of allEntries) {
+    const parts = entry.id.split("/");
+    const category = parts[0];
+    const slug = parts.slice(1).join("/");
+
+    paths.push({
+      params: { category, slug },
+      props: { type: "doc", entry },
+    });
+
+    // Track subcategories (entries with depth >= 3: category/subcat/file)
+    if (parts.length >= 3) {
+      subcategorySet.add(`${category}/${parts[1]}`);
+    }
+  }
+
+  // Generate a subcategory index path for each unique subcategory
+  for (const key of subcategorySet) {
+    const slashIdx = key.indexOf("/");
+    const category = key.slice(0, slashIdx);
+    const subcategory = key.slice(slashIdx + 1);
+
+    const subcatEntries = allEntries
+      .filter((e) => {
+        const parts = e.id.split("/");
+        return parts[0] === category && parts[1] === subcategory;
+      })
+      .sort((a, b) => a.id.localeCompare(b.id));
+
+    if (subcatEntries.length === 0) continue;
+
+    paths.push({
+      params: { category, slug: subcategory },
+      props: { type: "subcategory", subcategory, subcatEntries },
+    });
+  }
+
+  return paths;
+}
+
+const { category } = Astro.params;
+const props = Astro.props as PageProps;
+
+// Render content only for individual doc pages
+let Content: any = null;
+let headings: { depth: number; slug: string; text: string }[] = [];
+
+if (props.type === "doc") {
+  const rendered = await render(props.entry);
+  Content = rendered.Content;
+  headings = rendered.headings;
+}
+
+// Derive title, excerpt, and currentId for the layout
+const pageTitle =
+  props.type === "doc"
+    ? props.entry.data.title
+    : props.subcategory.replace(/-/g, " ");
+
+const pageExcerpt =
+  props.type === "doc"
+    ? props.entry.data.excerpt
+    : `${props.subcatEntries.length} ${props.subcatEntries.length === 1 ? "note" : "notes"} in this subcategory.`;
+
+const currentId = props.type === "doc" ? props.entry.id : undefined;
+---
+
+<DocsLayout
+  title={pageTitle}
+  category={category ?? ""}
+  currentId={currentId}
+  headings={headings}
+  excerpt={pageExcerpt}
+>
+  <!-- Individual document: render markdown -->
+  {props.type === "doc" && Content && <Content />}
+
+  <!-- Subcategory index: list all entries in the subcategory -->
+  {props.type === "subcategory" && (
+    <ul class="space-y-3 not-prose">
+      {props.subcatEntries.map((entry) => (
+        <li>
+          <a
+            href={`/notes/${entry.id}`}
+            class="flex items-start gap-4 p-4 border-2 border-orb-dark hover:shadow-brutal transition-shadow group"
+          >
+            <span class="text-orange-400 mt-0.5 text-lg leading-none shrink-0">→</span>
+            <div class="min-w-0">
+              <div class="font-semibold group-hover:underline">{entry.data.title}</div>
+              {entry.data.excerpt && (
+                <p class="text-sm text-orb-dark/55 mt-1 font-light">{entry.data.excerpt}</p>
+              )}
+              {entry.data.date && (
+                <time class="text-xs text-orb-dark/35 mt-1 block">
+                  {entry.data.date.toLocaleDateString("id-ID", {
+                    year: "numeric",
+                    month: "long",
+                    day: "numeric",
+                  })}
+                </time>
+              )}
+            </div>
+          </a>
+        </li>
+      ))}
+    </ul>
+  )}
+</DocsLayout>

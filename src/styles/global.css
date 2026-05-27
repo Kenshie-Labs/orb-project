@@ -1,0 +1,68 @@
+@import url("https://fonts.googleapis.com/css2?family=Petrona:ital,wght@0,100..900;1,100..900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,200..900;1,200..900&display=swap");
+@import "tailwindcss";
+
+@plugin "@tailwindcss/typography";
+
+
+@theme {
+  /*Global palette set*/
+  --color-orb-tan: #edeadf;
+  --color-orb-dark: #1a1a1a;
+  --font-petrona: "Petrona", sans-serif;
+  --font-source-sans: "Source Sans 3", sans-serif;
+
+  --color-bg-light: var(--color-orb-tan);
+  --color-bg-dark: var(--color-orb-dark);
+
+  /*NeoBrutalism palette set*/
+  --shadow-brutal: 6px 6px 0px 0px var(--color-orb-dark);
+  --shadow-brutal-onDarkMode: 6px 6px 0px 0px var(--color-orb-tan);
+}
+
+/*Fundamental Styling*/
+@layer base {
+  body {
+    @apply bg-orb-tan text-orb-dark;
+  }
+  
+  h1,
+  h2,
+  h3 {
+    @apply font-petrona leading-[1.2] font-[400];
+  }
+
+  h1 {
+    @apply text-4xl;
+  }
+  h2 {
+    @apply text-2xl;
+  }
+  h3 {
+    @apply text-xl;
+  }
+
+  p {
+    @apply font-light font-source-sans;
+  }
+}
+
+/* Customize Markdown Text to fit the Neo-Brutalism style */
+@utility prose-brutal {
+  --tw-prose-headings: var(--color-orb-dark);
+  --tw-prose-body: var(--color-orb-dark);
+
+  h1,
+  h2,
+  h3 {
+    font-weight: 800;
+    font-family: var(--font-source-sans);
+    letter-spacing: -0.02em;
+  }
+
+  code {
+    background-color: rgba(0, 0, 0, 0.05);
+    padding: 2px 6px;
+    font-size: 0.9em;
+  }
+}
