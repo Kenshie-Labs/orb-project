@@ -36,10 +36,8 @@
   /*Global palette set*/
   --color-orb-tan: #edeadf;
   --color-orb-dark: #1a1a1a;
-  --font-petrona: ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
-  --font-source-sans:
-    ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-    sans-serif;
+  --font-petrona: "Petrona", ui-serif, Georgia, serif;
+  --font-source-sans: "Source Sans 3", ui-sans-serif, Roboto, sans-serif;
 
   --color-bg-light: var(--color-orb-tan);
   --color-bg-dark: var(--color-orb-dark);
