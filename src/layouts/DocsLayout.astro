@@ -2,6 +2,7 @@
 import { getCollection, type CollectionEntry } from "astro:content";
 import "../styles/global.css";
 import Navbar from "../components/Navbar.svelte";
+import DocsPagination from "../components/DocsPagination.svelte";
 import ThemeInit from "../components/ThemeInit.astro";
 import { ClientRouter } from "astro:transitions";
 
@@ -40,6 +41,38 @@ if (currentId) {
     label: seg.replace(/-/g, " "),
     href: `/notes/${[parts[0], ...subcatParts.slice(0, i + 1)].join("/")}`,
   }));
+}
+
+// Determine previous and next pages for pagination
+let currentPage = null;
+let prevPage = null;
+let nextPage = null;
+
+if (currentId) {
+  const currentIndex = categoryEntries.findIndex(entry => entry.id === currentId);
+  if (currentIndex !== -1) {
+    const currentEntry = categoryEntries[currentIndex];
+    currentPage = {
+      title: currentEntry.data.title,
+      url: `/notes/${currentEntry.id}`
+    };
+
+    if (currentIndex > 0) {
+      const prevEntry = categoryEntries[currentIndex - 1];
+      prevPage = {
+        title: prevEntry.data.title,
+        url: `/notes/${prevEntry.id}`
+      };
+    }
+
+    if (currentIndex < categoryEntries.length - 1) {
+      const nextEntry = categoryEntries[currentIndex + 1];
+      nextPage = {
+        title: nextEntry.data.title,
+        url: `/notes/${nextEntry.id}`
+      };
+    }
+  }
 }
 ---
 
@@ -193,6 +226,9 @@ if (currentId) {
                     mt-8 pt-8 border-t-2 border-orb-dark/20 dark:border-orb-tan/20">
           <slot />
         </div>
+
+        <!-- Pagination -->
+        {currentPage && <DocsPagination currentPage={currentPage} prevPage={prevPage} nextPage={nextPage} client:load />}
       </main>
 
       <!-- RIGHT SIDEBAR (Table of Contents) -->
