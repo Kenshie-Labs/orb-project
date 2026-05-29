@@ -54,7 +54,7 @@
       handleScroll();
       // Tutup dropdown menu saat navigasi ke halaman lain
       isMenuOpen = false;
-      
+
       // Re-sync dark mode from localStorage on page load to ensure consistency
       try {
         const storedTheme = localStorage.getItem("orb-theme");
@@ -203,19 +203,6 @@
         class="max-w-screen-xl mx-auto px-6 py-4 flex flex-col sm:flex-row gap-2"
       >
         <a
-          href="/notes"
-          data-astro-prefetch
-          onclick={closeMenu}
-          class="px-4 py-2 text-sm font-medium border-2
-                 border-orb-dark text-orb-dark
-                 dark:border-orb-tan dark:text-orb-tan
-                 hover:bg-orb-dark hover:text-orb-tan
-                 dark:hover:bg-orb-tan dark:hover:text-orb-dark
-                 transition-colors"
-        >
-          → Notes
-        </a>
-        <a
           href="/"
           data-astro-prefetch
           onclick={closeMenu}
@@ -224,9 +211,26 @@
                  dark:border-orb-tan dark:text-orb-tan
                  hover:bg-orb-dark hover:text-orb-tan
                  dark:hover:bg-orb-tan dark:hover:text-orb-dark
+                 active:bg-orb-dark active:text-orb-tan
+                 dark:active:bg-orb-tan dark:active:text-orb-dark
                  transition-colors"
         >
           → Home
+        </a>
+        <a
+          href="/notes"
+          data-astro-prefetch
+          onclick={closeMenu}
+          class="px-4 py-2 text-sm font-medium border-2
+                 border-orb-dark text-orb-dark
+                 dark:border-orb-tan dark:text-orb-tan
+                 hover:bg-orb-dark hover:text-orb-tan
+                 dark:hover:bg-orb-tan dark:hover:text-orb-dark
+                 active:bg-orb-dark active:text-orb-tan
+                 dark:active:bg-orb-tan dark:active:text-orb-dark
+                 transition-colors"
+        >
+          → Notes
         </a>
       </nav>
     </div>

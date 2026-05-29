@@ -107,8 +107,8 @@ if (currentId) {
           <a
             href="/notes"
             class="flex items-center gap-1 text-xs mb-5 uppercase tracking-widest
-                   text-orb-dark/50 hover:text-orb-dark
-                   dark:text-orb-tan/50 dark:hover:text-orb-tan"
+                   text-orb-dark/50 hover:text-orb-dark active:text-orb-dark
+                   dark:text-orb-tan/50 dark:hover:text-orb-tan dark:active:text-orb-tan"
           >
             ← All Notes
           </a>
@@ -128,7 +128,7 @@ if (currentId) {
                   "block px-3 py-2 text-sm transition-colors mb-1 border-l-2",
                   isActive
                     ? "border-orange-400 bg-orb-dark text-orb-tan dark:bg-orb-tan dark:text-orb-dark font-semibold"
-                    : "border-transparent text-orb-dark dark:text-orb-tan hover:border-orb-dark dark:hover:border-orb-tan hover:bg-orb-dark/5 dark:hover:bg-orb-tan/5",
+                    : "border-transparent text-orb-dark dark:text-orb-tan hover:border-orb-dark active:border-orb-dark dark:hover:border-orb-tan dark:active:border-orb-tan hover:bg-orb-dark/5 active:bg-orb-dark/5 dark:hover:bg-orb-tan/5 dark:active:bg-orb-tan/5",
                 ]}
               >
                 {entry.data.title}
@@ -147,8 +147,8 @@ if (currentId) {
                 >
                   <span class="w-2 h-2 bg-orange-400 shrink-0 inline-block"></span>
                   <span class="text-xs font-bold uppercase tracking-widest transition-colors
-                               text-orb-dark/60 group-hover:text-orb-dark
-                               dark:text-orb-tan/60 dark:group-hover:text-orb-tan">
+                               text-orb-dark/60 group-hover:text-orb-dark group-active:text-orb-dark
+                               dark:text-orb-tan/60 dark:group-hover:text-orb-tan dark:group-active:text-orb-tan">
                     {subcat.replace(/-/g, " ")}
                   </span>
                 </a>
@@ -161,7 +161,7 @@ if (currentId) {
                         "block px-3 py-2 text-sm transition-colors mb-1 border-l-2",
                         isActive
                           ? "border-orange-400 bg-orb-dark text-orb-tan dark:bg-orb-tan dark:text-orb-dark font-semibold"
-                          : "border-transparent text-orb-dark dark:text-orb-tan hover:border-orb-dark dark:hover:border-orb-tan hover:bg-orb-dark/5 dark:hover:bg-orb-tan/5",
+                          : "border-transparent text-orb-dark dark:text-orb-tan hover:border-orb-dark active:border-orb-dark dark:hover:border-orb-tan dark:active:border-orb-tan hover:bg-orb-dark/5 active:bg-orb-dark/5 dark:hover:bg-orb-tan/5 dark:active:bg-orb-tan/5",
                       ]}
                     >
                       {entry.data.title}
@@ -179,18 +179,18 @@ if (currentId) {
         <!-- Breadcrumb -->
         <nav class="flex flex-wrap items-center gap-1.5 text-sm mb-6
                     text-orb-dark/50 dark:text-orb-tan/50">
-          <a href="/" class="hover:text-orb-dark dark:hover:text-orb-tan">Home</a>
+          <a href="/" class="hover:text-orb-dark active:text-orb-dark dark:hover:text-orb-tan dark:active:text-orb-tan">Home</a>
           <span>/</span>
-          <a href="/notes" class="hover:text-orb-dark dark:hover:text-orb-tan">Notes</a>
+          <a href="/notes" class="hover:text-orb-dark active:text-orb-dark dark:hover:text-orb-tan dark:active:text-orb-tan">Notes</a>
           <span>/</span>
           <a href={`/notes/${category}`}
-             class="capitalize hover:text-orb-dark dark:hover:text-orb-tan">
+             class="capitalize hover:text-orb-dark active:text-orb-dark dark:hover:text-orb-tan dark:active:text-orb-tan">
             {category.replace(/-/g, " ")}
           </a>
           {breadcrumbMiddle.map((seg) => (
             <>
               <span>/</span>
-              <a href={seg.href} class="capitalize hover:text-orb-dark dark:hover:text-orb-tan">
+              <a href={seg.href} class="capitalize hover:text-orb-dark active:text-orb-dark dark:hover:text-orb-tan dark:active:text-orb-tan">
                 {seg.label}
               </a>
             </>
@@ -251,8 +251,8 @@ if (currentId) {
                   <a
                     href={`#${h.slug}`}
                     class:list={[
-                      "block transition-colors py-1 border-l-2 border-transparent hover:border-orange-400",
-                      "text-orb-dark/55 hover:text-orb-dark dark:text-orb-tan/55 dark:hover:text-orb-tan",
+                      "block transition-colors py-1 border-l-2 border-transparent hover:border-orange-400 active:border-orange-400",
+                      "text-orb-dark/55 hover:text-orb-dark active:text-orb-dark dark:text-orb-tan/55 dark:hover:text-orb-tan dark:active:text-orb-tan",
                       h.depth === 2 ? "pl-2 text-sm" : "pl-5 text-xs",
                     ]}
                   >

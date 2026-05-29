@@ -112,11 +112,11 @@ const currentId = props.type === "doc" ? props.entry.id : undefined;
         <li>
           <a
             href={`/notes/${entry.id}`}
-            class="flex items-start gap-4 p-4 border-2 border-orb-dark hover:shadow-brutal transition-shadow group dark:border-orb-tan dark:hover:shadow-brutal-onDarkMode"
+            class="flex items-start gap-4 p-4 border-2 border-orb-dark hover:shadow-brutal active:shadow-brutal transition-shadow group dark:border-orb-tan dark:hover:shadow-brutal-onDarkMode dark:active:shadow-brutal-onDarkMode"
           >
             <span class="text-orange-400 mt-0.5 text-lg leading-none shrink-0">→</span>
             <div class="min-w-0">
-              <div class="font-semibold group-hover:underline">{entry.data.title}</div>
+              <div class="font-semibold group-hover:underline group-active:underline">{entry.data.title}</div>
               {entry.data.excerpt && (
                 <p class="text-sm text-orb-dark/55 mt-1 font-light dark:text-orb-tan">{entry.data.excerpt}</p>
               )}
