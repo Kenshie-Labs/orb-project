@@ -1,5 +1,6 @@
 ---
 import "../styles/global.css";
+import Navbar from "../components/Navbar.svelte";
 import ThemeInit from "../components/ThemeInit.astro";
 import { ClientRouter } from "astro:transitions";
 ---
@@ -17,6 +18,7 @@ import { ClientRouter } from "astro:transitions";
     <ClientRouter />
   </head>
   <body>
+    <Navbar client:idle transition:persist="navbar" />
     <h1>Lorem ipsum dolor sit amet.</h1>
     <a href="/notes" data-astro-prefetch>→ Notes</a>
   </body>

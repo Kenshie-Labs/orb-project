@@ -54,8 +54,23 @@
       handleScroll();
       // Tutup dropdown menu saat navigasi ke halaman lain
       isMenuOpen = false;
-      // Re-sync dark mode (kalau ada halaman yang mengubah class html)
-      isDark = document.documentElement.classList.contains("dark");
+      
+      // Re-sync dark mode from localStorage on page load to ensure consistency
+      try {
+        const storedTheme = localStorage.getItem("orb-theme");
+        if (storedTheme === "dark") {
+          document.documentElement.classList.add("dark");
+          isDark = true;
+        } else {
+          // If storedTheme is 'light' or null/undefined, ensure 'dark' class is removed
+          document.documentElement.classList.remove("dark");
+          isDark = false;
+        }
+      } catch (e) {
+        // Fallback in case localStorage is not available (e.g., security restrictions)
+        console.error("Error accessing localStorage for theme:", e);
+        isDark = document.documentElement.classList.contains("dark"); // Revert to DOM check as fallback
+      }
     };
 
     document.addEventListener("astro:page-load", onPageLoad);
