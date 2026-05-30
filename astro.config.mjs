@@ -4,6 +4,8 @@ import tailwindcss from "@tailwindcss/vite";
 import svelte from "@astrojs/svelte";
 import remarkDirective from "remark-directive";
 import { visit } from "unist-util-visit";
+import remarkMath from 'remark-math';
+import rehypeKatex from 'rehype-katex';
 
 function remarkEmbed() {
   return (tree) => {
@@ -33,7 +35,8 @@ function remarkEmbed() {
 // https://astro.build/config
 export default defineConfig({
   markdown: {
-    remarkPlugins: [remarkDirective, remarkEmbed],
+    remarkPlugins: [remarkDirective, remarkEmbed, remarkMath],
+    rehypePlugins: [rehypeKatex],
   },
   integrations: [svelte()],
   prefetch: {

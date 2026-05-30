@@ -26,6 +26,7 @@
 }
 
 @import "tailwindcss";
+@import "katex/dist/katex.min.css";
 
 /* Dark mode: class-based — default is ALWAYS light, dark hanya dari toggle */
 @custom-variant dark (&:is(.dark, .dark *));
@@ -135,7 +136,7 @@
   /* Targetkan gambar bawaan Markdown ![alt](url) */
 
   img {
-    @apply border-2 border-orb-dark shadow-brutal my-8 block mx-auto;
+    @apply border-2 border-orb-dark shadow-brutal dark:shadow-brutal-onDarkMode my-8 block mx-auto;
     max-width: 100%;
     height: auto;
   }

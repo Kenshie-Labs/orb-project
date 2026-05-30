@@ -18,7 +18,9 @@
     "@tailwindcss/typography": "^0.5.19",
     "@tailwindcss/vite": "^4.3.0",
     "astro": "^6.3.7",
+    "rehype-katex": "^7.0.1",
     "remark-directive": "^4.0.0",
+    "remark-math": "^6.0.0",
     "svelte": "^5.55.9",
     "tailwindcss": "^4.3.0"
   },
