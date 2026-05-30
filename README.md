@@ -185,6 +185,7 @@ See LICENSE file for details.
 - [ ] develop the navigation section to be more functional
 - [ ] Create a search feature with built-in algorithms on the navbar.
 - [ ] perfecting prose with typography for markdown rendering
+- [ ] using plugin remark-oembed for embedding media from urls
 - [ ] create a copy feature in prose code
 - [ ] create a landing page in the main /pages/index.astro
 - [ ] create a path-based generator and markdown generator folder via npm commands that rely on native node js parameters

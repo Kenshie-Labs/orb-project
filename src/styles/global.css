@@ -131,4 +131,12 @@
     padding: 2px 6px;
     font-size: 0.9em;
   }
+
+  /* Targetkan gambar bawaan Markdown ![alt](url) */
+
+  img {
+    @apply border-2 border-orb-dark shadow-brutal my-8 block mx-auto;
+    max-width: 100%;
+    height: auto;
+  }
 }
