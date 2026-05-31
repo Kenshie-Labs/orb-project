@@ -25,7 +25,8 @@ itu bisa di klik buat navigasi apa aja blog yang ada di kategori ini. Kalau di c
 - Di background, sebenarnya web ini bisa di akses **full offline** gausah khawatir gada kuota. Yg penting pernah tersambung internet bentar buat sinkron data terbaru, udah.
 - Bisa juga dijadikan shortcut ke beranda, Tekan titik 3 -> add to home sreen (tambahkan ke layar beranda). Atau bisa juga pilih Install di notifikasi Pop Up.
 
-
-> Catatan: Semua fitur diatas masih tahap experimental, kalau nemu bug lapor dong, request boleh.
+:::dangerous
+Catatan: Semua fitur diatas masih tahap experimental, kalau nemu bug lapor dong, request boleh.
+:::
 
 ![gif](https://media.tenor.com/HdfR6KsHPB8AAAAM/isla-plastic-memories.gif)

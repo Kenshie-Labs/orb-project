@@ -141,3 +141,20 @@
     height: auto;
   }
 }
+
+/*Custom Components*/
+@layer components {
+  .custom-block {
+    @apply p-4 my-6 border-2 border-orb-dark shadow-brutal dark:shadow-brutal-onDarkMode;
+  }
+
+  .note { @apply bg-blue-100; }
+  .tip { @apply bg-green-100; }
+  .important { @apply bg-purple-100; }
+  .dangerous { @apply bg-red-100; }
+  
+  /* Sesuaikan dengan mode gelap jika perlu */
+  .dark .custom-block {
+    @apply text-orb-dark;
+  }
+}

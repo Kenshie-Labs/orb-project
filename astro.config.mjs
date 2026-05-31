@@ -33,13 +33,33 @@ function remarkEmbed() {
   };
 }
 
+function remarkCustomBlocks() {
+  return (tree) => {
+    visit(tree, (node) => {
+      // Memeriksa jika node adalah container directive (:::name)
+      if (
+        node.type === 'containerDirective' &&
+        ['note', 'tip', 'important', 'dangerous'].includes(node.name)
+      ) {
+        const data = node.data || (node.data = {});
+        const tagName = 'div';
+        
+        data.hName = tagName;
+        data.hProperties = {
+          class: `custom-block ${node.name}`,
+        };
+      }
+    });
+  };
+}
+
 // https://astro.build/config
 export default defineConfig({
   devToolbar: {
     enabled: false,
   },
   markdown: {
-    remarkPlugins: [remarkDirective, remarkEmbed, remarkMath],
+    remarkPlugins: [remarkDirective, remarkEmbed, remarkMath, remarkCustomBlocks],
     rehypePlugins: [rehypeKatex],
   },
   integrations: [
