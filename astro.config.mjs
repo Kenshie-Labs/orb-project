@@ -124,7 +124,7 @@ export default defineConfig({
         ],
       },
       devOptions: {
-        enabled: true,
+        enabled: process.env.SW_DEV === 'true',
       },
     }),
   ],
