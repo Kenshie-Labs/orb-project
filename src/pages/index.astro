@@ -1,6 +1,7 @@
 ---
 import "../styles/global.css";
 import Navbar from "../components/Navbar.svelte";
+import CurrencyMarquee from '../components/CurrencyMarquee.svelte';
 import ThemeInit from "../components/ThemeInit.astro";
 import { ClientRouter } from "astro:transitions";
 ---
@@ -23,7 +24,8 @@ import { ClientRouter } from "astro:transitions";
   <body>
     <Navbar client:idle transition:persist="navbar" />
 
-    
+    <p class="text-center">Quick comparison of currency values to the dollar</p>
+    <CurrencyMarquee client:load />
     
         <main class="max-w-4xl mx-auto px-6 py-16">
           <!-- HERO -->
