@@ -63,6 +63,9 @@
   }
 
   function calculateDuration() {
+    // Tambahkan pengecekan apakah kita di browser
+    if (typeof window === 'undefined') return;
+    
     const container = document.querySelector('.marquee-content');
     if (container) {
       // scrollWidth adalah lebar total konten (termasuk yang tersembunyi)
