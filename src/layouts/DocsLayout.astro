@@ -224,6 +224,29 @@ if (currentId) {
           </p>
         )}
 
+        <!-- TOC Mobile (Hanya muncul di mobile/tablet) -->
+        {headings.filter((h) => h.depth <= 3).length > 0 && (
+          <details class="xl:hidden mb-8 border-2 border-orb-dark dark:border-orb-tan shadow-brutal dark:shadow-brutal-onDarkMode bg-white dark:bg-orb-dark/50">
+            <summary class="p-4 cursor-pointer font-bold uppercase tracking-widest text-sm flex items-center gap-2">
+              <span class="w-2 h-2 bg-green-400"></span>
+              In This Guide
+            </summary>
+            <nav class="p-4 border-t-2 border-orb-dark dark:border-orb-tan space-y-2">
+              {headings.filter((h) => h.depth <= 3).map((h) => (
+                <a
+                  href={`#${h.slug}`}
+                  class:list={[
+                    "block text-sm hover:text-orange-500 transition-colors font-source-sans",
+                    h.depth === 2 ? "pl-2 font-bold" : "pl-6 text-xs",
+                  ]}
+                >
+                  {h.text}
+                </a>
+              ))}
+            </nav>
+          </details>
+        )}
+
         <!-- Markdown content -->
         <div class="prose prose-neutral prose-brutal dark:prose-dark max-w-none
                     mt-8 pt-8 border-t-2 border-orb-dark/20 dark:border-orb-tan/20">
