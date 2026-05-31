@@ -1,7 +1,7 @@
 ---
 title: "ujian inggris"
 excerpt: "belajar bahasa inggris."
-date: 2024-01-01
+date: 2026-06-02
 ---
 
 test

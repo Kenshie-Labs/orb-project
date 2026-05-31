@@ -1,7 +1,7 @@
 ---
 title: "ujian matematika"
 excerpt: "Prediksi mtk yang mungkin sudah diajarkan pak ramos."
-date: 2026-06-01
+date: 2026-06-03
 ---
 
 ## contoh rumus
