@@ -193,3 +193,4 @@ See LICENSE file for details.
 - [ ] (Optional) create a smooth scroll animation when a section (Right: in this guide) is clicked
 - [ ] (Optional) create translation id/en button that toggles between languages with google translate engine
 - [ ] Frontend: change hover to active pseudo-element when media queries is mobile/tablet in global css
+- [x] Add PWA support (You must call the service worker in your head all of .astro files )
