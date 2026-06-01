@@ -7,7 +7,8 @@ date: 2026-06-04
 ## Overview
 
 Yah begitulah ~  
-Minimal ngerti perintah dasar SQL.
+Minimal ngerti perintah dasar SQL.  
+Inget aja tiap akhiran ditutup `;` itu artinya satu perintah.
 
 ![gif](https://media.tenor.com/U0-jS5nwtRkAAAAM/tree-wise.gif)
 
@@ -15,12 +16,14 @@ Minimal ngerti perintah dasar SQL.
 
 **Yang ditanyakan:** Buat database `sekolah` dan tabel `murid` dengan kolom:
 
+```text
 - id_murid: Primary Key, AUTO_INCREMENT
 - nama_murid: VARCHAR(100)
 - tanggal_lahir: DATE
 - jenis_kelamin: CHAR(1), hanya boleh 'L' atau 'P'
 - no_hp_orang_tua: VARCHAR(20)
 - id_kelas: Foreign Key ke tabel kelas
+```
 
 **Jawaban:**
 

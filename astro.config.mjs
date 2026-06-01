@@ -53,13 +53,24 @@ function remarkCustomBlocks() {
   };
 }
 
+function remarkCleanInlineCode() {
+  return (tree) => {
+    visit(tree, 'inlineCode', (node) => {
+      // Kita ubah tipe node agar di-render sebagai HTML custom
+      // Ini akan menghilangkan backtick dan membungkusnya dalam tag custom
+      node.type = 'html';
+      node.value = `<span class="inline-code">${node.value}</span>`;
+    });
+  };
+}
+
 // https://astro.build/config
 export default defineConfig({
   devToolbar: {
     enabled: false,
   },
   markdown: {
-    remarkPlugins: [remarkDirective, remarkEmbed, remarkMath, remarkCustomBlocks],
+    remarkPlugins: [remarkDirective, remarkEmbed, remarkMath, remarkCustomBlocks, remarkCleanInlineCode],
     rehypePlugins: [rehypeKatex],
   },
   integrations: [
