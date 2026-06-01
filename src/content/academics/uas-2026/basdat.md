@@ -7,7 +7,7 @@ date: 2026-06-04
 ## Overview
 
 Yah begitulah ~  
-Minimal ngerti perintah dasar SQL.  
+Minimal tauk perintah dasar SQL.  
 Inget aja tiap akhiran ditutup `;` itu artinya satu perintah.
 
 ![gif](https://media.tenor.com/U0-jS5nwtRkAAAAM/tree-wise.gif)
@@ -175,7 +175,7 @@ LEFT JOIN piket ON staf.id_staf = piket.id_staf;
 - <18 tahun: Remaja
 - 18–30 tahun: Dewasa Muda
 - 31–50 tahun: Dewasa
-- > 50 tahun: Lansia
+- umurnya >50 tahun: Lansia
 
 **Jawaban:**
 
@@ -198,9 +198,20 @@ FROM pelanggan;
 
 **Jawaban:**
 
-- **Entitas:** Penonton(id_penonton), Film(id_film), Studio(id_studio), Pemesanan(id_pemesanan)
-- **Relasi:** Penonton–Pemesanan (1:N), Film–Pemesanan (1:N), Film–Studio (N:1)
-- **Kardinalitas:** Penonton bisa banyak pemesanan, Film bisa banyak pemesanan, Studio bisa memutar banyak film, tapi satu film hanya di satu studio.
+- **Entitas:**
+
+```text
+Penonton(id_penonton), Film(id_film), Studio(id_studio), Pemesanan(id_pemesanan)
+```
+
+- **Relasi:**
+
+```text
+Penonton–Pemesanan (1:N), Film–Pemesanan (1:N), Film–Studio (N:1)
+```
+
+- **Kardinalitas:**  
+Penonton bisa banyak pemesanan, Film bisa banyak pemesanan, Studio bisa memutar banyak film, tapi satu film hanya di satu studio.
 
 ---
 
