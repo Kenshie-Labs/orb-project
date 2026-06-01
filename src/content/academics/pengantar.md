@@ -8,7 +8,7 @@ date: 2024-01-01
 ## Tujuan gua pakai ini
 
 Buat ngumpulin rangkuman, kisi kisi exam dan riset materi relavan dengan ulangan nanti.
-Kenapa ga pake discord aja? Malas, ngelola filenya ruwet.  
+Kenapa ga pake pdf aja? Malas, ngelola filenya ruwet.  
 Disini lebih enak buat dibaca sama di akses semua orang.
 
 Jadikan ini sumber belajar tambahan Practically Bukan acuan utama.
