@@ -129,7 +129,7 @@
 
   /* Ini hanya menargetkan inline code (yang tidak dibungkus <pre>) */
   .inline-code {
-    @apply bg-orb-dark! text-orb-tan! dark:bg-orb-tan/90! dark:text-orb-dark!;
+    @apply bg-orb-dark/90! text-orb-tan! dark:bg-orb-tan/90! dark:text-orb-dark!;
     padding: 2px 6px !important;
     border-radius: 4px !important;
     font-family: monospace !important;
@@ -137,10 +137,12 @@
     font-weight: 500;
   }
 
+  pre {
+    @apply p-2 m-0 border-none rounded-none shadow-none;
+  }
+  
   pre code {
-    background-color: rgba(0, 0, 0, 0.05);
-    padding: 2px 6px;
-    font-size: 0.9em;
+    @apply bg-transparent p-0 m-0;
   }
 
   /* Targetkan gambar bawaan Markdown ![alt](url) */

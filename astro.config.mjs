@@ -70,6 +70,11 @@ export default defineConfig({
     enabled: false,
   },
   markdown: {
+    syntaxHighlight: 'shiki', // Pastikan menggunakan shiki
+    shikiConfig: {
+      theme: 'vitesse-dark', // atau theme pilihan Anda
+      wrap: true,
+    },
     remarkPlugins: [remarkDirective, remarkEmbed, remarkMath, remarkCustomBlocks, remarkCleanInlineCode],
     rehypePlugins: [rehypeKatex],
   },

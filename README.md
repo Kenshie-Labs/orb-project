@@ -186,7 +186,7 @@ See LICENSE file for details.
 - [ ] Create a search feature with built-in algorithms on the navbar.
 - [ ] perfecting prose with typography for markdown rendering
 - [ ] using plugin remark-oembed for embedding media from urls
-- [ ] create a copy feature in prose code
+- [x] create a header & copy button feature in container (pre block code)
 - [ ] create a path-based generator and markdown generator folder via npm commands that rely on native node js parameters
 - [ ] (Optional) create a simple i8n from locales which is useful for static id/en buttons to change the specified base language e.g. {..title}
 - [ ] (Optional) create a smooth scroll animation when a section (Right: in this guide) is clicked

@@ -17,6 +17,7 @@ Inget aja tiap akhiran ditutup `;` itu artinya satu perintah.
 **Yang ditanyakan:** Buat database `sekolah` dan tabel `murid` dengan kolom:
 
 ```text
+--------- ini datanya ----------
 - id_murid: Primary Key, AUTO_INCREMENT
 - nama_murid: VARCHAR(100)
 - tanggal_lahir: DATE
@@ -55,7 +56,8 @@ CREATE TABLE murid (
 
 ### 2. ALTER TABLE (Karyawan Toko)
 
-**Yang ditanyakan:** Pada tabel `karyawan(id_karyawan, nama, upah, cabang)` lakukan:
+**Yang ditanyakan:** Pada tabel berikut  
+`karyawan(id_karyawan, nama, upah, cabang)` lakukan:
 
 1. Tambah kolom `nomor_rekening` bertipe VARCHAR(30) dan UNIQUE
 2. Ubah tipe data `upah` dari INT ke DECIMAL(10,2)

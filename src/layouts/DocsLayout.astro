@@ -291,5 +291,63 @@ if (currentId) {
       )}
 
     </div>
+
+    <!-- Manual setup DOM untuk tombol copy pada code blocks -->
+    <script>
+      function setupCodeBlocks() {
+        const codeBlocks = document.querySelectorAll('pre');
+        
+        codeBlocks.forEach((block) => {
+          
+          // Mencegah duplikasi
+          if (block.parentElement?.classList.contains('code-wrapper')) return;
+    
+          // 1. Deteksi Bahasa (Astro/Shiki biasanya memberi class "language-xxx")
+          const codeEl = block.querySelector('code');
+          // Cek class di <pre> ATAU di <code>
+          const combinedClasses = [...block.classList, ...Array.from(codeEl?.classList || [])];
+          const langClass = combinedClasses.find(c => c.startsWith('language-') || c.startsWith('lang-'));
+          // Cek attribute data-language yang biasanya diset Shiki
+          const lang = block.getAttribute('data-language') || codeEl?.getAttribute('data-language') || 'CODE';
+    
+          // 2. Buat Wrapper
+          const wrapper = document.createElement('div');
+          wrapper.className = 'code-wrapper my-6 border rounded overflow-hidden border-orb-dark dark:border-orb-tan shadow-brutal dark:shadow-brutal-onDarkMode/70';
+          
+          // 3. Buat Header
+          const header = document.createElement('div');
+          header.className = 'flex justify-between items-center px-4 py-2 border-b-2 border-orb-dark dark:border-orb-tan bg-orb-dark/5 dark:bg-orb-tan/5';
+          header.innerHTML = `
+            <span class="text-[10px] font-bold uppercase tracking-widest text-orb-dark dark:text-orb-tan">${lang}</span>
+            <button class="copy-btn text-orb-dark dark:text-orb-tan active:text-orange-500 transition-colors">
+              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
+            </button>
+          `;
+    
+          // 4. Logika Copy
+          const button = header.querySelector('.copy-btn');
+          button?.addEventListener('click', async () => {
+            const code = codeEl?.innerText || '';
+            await navigator.clipboard.writeText(code);
+            button.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>`;
+            setTimeout(() => {
+              button.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>`;
+            }, 2000);
+          });
+    
+          // 5. Susun DOM: Wrapper -> Header -> Pre
+          block.parentNode?.insertBefore(wrapper, block);
+          wrapper.appendChild(header);
+          wrapper.appendChild(block);
+          
+          // Bersihkan style 'pre' bawaan agar tidak konflik
+          block.className = 'p-4 overflow-x-auto';
+        });
+      }
+    
+      setupCodeBlocks();
+      document.addEventListener('astro:page-load', setupCodeBlocks);
+    </script>
+
   </body>
 </html>
