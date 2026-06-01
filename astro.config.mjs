@@ -73,7 +73,7 @@ export default defineConfig({
     syntaxHighlight: 'shiki', // Pastikan menggunakan shiki
     shikiConfig: {
       theme: 'vitesse-dark', // atau theme pilihan Anda
-      wrap: true,
+      wrap: false, // kode yang terlalu panjang akan dibungkus
     },
     remarkPlugins: [remarkDirective, remarkEmbed, remarkMath, remarkCustomBlocks, remarkCleanInlineCode],
     rehypePlugins: [rehypeKatex],

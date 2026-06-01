@@ -10,7 +10,7 @@ Mana gua tau?
 
 ![gif](https://media.tenor.com/qlOG0P00yGkAAAAM/brainrot-brain-rot.gif)
 
-Kira kira ini cuma sekedar pertanyaan umum yang mungkin muncul karena yang diujikan adalah 4 bab ini, selebihnya baca buku lagi
+Kira kira ini cuma sekedar pertanyaan umum yang mungkin muncul karena yang diujikan adalah 3 bab ini, selebihnya baca buku lagi
 
 ---
 
@@ -58,8 +58,10 @@ Adab bermedia sosial: berkata benar, tidak menyebar fitnah, menjaga lisan digita
 
 **Dalil kuat:**
 
-- Q.S. Ar-Rum:21 → “Dia menciptakan untukmu pasangan hidup supaya kamu merasa tenteram, dan dijadikan-Nya kasih sayang.”
+- Q.S. Ar-Rum ayat 21 → “Dia menciptakan untukmu pasangan hidup supaya kamu merasa tenteram, dan dijadikan-Nya kasih sayang.”
 - Hadis Bukhari-Muslim → “Barangsiapa mampu menikah maka menikahlah, karena menikah lebih menundukkan pandangan dan menjaga kehormatan.”
+
+> Ini adalah sabda Nabi Muhammad yang diriwayatkan oleh Abdullah bin Mas'ud dalam Sahih Bukhari (no.  1905) dan Sahih Muslim
 
 **Kilasan jawaban:**  
 Tujuan pernikahan: sakinah, mawaddah, rahmah. Hikmah: ketenangan hidup, keturunan, memperluas silaturahmi. Rukun: calon suami-istri, wali, saksi, ijab qabul, mahar. Nikah mut’ah tidak sah menurut mayoritas ulama karena tidak sesuai syariat.

@@ -8,14 +8,16 @@ date: 2024-01-01
 ## Tujuan gua pakai ini
 
 Buat ngumpulin rangkuman, kisi kisi exam dan riset materi relavan dengan ulangan nanti.
-Kenapa ga pake discord aja? Malas bikin dokumen euy, ngelola filenya ruwet.  
+Kenapa ga pake discord aja? Malas, ngelola filenya ruwet.  
 Disini lebih enak buat dibaca sama di akses semua orang.
 
-Jadikan ini sumber belajar orang dalam Practically.
+Jadikan ini sumber belajar tambahan Practically Bukan acuan utama.
 
 :::dangerous
 Awas jangan dipake buat nyontek 😡💢
 :::
+
+Gweh yang ulangannya ga tek home:
 
 ![gif](https://media.tenor.com/vSd7s_nUkk4AAAAM/re-zero-echidna.gif)
 

@@ -5,7 +5,7 @@ date: 2026-06-04
 ---
 
 :::tip
-yang sabar aja ya bos, emang rumit aseli 😑😩
+yang sabar aja ya bos, emang rumit aseli 😑😩💀
 :::
 
 ## Overview
