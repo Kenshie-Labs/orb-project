@@ -1,7 +1,7 @@
 ---
 title: "ujian PPB"
 excerpt: "Pemrograman Perangkat Bergerak."
-date: 2026-06-03
+date: 2026-06-04
 ---
 
 ## Overview

@@ -1,7 +1,7 @@
 ---
 title: "ujian Basis Data"
 excerpt: "Tafsir kisi kisi basdat dari Bu Dewi."
-date: 2026-06-04
+date: 2026-06-03
 ---
 
 ## Overview
