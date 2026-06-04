@@ -2,6 +2,9 @@
 title: "ujian inggris"
 excerpt: "belajar bahasa inggris."
 date: 2026-06-04
+isLocked: true
+question: "67"
+hintSystemLog: "676767"
 ---
 
 > No matter how clever a squirrel jumps, a cunning fox will catch it.

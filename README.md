@@ -193,3 +193,4 @@ See LICENSE file for details.
 - [ ] (Optional) create translation id/en button that toggles between languages with google translate engine
 - [x] Add PWA support (You must call the service worker in your head all of .astro files )
 - [x] Add custom quotation github style markdown via remar-directive plugin
+- [x] create an optional content lock feature to provide a captcha-style puzzle before the actual rendering (techniques to decoy unserious visitors)

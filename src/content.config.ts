@@ -13,6 +13,10 @@ const content = defineCollection({
     title: z.string(),
     excerpt: z.string().optional(),
     date: z.date().optional(),
+    // content guard mechanism is optional
+    isLocked: z.boolean().optional().default(false),
+    question: z.string().optional(),
+    hintSystemLog: z.string().optional(),
   }),
 });
 

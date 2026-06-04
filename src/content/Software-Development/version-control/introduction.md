@@ -2,6 +2,9 @@
 title: "learn"
 excerpt: "development mode..."
 date: 2024-01-01
+isLocked: true
+question: "Apa warna langit?"
+hintSystemLog: "biru"
 ---
 
 ## render test

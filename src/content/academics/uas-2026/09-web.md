@@ -2,6 +2,9 @@
 title: "ujian Web"
 excerpt: "Tafsir kisi kisi p pauzy."
 date: 2026-06-04
+isLocked: true
+question: "67"
+hintSystemLog: "676767"
 ---
 
 :::tip

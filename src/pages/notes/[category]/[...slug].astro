@@ -1,6 +1,7 @@
 ---
 import { getCollection, render, type CollectionEntry } from "astro:content";
 import DocsLayout from "../../../layouts/DocsLayout.astro";
+import Guard from "../../../components/ContentGuard.svelte";
 
 type DocEntry = CollectionEntry<"content">;
 
@@ -102,8 +103,18 @@ const currentId = props.type === "doc" ? props.entry.id : undefined;
   headings={headings}
   excerpt={pageExcerpt}
 >
-  <!-- Individual document: render markdown -->
-  {props.type === "doc" && Content && <Content />}
+  <!-- Individual document: render markdown + content guard validation-->
+  
+  {props.type === "doc" && Content && (
+    <Guard 
+      client:load 
+      isLocked={props.entry.data.isLocked ?? false}
+      question={props.entry.data.question ?? ''}
+      correctAnswer={props.entry.data.hintSystemLog ?? ''}
+    >
+      <Content />
+    </Guard>
+  )}
 
   <!-- Subcategory index: list all entries in the subcategory -->
   {props.type === "subcategory" && (
