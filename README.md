@@ -34,9 +34,12 @@ ORB Knownrie is a modern documentation website built with Astro, designed to org
 ## Project Structure
 
 ```text
+orb-project/
 ├── public/
 │   ├── favicon.svg
-│   └── site.webmanifest
+│   ├── attachImg/
+│   ├── site.webmanifest
+│   └── fonts/
 ├── src/
 │   ├── components/
 │   │   ├── Navbar.svelte          # Main navigation with theme toggle
@@ -44,8 +47,9 @@ ORB Knownrie is a modern documentation website built with Astro, designed to org
 │   ├── content/
 │   │   └── academics/             # Academic notes by category
 │   │       ├── informatika/       # Computer science notes
+│   │       │   └── materi.md      # material content md
 │   │       ├── matematika/        # Mathematics notes
-│   │       └── test.md            # Example content
+│   │       └── pengantar.md       # Example content
 │   ├── layouts/
 │   │   └── DocsLayout.astro       # Documentation layout with sidebars
 │   ├── locales/
