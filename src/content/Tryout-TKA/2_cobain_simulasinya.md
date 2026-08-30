@@ -7,7 +7,7 @@ question: "Di dunia ini gada yg gratis, follow ig gw dulu @axelkenshi lalu paste
 hintSystemLog: ""
 ---
 
-# Kalian wajib cobain biar ga asing dengan Sistemnya!
+## Kalian wajib cobain biar ga asing dengan Sistemnya!
 
 Kalau yang pernah kepilih ANBK udah pasti ga aneh lagi,  
 dari sisi tampilannya ga terlalu membingungkan kok.

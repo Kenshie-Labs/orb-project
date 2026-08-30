@@ -15,7 +15,8 @@ hintSystemLog: ""
 
 ## Sedikit Motivasi
 
-jadikan belajar beberapa materi ini sebagai alasan supaya jadi pengetahuan yang berguna untuk masa depan kamu sendiri. belajar sesuatu sebagai investment jangka panjang, bukan beban kewajiban, lakukan sebisanya aja.
+jadikan belajar beberapa materi ini sebagai alasan supaya jadi pengetahuan yang berguna untuk masa depan kamu sendiri.  
+belajar sesuatu sebagai investment jangka panjang, bukan beban kewajiban, lakukan sebisanya aja.
 
 Hitung-hitung nambah skill yang sebelumnya belum pernah ada.
 
