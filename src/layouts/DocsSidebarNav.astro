@@ -1,0 +1,47 @@
+---
+import type { CollectionEntry } from "astro:content";
+
+interface Props {
+  category: string;
+  grouped: Record<string, CollectionEntry<"content">[]>;
+  currentId?: string;
+}
+
+const { category, grouped, currentId } = Astro.props;
+
+const linkClass = (isActive: boolean) =>
+  [
+    "block px-3 py-2 text-sm transition-colors mb-1 border-l-2",
+    isActive
+      ? "border-orange-400 bg-orb-dark text-orb-tan dark:bg-orb-tan dark:text-orb-dark font-semibold"
+      : "border-transparent text-orb-dark dark:text-orb-tan hover:border-orb-dark active:border-orb-dark dark:hover:border-orb-tan dark:active:border-orb-tan hover:bg-orb-dark/5 active:bg-orb-dark/5 dark:hover:bg-orb-tan/5 dark:active:bg-orb-tan/5",
+  ].join(" ");
+
+const subcategories = Object.entries(grouped).filter(([k]) => k !== "_root");
+---
+
+<!-- Root-level files -->
+{(grouped["_root"] ?? []).map((entry) => (
+  <a href={`/notes/${entry.id}`} class={linkClass(entry.id === currentId)}>
+    {entry.data.title}
+  </a>
+))}
+
+<!-- Subcategory groups -->
+{subcategories.map(([subcat, entries]) => (
+  <div class="mt-5">
+    <a href={`/notes/${category}/${subcat}`} class="flex items-center gap-2 mb-2 px-1 group">
+      <span class="w-2 h-2 bg-orange-400 shrink-0 inline-block"></span>
+      <span class="text-xs font-bold uppercase tracking-widest transition-colors
+                   text-orb-dark/60 group-hover:text-orb-dark group-active:text-orb-dark
+                   dark:text-orb-tan/60 dark:group-hover:text-orb-tan dark:group-active:text-orb-tan">
+        {subcat.replace(/-/g, " ")}
+      </span>
+    </a>
+    {entries.map((entry) => (
+      <a href={`/notes/${entry.id}`} class={linkClass(entry.id === currentId)}>
+        {entry.data.title}
+      </a>
+    ))}
+  </div>
+))}

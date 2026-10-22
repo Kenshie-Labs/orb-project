@@ -15,7 +15,7 @@ dari sisi tampilannya ga terlalu membingungkan kok.
 kira-kira gini gambaran nanti pas TKA di lab sekolah
 ![gambar tka](https://smkn1bangil.sch.id/wp-content/uploads/2025/10/tka-3-690x400.jpg)
 
-![gambar jadwal](../../assets/attachImg/sticker.jpeg)
+![gambar jadwal](/../../media/sticker.jpeg)
 
 ## Pahami dulu gambarannya, baru kuasai medan perangnya
 

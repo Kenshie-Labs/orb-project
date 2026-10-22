@@ -50,6 +50,42 @@
 
 /*Fundamental Styling*/
 @layer base {
+
+  /* ===== Scrollbar halaman utama: tipis & minimalis ===== */
+  
+  /* Firefox & browser yang mendukung standar baru */
+  html {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(0, 0, 0, 0.2) transparent;
+  }
+  
+  /* Chrome, Edge, Safari */
+  html::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  html::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  html::-webkit-scrollbar-thumb {
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 999px;
+  }
+  html::-webkit-scrollbar-thumb:hover {
+    background: rgba(0, 0, 0, 0.4);
+  }
+  
+  /* Mode gelap: sesuaikan selector dengan cara ThemeInit Anda menambahkan kelas */
+  html.dark {
+    scrollbar-color: rgba(255, 255, 255, 0.2) transparent;
+  }
+  html.dark::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.2);
+  }
+  html.dark::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.4);
+  }
+  
   body {
     @apply bg-orb-tan text-orb-dark;
     @apply dark:bg-orb-dark dark:text-orb-tan;

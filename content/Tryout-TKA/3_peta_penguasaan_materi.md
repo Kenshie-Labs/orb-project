@@ -9,7 +9,7 @@ hintSystemLog: ""
 
 ## Sebelum ke roadmap belajar, Lihat dulu jadwal TKA biar tenang
 
-![gambar jadwal](../../assets/attachImg/jadwaltka.jpeg)
+![gambar jadwal](/media/jadwaltka.jpeg)
 
 ---
 
@@ -25,7 +25,7 @@ Tidak semua orang butuh semua rumpun ilmu ini dengan urgency yang sama.
 kebutuhan lebih penting dari perfection.  
 Prioritas sesuai kebutuhan kamu aja.
 
-![gambar jadwal](../../assets/attachImg/sticker2.jpeg)
+![gambar jadwal](/../../media/sticker2.jpeg)
 
 ---
 
@@ -197,6 +197,7 @@ Prioritas sesuai kebutuhan kamu aja.
 * **Pemrograman Dasar:** Flowchart, pseudocode, tipe data, variabel, operator, branching (*if-else*, *switch*), looping (*for*, *while*).
 * **Object-Oriented Programming (OOP):** Class, Object, Encapsulation, Inheritance, Polymorphism, Abstraction.
 * **Database / Basis Data:** ERD (Entity Relationship Diagram), Relasi Tabel, SQL DDL (*CREATE*, *ALTER*), SQL DML (*SELECT*, *INSERT*, *UPDATE*, *DELETE*, *JOIN*, *GROUP BY*).
+* (Pelajari python karena sering muncul sebagai pertanyaan seputar programming)
 * **Pengembangan Web & Gim:** Arsitektur Client-Server, REST API dasar, Game Loop, Collision Detection dasar.
 * **Rekayasa Perangkat Lunak:** SDLC (Waterfall, Agile/Scrum), UML (Use Case Diagram, Class Diagram, Activity Diagram), Debugging code.
 

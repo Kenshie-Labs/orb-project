@@ -14,7 +14,7 @@ hintSystemLog: ""
 TKA itu ibarat ***"survey ketajaman otak"***, bukan ulangan seberapa banyak kamu bisa membeberkan hafalan isi buku. Tes ini menguji seberapa mampu kamu berpikir logis, membaca situasi, dan menyelesaikan masalah.  
 Ya tapi tetep aja sih kita harus paham materinya.
 
-Bukan ngapalin jawaban yang kaya bocoran ujian, karena kalau kamu gapaham konsep dari pertanyaannya, ya bakal ngasal 😂.
+Bukan ngapalin kayak bocoran ujian, karena kalau kamu gapaham konsep dari pertanyaannya, ya bakal ngasal.
 
 ### Relavansinya apa?
 

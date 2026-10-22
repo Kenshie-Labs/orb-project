@@ -6,7 +6,7 @@ const content = defineCollection({
   // 1. Definisikan loader untuk menyapu bersih file markdown secara rekursif
   loader: glob({
     pattern: "**/*.md",
-    base: "./src/content/",
+    base: "./content/",
   }),
   // 2. Skema frontmatter untuk validasi data catatan kamu
   schema: z.object({

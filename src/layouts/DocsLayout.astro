@@ -3,6 +3,7 @@ import { getCollection, type CollectionEntry } from "astro:content";
 import "../styles/global.css";
 import Navbar from "../components/Navbar.svelte";
 import DocsPagination from "../components/DocsPagination.svelte";
+import DocsSidebarNav from "./DocsSidebarNav.astro";
 import ThemeInit from "../components/ThemeInit.astro";
 import { ClientRouter } from "astro:transitions";
 
@@ -15,6 +16,9 @@ interface Props {
 }
 
 const { title, category, currentId, headings = [], excerpt } = Astro.props;
+
+// Heading yang dipakai di TOC (depth <= 3)
+const tocHeadings = headings.filter((h) => h.depth <= 3);
 
 // Fetch sidebar entries for this category
 const allEntries = await getCollection("content");
@@ -49,19 +53,19 @@ let prevPage = null;
 let nextPage = null;
 
 if (currentId) {
-  const currentIndex = categoryEntries.findIndex(entry => entry.id === currentId);
+  const currentIndex = categoryEntries.findIndex((entry) => entry.id === currentId);
   if (currentIndex !== -1) {
     const currentEntry = categoryEntries[currentIndex];
     currentPage = {
       title: currentEntry.data.title,
-      url: `/notes/${currentEntry.id}`
+      url: `/notes/${currentEntry.id}`,
     };
 
     if (currentIndex > 0) {
       const prevEntry = categoryEntries[currentIndex - 1];
       prevPage = {
         title: prevEntry.data.title,
-        url: `/notes/${prevEntry.id}`
+        url: `/notes/${prevEntry.id}`,
       };
     }
 
@@ -69,7 +73,7 @@ if (currentId) {
       const nextEntry = categoryEntries[currentIndex + 1];
       nextPage = {
         title: nextEntry.data.title,
-        url: `/notes/${nextEntry.id}`
+        url: `/notes/${nextEntry.id}`,
       };
     }
   }
@@ -82,8 +86,8 @@ if (currentId) {
 
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="icon" href="/favicon.ico" />
-    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-    <meta name="viewport" content="width=device-width" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{title} — Orb</title>
     <!-- pwa -->
     <script src="../pwa.ts"></script>
@@ -100,10 +104,10 @@ if (currentId) {
     <!-- 3-column docs body -->
     <div class="max-w-screen-xl mx-auto flex min-h-[calc(100vh-3.5rem)]">
 
-      <!-- LEFT SIDEBAR -->
+      <!-- LEFT SIDEBAR (desktop only, lg+) -->
       <aside class="hidden lg:flex flex-col w-64 shrink-0 border-r-2
                     border-orb-dark dark:border-orb-tan
-                    sticky top-14 h-[calc(100vh-3.5rem)] overflow-y-auto">
+                    sticky top-14 h-[calc(100vh-3.5rem)] overflow-y-auto hide-scrollbar">
         <div class="p-5">
 
           <!-- Back link -->
@@ -121,66 +125,17 @@ if (currentId) {
             Browse {category.replace(/-/g, " ")}
           </p>
 
-          <!-- Root-level files (no subcategory) -->
-          {grouped["_root"]?.map((entry) => {
-            const isActive = entry.id === currentId;
-            return (
-              <a
-                href={`/notes/${entry.id}`}
-                class:list={[
-                  "block px-3 py-2 text-sm transition-colors mb-1 border-l-2",
-                  isActive
-                    ? "border-orange-400 bg-orb-dark text-orb-tan dark:bg-orb-tan dark:text-orb-dark font-semibold"
-                    : "border-transparent text-orb-dark dark:text-orb-tan hover:border-orb-dark active:border-orb-dark dark:hover:border-orb-tan dark:active:border-orb-tan hover:bg-orb-dark/5 active:bg-orb-dark/5 dark:hover:bg-orb-tan/5 dark:active:bg-orb-tan/5",
-                ]}
-              >
-                {entry.data.title}
-              </a>
-            );
-          })}
-
-          <!-- Subcategory groups -->
-          {Object.entries(grouped)
-            .filter(([k]) => k !== "_root")
-            .map(([subcat, entries]) => (
-              <div class="mt-5">
-                <a
-                  href={`/notes/${category}/${subcat}`}
-                  class="flex items-center gap-2 mb-2 px-1 group"
-                >
-                  <span class="w-2 h-2 bg-orange-400 shrink-0 inline-block"></span>
-                  <span class="text-xs font-bold uppercase tracking-widest transition-colors
-                               text-orb-dark/60 group-hover:text-orb-dark group-active:text-orb-dark
-                               dark:text-orb-tan/60 dark:group-hover:text-orb-tan dark:group-active:text-orb-tan">
-                    {subcat.replace(/-/g, " ")}
-                  </span>
-                </a>
-                {entries.map((entry) => {
-                  const isActive = entry.id === currentId;
-                  return (
-                    <a
-                      href={`/notes/${entry.id}`}
-                      class:list={[
-                        "block px-3 py-2 text-sm transition-colors mb-1 border-l-2",
-                        isActive
-                          ? "border-orange-400 bg-orb-dark text-orb-tan dark:bg-orb-tan dark:text-orb-dark font-semibold"
-                          : "border-transparent text-orb-dark dark:text-orb-tan hover:border-orb-dark active:border-orb-dark dark:hover:border-orb-tan dark:active:border-orb-tan hover:bg-orb-dark/5 active:bg-orb-dark/5 dark:hover:bg-orb-tan/5 dark:active:bg-orb-tan/5",
-                      ]}
-                    >
-                      {entry.data.title}
-                    </a>
-                  );
-                })}
-              </div>
-            ))}
+          <DocsSidebarNav category={category} grouped={grouped} currentId={currentId} />
         </div>
       </aside>
 
       <!-- MAIN CONTENT -->
-      <main class="flex-1 min-w-0 px-8 py-10 max-w-3xl">
+      <main class="flex-1 min-w-0 mx-auto w-full max-w-3xl
+                   px-4 sm:px-6 md:px-8 lg:px-10
+                   py-6 md:py-10">
 
         <!-- Breadcrumb -->
-        <nav class="flex flex-wrap items-center gap-1.5 text-sm mb-6
+        <nav class="flex flex-wrap items-center gap-x-1.5 gap-y-1 text-xs sm:text-sm mb-5 md:mb-6
                     text-orb-dark/50 dark:text-orb-tan/50">
           <a href="/" class="hover:text-orb-dark active:text-orb-dark dark:hover:text-orb-tan dark:active:text-orb-tan">Home</a>
           <span>/</span>
@@ -201,44 +156,63 @@ if (currentId) {
           {currentId && (
             <>
               <span>/</span>
-              <span class="font-medium text-orb-dark dark:text-orb-tan">{title}</span>
+              <span class="font-medium text-orb-dark dark:text-orb-tan break-words">{title}</span>
             </>
           )}
         </nav>
 
         <!-- Category chip -->
-        <span class="inline-block px-3 py-1 text-xs font-bold uppercase mb-5 tracking-widest
+        <span class="inline-block px-3 py-1 text-xs font-bold uppercase mb-4 md:mb-5 tracking-widest
                      border-2 border-orb-dark bg-orange-400 dark:border-orb-tan">
           {category.replace(/-/g, " ")}
         </span>
 
         <!-- Page title -->
-        <h1 class="text-5xl font-petrona font-light leading-tight mb-3
+        <h1 class="text-3xl sm:text-4xl lg:text-5xl font-petrona font-light leading-tight mb-3 break-words
                    text-orb-dark dark:text-orb-tan">
           {title}
         </h1>
 
         {excerpt && (
-          <p class="text-lg mb-2 font-light text-orb-dark/60 dark:text-orb-tan/60">
+          <p class="text-base md:text-lg mb-2 font-light text-orb-dark/60 dark:text-orb-tan/60">
             {excerpt}
           </p>
         )}
 
-        <!-- TOC Mobile (Hanya muncul di mobile/tablet) -->
-        {headings.filter((h) => h.depth <= 3).length > 0 && (
+        <!-- Browse sidebar (tablet & mobile, di bawah lg) -->
+        <details class="lg:hidden mt-6 mb-6 border-2 border-orb-dark dark:border-orb-tan shadow-brutal dark:shadow-brutal-onDarkMode bg-white dark:bg-orb-dark/50">
+          <summary class="p-4 cursor-pointer font-bold uppercase tracking-widest text-sm flex items-center gap-2 select-none">
+            <span class="w-2 h-2 bg-orange-400 shrink-0"></span>
+            Browse {category.replace(/-/g, " ")}
+          </summary>
+          <nav class="p-4 border-t-2 border-orb-dark dark:border-orb-tan">
+            <a href="/notes" class="block text-xs mb-4 uppercase tracking-widest
+                                   text-orb-dark/50 hover:text-orb-dark active:text-orb-dark
+                                   dark:text-orb-tan/50 dark:hover:text-orb-tan dark:active:text-orb-tan">
+              ← All Notes
+            </a>
+            <DocsSidebarNav category={category} grouped={grouped} currentId={currentId} />
+          </nav>
+        </details>
+
+        <!-- TOC Mobile (di bawah xl) -->
+        {tocHeadings.length > 0 && (
           <details class="xl:hidden mb-8 border-2 border-orb-dark dark:border-orb-tan shadow-brutal dark:shadow-brutal-onDarkMode bg-white dark:bg-orb-dark/50">
-            <summary class="p-4 cursor-pointer font-bold uppercase tracking-widest text-sm flex items-center gap-2">
-              <span class="w-2 h-2 bg-green-400"></span>
+            <summary class="p-4 cursor-pointer font-bold uppercase tracking-widest text-sm flex items-center gap-2 select-none">
+              <span class="w-2 h-2 bg-green-400 shrink-0"></span>
               In This Guide
             </summary>
-            <nav class="p-4 border-t-2 border-orb-dark dark:border-orb-tan space-y-2">
-              {headings.filter((h) => h.depth <= 3).map((h) => (
+            <nav class="p-4 border-t-2 border-orb-dark dark:border-orb-tan space-y-1">
+              {tocHeadings.map((h) => (
                 <a
                   href={`#${h.slug}`}
-                  class:list={[
-                    "block text-sm hover:text-orange-500 active:text-orange-500 transition-colors font-source-sans",
-                    h.depth === 2 ? "pl-2 font-bold" : "pl-6 text-xs",
-                  ]}
+                  data-toc-link
+                  data-slug={h.slug}
+                  class={[
+                    "toc-link block transition-colors py-1 border-l-2 border-transparent",
+                    "text-orb-dark/55 hover:text-orange-500 active:text-orange-500 dark:text-orb-tan/55 font-source-sans",
+                    h.depth === 2 ? "pl-2 text-sm font-bold" : "pl-5 text-xs",
+                  ].join(" ")}
                 >
                   {h.text}
                 </a>
@@ -249,7 +223,8 @@ if (currentId) {
 
         <!-- Markdown content -->
         <div class="prose prose-neutral prose-brutal dark:prose-dark max-w-none
-                    mt-8 pt-8 border-t-2 border-orb-dark/20 dark:border-orb-tan/20">
+                    [&_table]:block [&_table]:overflow-x-auto [&_table]:max-w-full
+                    mt-6 md:mt-8 pt-6 md:pt-8 border-t-2 border-orb-dark/20 dark:border-orb-tan/20">
           <slot />
         </div>
 
@@ -257,11 +232,11 @@ if (currentId) {
         {currentPage && <DocsPagination currentPage={currentPage} prevPage={prevPage} nextPage={nextPage} client:load />}
       </main>
 
-      <!-- RIGHT SIDEBAR (Table of Contents) -->
-      {headings.filter((h) => h.depth <= 3).length > 0 && (
+      <!-- RIGHT SIDEBAR (Table of Contents, desktop xl+) -->
+      {tocHeadings.length > 0 && (
         <aside class="hidden xl:flex flex-col w-52 shrink-0 border-l-2
                       border-orb-dark dark:border-orb-tan
-                      sticky top-14 h-[calc(100vh-3.5rem)] overflow-y-auto">
+                      sticky top-14 h-[calc(100vh-3.5rem)] overflow-y-auto hide-scrollbar">
           <div class="p-5">
             <div class="flex items-center gap-2 mb-4">
               <span class="w-2 h-2 bg-green-400 shrink-0 inline-block"></span>
@@ -271,20 +246,20 @@ if (currentId) {
               </span>
             </div>
             <nav class="space-y-1">
-              {headings
-                .filter((h) => h.depth <= 3)
-                .map((h) => (
-                  <a
-                    href={`#${h.slug}`}
-                    class:list={[
-                      "block transition-colors py-1 border-l-2 border-transparent hover:border-orange-400 active:border-orange-400",
-                      "text-orb-dark/55 hover:text-orb-dark active:text-orb-dark dark:text-orb-tan/55 dark:hover:text-orb-tan dark:active:text-orb-tan",
-                      h.depth === 2 ? "pl-2 text-sm" : "pl-5 text-xs",
-                    ]}
-                  >
-                    {h.text}
-                  </a>
-                ))}
+              {tocHeadings.map((h) => (
+                <a
+                  href={`#${h.slug}`}
+                  data-toc-link
+                  data-slug={h.slug}
+                  class={[
+                    "toc-link block transition-colors py-1 border-l-2 border-transparent",
+                    "text-orb-dark/55 hover:text-orb-dark active:text-orb-dark dark:text-orb-tan/55 dark:hover:text-orb-tan dark:active:text-orb-tan",
+                    h.depth === 2 ? "pl-2 text-sm" : "pl-5 text-xs",
+                  ].join(" ")}
+                >
+                  {h.text}
+                </a>
+              ))}
             </nav>
           </div>
         </aside>
@@ -292,16 +267,34 @@ if (currentId) {
 
     </div>
 
-    <!-- Manual setup DOM untuk tombol copy pada code blocks -->
+    <!-- Hide scrollbar: hardcoded CSS, tidak bergantung pada plugin Tailwind -->
+    <style is:global>
+      .hide-scrollbar {
+        -ms-overflow-style: none;   /* IE & Edge lama */
+        scrollbar-width: none;      /* Firefox */
+      }
+      .hide-scrollbar::-webkit-scrollbar {
+        display: none;              /* Chrome, Safari, Edge baru */
+        width: 0;
+        height: 0;
+      }
+
+      /* Heading tidak tertutup navbar saat dituju lewat anchor */
+      .prose :is(h1, h2, h3, h4, h5, h6)[id] {
+        scroll-margin-top: 4.5rem;
+      }
+    </style>
+
+    <!-- Code block copy button -->
     <script>
       function setupCodeBlocks() {
         const codeBlocks = document.querySelectorAll('pre');
-        
+
         codeBlocks.forEach((block) => {
-          
+
           // Mencegah duplikasi
           if (block.parentElement?.classList.contains('code-wrapper')) return;
-    
+
           // 1. Deteksi Bahasa (Astro/Shiki biasanya memberi class "language-xxx")
           const codeEl = block.querySelector('code');
           // Cek class di <pre> ATAU di <code>
@@ -309,11 +302,11 @@ if (currentId) {
           const langClass = combinedClasses.find(c => c.startsWith('language-') || c.startsWith('lang-'));
           // Cek attribute data-language yang biasanya diset Shiki
           const lang = block.getAttribute('data-language') || codeEl?.getAttribute('data-language') || 'CODE';
-    
+
           // 2. Buat Wrapper
           const wrapper = document.createElement('div');
           wrapper.className = 'code-wrapper my-6 border rounded overflow-hidden border-orb-dark dark:border-orb-tan shadow-brutal dark:shadow-brutal-onDarkMode/70';
-          
+
           // 3. Buat Header
           const header = document.createElement('div');
           header.className = 'flex justify-between items-center px-4 py-2 border-b-2 border-orb-dark dark:border-orb-tan bg-orb-dark/5 dark:bg-orb-tan/5';
@@ -323,7 +316,7 @@ if (currentId) {
               <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
             </button>
           `;
-    
+
           // 4. Logika Copy
           const button = header.querySelector('.copy-btn');
           button?.addEventListener('click', async () => {
@@ -334,19 +327,126 @@ if (currentId) {
               button.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>`;
             }, 2000);
           });
-    
+
           // 5. Susun DOM: Wrapper -> Header -> Pre
           block.parentNode?.insertBefore(wrapper, block);
           wrapper.appendChild(header);
           wrapper.appendChild(block);
-          
+
           // Bersihkan style 'pre' bawaan agar tidak konflik
           block.className = 'p-4 overflow-x-auto';
         });
       }
-    
+
       setupCodeBlocks();
       document.addEventListener('astro:page-load', setupCodeBlocks);
+    </script>
+
+    <!-- TOC scroll-spy: highlight heading yang sedang tampil di viewport -->
+    <script>
+      const ACTIVE_CLASSES = [
+        "border-orange-400",
+        "font-semibold",
+        "text-orb-dark",
+        "dark:text-orb-tan",
+      ];
+      const IDLE_CLASSES = [
+        "border-transparent",
+        "text-orb-dark/55",
+        "dark:text-orb-tan/55",
+      ];
+
+      // Jarak dari atas viewport agar heading "aktif" tidak tertutup navbar (top-14 = 56px)
+      const BAND_TOP = 72;
+
+      let tocObserver: IntersectionObserver | null = null;
+
+      function setupTocSpy() {
+        tocObserver?.disconnect();
+        tocObserver = null;
+
+        const links = Array.from(
+          document.querySelectorAll<HTMLAnchorElement>("[data-toc-link]")
+        );
+        if (links.length === 0) return;
+
+        // Kelompokkan link berdasarkan slug (desktop & mobile bisa punya link yang sama)
+        const linksBySlug = new Map<string, HTMLAnchorElement[]>();
+        for (const link of links) {
+          const slug = link.dataset.slug ?? "";
+          linksBySlug.set(slug, [...(linksBySlug.get(slug) ?? []), link]);
+        }
+
+        // Ambil heading di DOM, urutkan sesuai posisi dokumen
+        const headings = Array.from(linksBySlug.keys())
+          .map((slug) => document.getElementById(slug))
+          .filter((el): el is HTMLElement => el !== null)
+          .sort((a, b) =>
+            a.compareDocumentPosition(b) & Node.DOCUMENT_POSITION_FOLLOWING ? -1 : 1
+          );
+
+        if (headings.length === 0) return;
+
+        const visible = new Set<HTMLElement>();
+        let activeId: string | null = null;
+
+        const setActive = (id: string | null) => {
+          if (id === activeId) return;
+          activeId = id;
+
+          linksBySlug.forEach((els, slug) => {
+            const on = slug === id;
+            els.forEach((el) => {
+              if (on) {
+                el.classList.remove(...IDLE_CLASSES);
+                el.classList.add(...ACTIVE_CLASSES);
+              } else {
+                el.classList.remove(...ACTIVE_CLASSES);
+                el.classList.add(...IDLE_CLASSES);
+              }
+            });
+          });
+
+          // Pastikan link aktif di sidebar desktop ikut terlihat (hanya di dalam <aside>)
+          if (id) {
+            const sidebarLink = linksBySlug.get(id)?.find((el) => el.closest("aside"));
+            sidebarLink?.scrollIntoView({ block: "nearest" });
+          }
+        };
+
+        const pickActive = (): string | null => {
+          // 1. Prioritaskan heading yang sedang berada di area baca (urutan dokumen)
+          const inView = headings.find((h) => visible.has(h));
+          if (inView) return inView.id;
+
+          // 2. Tidak ada yang terlihat: pakai heading terakhir yang sudah lewat di atas
+          const passed = headings.filter(
+            (h) => h.getBoundingClientRect().top < BAND_TOP
+          );
+          return passed.length ? passed[passed.length - 1].id : null;
+        };
+
+        tocObserver = new IntersectionObserver(
+          (entries) => {
+            for (const entry of entries) {
+              const el = entry.target as HTMLElement;
+              if (entry.isIntersecting) visible.add(el);
+              else visible.delete(el);
+            }
+            setActive(pickActive());
+          },
+          {
+            rootMargin: `-${BAND_TOP}px 0px -60% 0px`,
+            threshold: 0,
+          }
+        );
+
+        headings.forEach((h) => tocObserver!.observe(h));
+        setActive(pickActive());
+      }
+
+      setupTocSpy();
+      document.addEventListener("astro:page-load", setupTocSpy);
     </script>
 
   </body>

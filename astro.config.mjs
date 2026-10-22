@@ -66,6 +66,11 @@ function remarkCleanInlineCode() {
 
 // https://astro.build/config
 export default defineConfig({
+  // Konfigurasi server development
+  server: {
+    port: 2999, // Ganti dengan port yang Anda inginkan (misal: 3000, 5000, dll)
+    host: true, // (Opsional) Agar bisa diakses juga via IP lokal / network
+  },
   devToolbar: {
     enabled: false,
   },

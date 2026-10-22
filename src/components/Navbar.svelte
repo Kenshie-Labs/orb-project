@@ -4,7 +4,7 @@
   // 'slide' digunakan sebagai Svelte transition directive di template (transition:slide)
   // Warning Vite adalah false positive — Svelte compiler menangani ini secara internal
   void slide;
-  import { Grid3x3, Sun, Moon, X } from "@lucide/svelte";
+  import { Grip, Sun, Moon, X } from "@lucide/svelte";
 
   // --- State (Svelte 5 runes) ---
   let isDark = $state(false);
@@ -179,7 +179,7 @@
           {#if isMenuOpen}
             <X size={16} strokeWidth={2} />
           {:else}
-            <Grid3x3 size={16} strokeWidth={2} />
+            <Grip size={16} strokeWidth={2} />
           {/if}
         </div>
 

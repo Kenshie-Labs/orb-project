@@ -13,4 +13,4 @@ hintSystemLog: ""
 
 [tryout nasional](https://www.tryoutnasional.id/)
 
-![gambar jadwal](../../assets/attachImg/sticker3.jpeg)
+![gambar jadwal](/../../media/sticker3.jpeg)
