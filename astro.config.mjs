@@ -1,57 +1,12 @@
 // @ts-check
 import { defineConfig } from "astro/config";
 import tailwindcss from "@tailwindcss/vite";
+import sitemap from "@astrojs/sitemap";
 import svelte from "@astrojs/svelte";
+import expressiveCode from 'astro-expressive-code';
 import remarkDirective from "remark-directive";
 import { visit } from "unist-util-visit";
-import remarkMath from "remark-math";
-import rehypeKatex from "rehype-katex";
 import pwa from "@vite-pwa/astro";
-
-function remarkEmbed() {
-  return (tree) => {
-    visit(tree, (node) => {
-      // HANYA tangani video, biarkan gambar dilewati
-      if (node.name === "embed" && node.attributes.url?.includes("youtu")) {
-        const url = node.attributes.url;
-        const videoId = url
-          .split(/v=|youtu\.be\/|\/embed\//)[1]
-          ?.split(/[?&]/)[0];
-
-        node.type = "html";
-        node.value = `
-                  <div>
-                    <iframe
-                      src="https://www.youtube.com/embed/${videoId}"
-                      class="w-full aspect-video block"
-                      frameborder="0"
-                      allowfullscreen>
-                    </iframe>
-                  </div>`;
-      }
-    });
-  };
-}
-
-function remarkCustomBlocks() {
-  return (tree) => {
-    visit(tree, (node) => {
-      // Memeriksa jika node adalah container directive (:::name)
-      if (
-        node.type === 'containerDirective' &&
-        ['note', 'tip', 'important', 'dangerous'].includes(node.name)
-      ) {
-        const data = node.data || (node.data = {});
-        const tagName = 'div';
-        
-        data.hName = tagName;
-        data.hProperties = {
-          class: `custom-block ${node.name}`,
-        };
-      }
-    });
-  };
-}
 
 function remarkCleanInlineCode() {
   return (tree) => {
@@ -66,6 +21,7 @@ function remarkCleanInlineCode() {
 
 // https://astro.build/config
 export default defineConfig({
+  site: "https://orb.axelkenshi.web.id",
   // Konfigurasi server development
   server: {
     port: 2999, // Ganti dengan port yang Anda inginkan (misal: 3000, 5000, dll)
@@ -80,11 +36,14 @@ export default defineConfig({
       theme: 'vitesse-dark', // atau theme pilihan Anda
       wrap: false, // kode yang terlalu panjang akan dibungkus
     },
-    remarkPlugins: [remarkDirective, remarkEmbed, remarkMath, remarkCustomBlocks, remarkCleanInlineCode],
-    rehypePlugins: [rehypeKatex],
+    remarkPlugins: [remarkDirective, remarkCleanInlineCode],
   },
   integrations: [
+    sitemap(),
     svelte(),
+    expressiveCode({
+    themes: ['github-dark'],
+    }),
     pwa({
       registerType: "autoUpdate",
       includeAssets: ["favicon.svg", "apple-touch-icon.png"],
@@ -111,9 +70,28 @@ export default defineConfig({
       },
       workbox: {
         globPatterns: ["**/*.{js,css,html,ico,png,svg,woff2}"],
+        // Jangan precache CMS dan library mermaid yang besar
+        globIgnores: ["**/admin/**", "**/vendor/mermaid/**"],
+        navigateFallbackDenylist: [/^\/admin/],
         // navigateFallback: "/index.html",
         // Ambil alih cache external
         runtimeCaching: [
+          // Mermaid: cache saat pertama dipakai (CacheFirst)
+          {
+            urlPattern: /\/vendor\/mermaid\/.*/,
+            handler: "CacheFirst",
+            options: {
+              cacheName: "mermaid-vendor-cache",
+              expiration: {
+                maxEntries: 60,
+                maxAgeSeconds: 30 * 24 * 60 * 60, // 30 hari
+              },
+              cacheableResponse: {
+                statuses: [0, 200],
+              },
+            },
+          },
+          // unsplash CDN
           {
             urlPattern: /^https:\/\/images\.unsplash\.com\/.*$/,
             handler: "CacheFirst",
@@ -128,6 +106,7 @@ export default defineConfig({
               },
             },
           },
+          // Tenor CDN
           {
             urlPattern: /^https:\/\/media\.tenor\.com\/.*$/,
             handler: "CacheFirst",
@@ -141,6 +120,37 @@ export default defineConfig({
                 statuses: [0, 200],
               },
             },
+          },
+          // Cloudinary: gambar hasil transformasi
+          {
+            urlPattern: /^https:\/\/res\.cloudinary\.com\/.*\.(?:png|jpe?g|gif|webp|avif|svg)(\?.*)?$/i,
+            handler: "CacheFirst",
+            options: {
+              cacheName: "cloudinary-images-cache",
+              expiration: {
+                maxEntries: 60,
+                maxAgeSeconds: 7 * 24 * 60 * 60, // 7 hari
+              },
+              cacheableResponse: { statuses: [0, 200] },
+            },
+          },
+          // Pixeldrain: hanya gambar, bukan video atau file besar
+          {
+            urlPattern: /^https:\/\/pixeldrain\.com\/api\/file\/.*\.(?:png|jpe?g|gif|webp|avif|svg)(\?.*)?$/i,
+            handler: "CacheFirst",
+            options: {
+              cacheName: "pixeldrain-images-cache",
+              expiration: {
+                maxEntries: 40,
+                maxAgeSeconds: 7 * 24 * 60 * 60, // 7 hari
+              },
+              cacheableResponse: { statuses: [0, 200] },
+            },
+          },
+          // Video Cloudinary atau Pixeldrain: jangan di-cache, selalu dari jaringan
+          {
+            urlPattern: /^https:\/\/(res\.cloudinary\.com|pixeldrain\.com)\/.*\.(?:mp4|webm|ogg|mov|m4v|mp3|wav)(\?.*)?$/i,
+            handler: "NetworkOnly",
           },
         ],
       },

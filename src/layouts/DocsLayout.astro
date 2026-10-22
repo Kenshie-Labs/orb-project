@@ -4,6 +4,7 @@ import "../styles/global.css";
 import Navbar from "../components/Navbar.svelte";
 import DocsPagination from "../components/DocsPagination.svelte";
 import DocsSidebarNav from "./DocsSidebarNav.astro";
+import TranslateToggle from "../components/TranslateToggle.astro"
 import ThemeInit from "../components/ThemeInit.astro";
 import { ClientRouter } from "astro:transitions";
 
@@ -102,7 +103,8 @@ if (currentId) {
     <Navbar client:idle transition:persist="navbar" />
 
     <!-- 3-column docs body -->
-    <div class="max-w-screen-xl mx-auto flex min-h-[calc(100vh-3.5rem)]">
+    <!-- id "note-content" Area yang diterjemahkan: judul, deskripsi, gambar, dan isi markdown -->
+    <div id="note-content" class="max-w-screen-xl mx-auto flex min-h-[calc(100vh-3.5rem)]">
 
       <!-- LEFT SIDEBAR (desktop only, lg+) -->
       <aside class="hidden lg:flex flex-col w-64 shrink-0 border-r-2
@@ -162,11 +164,15 @@ if (currentId) {
         </nav>
 
         <!-- Category chip -->
-        <span class="inline-block px-3 py-1 text-xs font-bold uppercase mb-4 md:mb-5 tracking-widest
-                     border-2 border-orb-dark bg-orange-400 dark:border-orb-tan">
-          {category.replace(/-/g, " ")}
-        </span>
-
+        <div class="flex">
+          <span class="inline-block px-3 py-1 text-xs font-bold uppercase mb-4 md:mb-5 tracking-widest
+                       border-2 border-orb-dark bg-orange-400 dark:border-orb-tan">
+            {category.replace(/-/g, " ")}
+            
+          </span>
+          <TranslateToggle />
+        </div>
+        
         <!-- Page title -->
         <h1 class="text-3xl sm:text-4xl lg:text-5xl font-petrona font-light leading-tight mb-3 break-words
                    text-orb-dark dark:text-orb-tan">
@@ -267,7 +273,7 @@ if (currentId) {
 
     </div>
 
-    <!-- Hide scrollbar: hardcoded CSS, tidak bergantung pada plugin Tailwind -->
+    <!-- Hide scrollbar milik sidebar: hardcoded CSS, tidak bergantung pada plugin Tailwind -->
     <style is:global>
       .hide-scrollbar {
         -ms-overflow-style: none;   /* IE & Edge lama */
@@ -285,62 +291,8 @@ if (currentId) {
       }
     </style>
 
-    <!-- Code block copy button -->
-    <script>
-      function setupCodeBlocks() {
-        const codeBlocks = document.querySelectorAll('pre');
-
-        codeBlocks.forEach((block) => {
-
-          // Mencegah duplikasi
-          if (block.parentElement?.classList.contains('code-wrapper')) return;
-
-          // 1. Deteksi Bahasa (Astro/Shiki biasanya memberi class "language-xxx")
-          const codeEl = block.querySelector('code');
-          // Cek class di <pre> ATAU di <code>
-          const combinedClasses = [...block.classList, ...Array.from(codeEl?.classList || [])];
-          const langClass = combinedClasses.find(c => c.startsWith('language-') || c.startsWith('lang-'));
-          // Cek attribute data-language yang biasanya diset Shiki
-          const lang = block.getAttribute('data-language') || codeEl?.getAttribute('data-language') || 'CODE';
-
-          // 2. Buat Wrapper
-          const wrapper = document.createElement('div');
-          wrapper.className = 'code-wrapper my-6 border rounded overflow-hidden border-orb-dark dark:border-orb-tan shadow-brutal dark:shadow-brutal-onDarkMode/70';
-
-          // 3. Buat Header
-          const header = document.createElement('div');
-          header.className = 'flex justify-between items-center px-4 py-2 border-b-2 border-orb-dark dark:border-orb-tan bg-orb-dark/5 dark:bg-orb-tan/5';
-          header.innerHTML = `
-            <span class="text-[10px] font-bold uppercase tracking-widest text-orb-dark dark:text-orb-tan">${lang}</span>
-            <button class="copy-btn text-orb-dark dark:text-orb-tan active:text-orange-500 transition-colors">
-              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
-            </button>
-          `;
-
-          // 4. Logika Copy
-          const button = header.querySelector('.copy-btn');
-          button?.addEventListener('click', async () => {
-            const code = codeEl?.innerText || '';
-            await navigator.clipboard.writeText(code);
-            button.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>`;
-            setTimeout(() => {
-              button.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>`;
-            }, 2000);
-          });
-
-          // 5. Susun DOM: Wrapper -> Header -> Pre
-          block.parentNode?.insertBefore(wrapper, block);
-          wrapper.appendChild(header);
-          wrapper.appendChild(block);
-
-          // Bersihkan style 'pre' bawaan agar tidak konflik
-          block.className = 'p-4 overflow-x-auto';
-        });
-      }
-
-      setupCodeBlocks();
-      document.addEventListener('astro:page-load', setupCodeBlocks);
-    </script>
+    <!-- Execute rendering KaTeX & Mermaid -->
+    <script src="/js/blocks.js" defer></script>
 
     <!-- TOC scroll-spy: highlight heading yang sedang tampil di viewport -->
     <script>

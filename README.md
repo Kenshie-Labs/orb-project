@@ -35,22 +35,48 @@ ORB Knownrie is a modern documentation website built with Astro, designed to org
 
 ```text
 orb-project/
+│   ├── content/
+│   │   ├── software-engineering/
+│   │   │   ├── learn-git/
+│   │   │   │   └── material.md
+│   │   │   ├── learn-python/
+│   │   │   │   ├── one.md
+│   │   │   │   ├── two.md
+│   │   │   │   └── three.md
+│   │   │   └── wellcome.md
+│   │   └── exam-tryout/
+│   │       ├── informatics/
+│   │       │   └── materi.md
+│   │       ├── introduction.md
+│   │       └── conclusion.md
+│   │
 ├── public/
 │   ├── favicon.svg
-│   ├── attachImg/
+│   ├── media/
+│   ├── fonts/
 │   ├── site.webmanifest
-│   └── fonts/
+│   ├── robots.txt
+│   ├── styles/
+│   │     └── custom-blocks.css
+│   ├── js/
+│   │     └── blocks.css
+│   ├── vendor/
+│   │     └── katex/
+│   │     └── mermaid/
+│   ├── admin/
+│   │     ├── chunks/
+│   │     ├── config.yml
+│   │     ├── editor-components.js
+│   │     ├── index.html
+│   │     └── sveltia-cms.js
 ├── src/
 │   ├── components/
 │   │   ├── Navbar.svelte          # Main navigation with theme toggle
+│   │   ├── ContentGuard.svelte    # Password content protected client side
+│   │   ├── DocsPagination.svelte  # paginations button
 │   │   └── ThemeInit.astro        # Prevents FOUC on theme load
-│   ├── content/
-│   │   └── academics/             # Academic notes by category
-│   │       ├── informatika/       # Computer science notes
-│   │       │   └── materi.md      # material content md
-│   │       ├── matematika/        # Mathematics notes
-│   │       └── pengantar.md       # Example content
 │   ├── layouts/
+│   │   ├── DocsSidebarNav.svelte  # Clean sidebar & responsive device UI layout
 │   │   └── DocsLayout.astro       # Documentation layout with sidebars
 │   ├── locales/
 │   │   └── translations.json      # i18n translations (ID/EN)

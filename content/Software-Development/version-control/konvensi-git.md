@@ -1,7 +1,10 @@
 ---
-title: "testing first"
-excerpt: "tanpa direktori sub folder."
+title: testing first
+excerpt: tanpa direktori sub folder.
 date: 2024-01-01
+isLocked: false
+question: ''
+hintSystemLog: ''
 ---
 
 # KONVENSI COMMIT GIT (CONVENTIONAL COMMITS)
@@ -10,25 +13,45 @@ date: 2024-01-01
 
 Format pesan commit mengikuti pola berikut:
 
+<div class="callout" data-type="tip">
+
+hai semua
+
+</div>
+
+
+
 ```text
 <tipe>(<scope>): <deskripsi>
 ```
+
+
 
 ```text
 [body opsional]
 ````
 
-```text
+
+
+<div class="embed-youtube"><iframe src="https://www.youtube.com/embed/o6UXRZ2XwgU" loading="lazy" allowfullscreen></iframe></div>
+
+
+
+
+
+```text title="teks.txt"
 [footer opsional]
 ```
 
-Keterangan:
-- `<tipe>:` Jenis perubahan (wajib).
-- `(<scope>):` Lingkup perubahan (opsional, dalam tanda kurung).
-- `<deskripsi>:` Ringkasan singkat perubahan (wajib).
-- `[body]:` Penjelasan detail (opsional, pisahkan dengan satu baris kosong).
-- `[footer]:` Referensi isu atau perubahan merusak (opsional).
 
+
+Keterangan:
+
+- `<tipe>:` Jenis perubahan (wajib).\`
+`- `(<scope>):` Lingkup perubahan (opsional, dalam tanda kurung).`
+`- `<deskripsi>:` Ringkasan singkat perubahan (wajib).`
+`- `[body]:` Penjelasan detail (opsional, pisahkan dengan satu baris kosong).`
+`- `[footer]:\` Referensi isu atau perubahan merusak (opsional).
 
 ## 2. JENIS-JENIS TIPE (TYPE)
 
@@ -90,4 +113,4 @@ Reviewed-by: Budi Santoso
 - Changelog Otomatis: Alat dapat membuat daftar perubahan secara otomatis.
 - Penomoran Versi: Menentukan kenaikan versi (Major, Minor, Patch) secara otomatis.
 - Kejelasan: Memudahkan tim memahami riwayat perubahan kode.
-- Standar Industri: Format yang diakui secara luas dalam ekosistem pengembang.   
+- Standar Industri: Format yang diakui secara luas dalam ekosistem pengembang.
