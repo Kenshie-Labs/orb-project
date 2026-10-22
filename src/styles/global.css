@@ -1,3 +1,6 @@
+@import "tailwindcss";
+@plugin "@tailwindcss/typography";
+
 /* Self-hosted fonts untuk performa optimal */
 @font-face {
   font-family: "Petrona";
@@ -25,13 +28,8 @@
   size-adjust: 108%;
 }
 
-@import "tailwindcss";
-@import "katex/dist/katex.min.css";
-
 /* Dark mode: class-based — default is ALWAYS light, dark hanya dari toggle */
 @custom-variant dark (&:is(.dark, .dark *));
-
-@plugin "@tailwindcss/typography";
 
 @theme {
   /*Global palette set*/

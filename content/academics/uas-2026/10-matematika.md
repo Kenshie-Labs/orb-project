@@ -27,17 +27,3 @@ interpretasi: Semakin tinggi nilai x maka nilai y pun ikut naik
 ## Regresi linear
 
 rumus :
-
-$$
-SS_{xy} = \sum xy - \frac{(\sum x)(\sum y)}{n}
-$$
-
-$$
-SS_{xx} = \sum x^2 - \frac{(\sum x^2)}{n}
-$$
-
-$$
-b = \frac{SS_{xy}}{SS_{xx}}
-$$
-
-$a = \bar{y} - b\bar{x}$
