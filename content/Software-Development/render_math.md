@@ -169,49 +169,56 @@ Cukup tuliskan rumus katex sesuai pedoman bakunya, namun dilarang menggunakan si
 ### Mode Matematika
 
 | Mode | Delimiter | Kegunaan |
-|:---|:---|:---|
-| Inline | `\( ... \)` | Rumus di dalam paragraf |
-| Display | `\[ ... \]` | Rumus standalone (baris sendiri) |
-| Nomor manual | `\[ ... \tag{1} \]` | Display + nomor (tanpa `equation`) |
+| --- | --- | --- |
+
+| Inline | `\( ... \)` | Rumus di dalam paragraf |\`
+`| Display | `[ ... ]` | Rumus standalone (baris sendiri) |`
+`| Nomor manual | `[ ... \tag{1} ]`| Display + nomor (tanpa`equation\`) |
 
 > **Aturan:** `\(` ditutup `\)` dalam satu paragraf. `\[` ditutup `\]`. Tidak boleh nest.
 
----
+***
 
 ### Struktur Dasar
 
 | Elemen | Sintaks |
-|:---|:---|
-| Pecahan | `\frac{a}{b}` |
-| Akar | `\sqrt{x}` |
-| Akar n | `\sqrt[n]{x}` |
+| --- | --- |
+
+| Pecahan | `\frac{a}{b}` |\`
+`| Akar | `\sqrt{x}` |`
+`| Akar n | `\sqrt[n]{x}\` |
+
 | Eksponen | `x^2` |
+| --- | --- |
 | Subskrip | `x_i` |
 | Keduanya | `x_i^2` |
 | Binomial | `\binom{n}{k}` |
 
 > **Aturan:** Setiap argumen **wajib** dalam `{}`. `x^23` = x²³, bukan x²·3.
 
----
+***
 
 ### Spasi & Huruf
 
 | Aturan | Penjelasan |
-|:---|:---|
+| --- | --- |
 | Spasi diabaikan | `a + b` dan `a+b` → hasil sama |
 | Huruf italic | `abc` → *abc* |
-| Teks tegak | `\text{abc}` atau `\mathrm{abc}` |
-| Operasi biner | `+`, `-`, `=` → otomatis ada spasi |
+
+| Teks tegak | `\text{abc}` atau `\mathrm{abc}` |\`
+`| Operasi biner | `+`, `-`, `=\` → otomatis ada spasi |
 
 **Spasi manual yang didukung:** `\,` (thin), `\;` (med), `\:` (med), `\quad`, `\qquad`
 
 > **Tidak didukung:** `\hskip`, `\mspace` — gunakan `\quad` / `\;` / `\,` sebagai pengganti.
 
----
+***
 
 ### Delimiter (Tanda Kurung)
 
 Setiap `\left` **harus** berpasangan dengan `\right` dalam satu math environment.
+
+
 
 ```latex
 \left( \frac{a}{b} \right)
@@ -219,13 +226,21 @@ Setiap `\left` **harus** berpasangan dengan `\right` dalam satu math environment
 \left\{ x \in \mathbb{R} \right\}
 ```
 
+
+
 **Satu sisi** → pakai `.`:
+
+
 
 ```latex
 \left. \frac{x^3}{3} \right|_0^1
 ```
 
+
+
 **Manual sizing:**
+
+
 
 ```latex
 \big( ... \big)
@@ -234,7 +249,9 @@ Setiap `\left` **harus** berpasangan dengan `\right` dalam satu math environment
 \Bigg( ... \Bigg)
 ```
 
----
+
+
+***
 
 ### Environment Multi-Baris
 
@@ -242,6 +259,8 @@ Setiap `\left` **harus** berpasangan dengan `\right` dalam satu math environment
 > **Pengganti universal:** `\begin{aligned}...\end{aligned}` di dalam `\[...\]`.
 
 #### Multi-baris dengan alignment
+
+
 
 ```latex
 \[
@@ -253,10 +272,14 @@ Setiap `\left` **harus** berpasangan dengan `\right` dalam satu math environment
 \]
 ```
 
-- `&` → titik alignment
-- `\\` → baris baru
+
+
+- `&` → titik alignment\`
+`- `\\\` → baris baru
 
 #### Multi-baris tanpa alignment (center)
+
+
 
 ```latex
 \[
@@ -267,20 +290,26 @@ Setiap `\left` **harus** berpasangan dengan `\right` dalam satu math environment
 \]
 ```
 
+
+
 > **Catatan:** `gathered` (bukan `gather`) adalah yang didukung KaTeX.
 
 #### `cases` (inline & display, sama)
+
+
 
 ```latex
 \( f(x) = \begin{cases} x^2 & x \geq 0 \\ -x & x < 0 \end{cases} \)
 ```
 
----
+
+
+***
 
 ### Matriks
 
 | Environment | Delimiter |
-|:---|:---|
+| --- | --- |
 | `matrix` | (tidak ada) |
 | `pmatrix` | `( )` |
 | `bmatrix` | `[ ]` |
@@ -289,45 +318,55 @@ Setiap `\left` **harus** berpasangan dengan `\right` dalam satu math environment
 | `Vmatrix` | `\|\| \|\|` |
 | `array` | custom (butuh `{c}` dll.) |
 
+
+
 ```latex
 A = \begin{pmatrix} 1 & 0 \\ 0 & 1 \end{pmatrix}
 ```
 
+
+
 > **Tidak didukung:** `\cline`, `\multicolumn` di dalam `array`.
 
----
+***
 
 ### Simbol Umum
 
 | Kategori | Command |
-|:---|:---|
-| Relasi | `\leq`, `\geq`, `\neq`, `\approx` |
-| Himpunan | `\in`, `\notin`, `\subset`, `\cup`, `\cap` |
-| Logika | `\forall`, `\exists`, `\neg`, `\land`, `\lor` |
+| --- | --- |
+| Relasi | `\leq`, `\geq`, \`\neq`, `\approx\` |
+| Himpunan | `\in`, \`\notin`, `\subset`, `\cup`, `\cap\` |
+| Logika | `\forall`, `\exists`, \`\neg`, `\land`, `\lor\` |
 | Operasi | `\sum`, `\prod`, `\int`, `\lim` |
 | Panah | `\to`, `\Rightarrow`, `\mapsto` |
-| Fungsi | `\sin`, `\cos`, `\log`, `\ln`, `\exp`, `\operatorname{Hom}` |
-| Huruf khusus | `\mathbb{R}`, `\mathcal{F}`, `\vec{v}` |
+
+| Fungsi | `\sin`, `\cos`, `\log`, `\ln`, `\exp`, `\operatorname{Hom}` |\`
+`| Huruf khusus | `\mathbb{R}`, `\mathcal{F}`, `\vec{v}\` |
 
 > **Catatan:** Untuk operator custom, gunakan `\operatorname{Hom}` langsung — **tidak** ada `\DeclareMathOperator`.
 
----
+***
 
 ### Aturan Spesifik KaTeX (Tidak Ada di LaTeX)
 
 | Hal | Solusi KaTeX |
-|:---|:---|
-| `\newcommand{\R}{\mathbb{R}}` | Tulis `\mathbb{R}` langsung, atau definisikan via **rendering options** API: `macros: { '\\R': '\\mathbb{R}' }` |
-| `\substack{a \\ b}` | `\begin{array}{c} a \\ b \end{array}` |
-| `\label{eq:1}` + `\ref{}` | `\tag{1}` manual — tidak ada cross-reference |
+| --- | --- |
+
+| `\newcommand{\R}{\mathbb{R}}` | Tulis `\mathbb{R}` langsung, atau definisikan via **rendering options** API: `macros: { '\\R': '\\mathbb{R}' }` |\`
+`| `\substack{a \ b}`|`\begin{array}{c} a \ b \end{array}` |`
+`| `\label{eq:1}`+`\ref{}`|`\tag{1}\` manual — tidak ada cross-reference |
+
 | `equation` environment | `\[ ... \tag{1} \]` |
+| --- | --- |
 | `split` | `aligned` |
 | TikZ / PGF | Gambar eksternal (SVG/PNG) |
 | `\sideset` | Tidak ada pengganti |
 
----
+***
 
 ### Contoh Lengkap (KaTeX, Tanpa `$`)
+
+
 
 ```latex
 \documentclass{article}
@@ -371,23 +410,25 @@ Rumus luas lingkaran: \( A = \pi r^2 \).
 \end{document}
 ```
 
----
+
+
+***
 
 ### Ringkasan Aturan KaTeX
 
 1. **`\(...\)`** inline, **`\[...\]`** display — tanpa `$`.
-2. **Multi-baris → `aligned`** (di dalam `\[...\]`), bukan `align*`.
-3. **Center tanpa `&` → `gathered`**, bukan `gather`.
-4. **Nomor → `\tag{N}`**, bukan `equation` + `\label`.
-5. **Brace `{}` wajib** untuk setiap argumen.
-6. **`\left`/`\right`** harus berpasangan.
-7. **`&` dan `\\`** hanya di dalam environment (`aligned`, `matrix`, dll.).
-8. **`\text{}`** untuk teks di dalam rumus.
-9. **`\,`** setelah `\int`, `\sum` sebelum `dx`.
-10. **Tidak boleh nest** — satu `\(...\)` tidak memuat `\(...\)` lain.
-11. **Macro custom** → via `macros` option di API KaTeX, bukan `\newcommand` di preamble.
+2. **Multi-baris → `aligned`** (di dalam `\[...\]`), bukan `align*`.\`
+`3. **Center tanpa `&`→`gathered`**, bukan `gather\`.
+3. **Nomor → `\tag{N}`**, bukan `equation` + `\label`.
+4. **Brace `{}` wajib** untuk setiap argumen.\`
+`6. **`\left`/`\right\`\*\* harus berpasangan.
+5. **`&` dan `\\`** hanya di dalam environment (`aligned`, `matrix`, dll.).
+6. **`\text{}`** untuk teks di dalam rumus.\`
+`9. **`,`** setelah `\int`, `\sum`sebelum`dx\`.
+7. **Tidak boleh nest** — satu `\(...\)` tidak memuat `\(...\)` lain.
+8. **Macro custom** → via `macros` option di API KaTeX, bukan `\newcommand` di preamble.
 
----
+***
 
 7. Mermaid
 Tuliskan sintaks mermaid sesuai pedoman bakunya.
@@ -470,7 +511,6 @@ flowchart TD
 - `linkStyle N` → gaya link ke-N (0-based index)
 - `linkStyle default` → diterapkan ke semua link
 
-
 **Class (reusable):**
 
 
@@ -522,7 +562,6 @@ Jika label mengandung koma, tidak masalah. Sistem membaca nilai dari kolom palin
 
 **Baris yang salah diabaikan tanpa pesan**. Jika titik, garis, atau data tidak muncul, periksa kembali format dan angkanya.
 
-
 ### Aturan per grafik
 
 - **Koordinat 2D**: batas sumbu harus mencakup semua titik dan garis. Titik di luar batas tetap digambar, tetapi bisa keluar dari area grid. Jika x maksimum sama atau lebih kecil dari x minimum, sistem menyesuaikannya secara otomatis.
@@ -564,8 +603,7 @@ Contoh alur Login sebuah Aplikasi:
 
 
 
-<div class="mermaid-block" data-src-b64="Zmxvd2NoYXJ0IFRECiAgICBzdGFydChbVXNlciB2aXNpdHMgYXBwXSkgLS0+IGxvZ2luW0xvZ2luIGZvcm1dCiAgICBsb2dpbiAtLT4gc3VibWl0W1N1Ym1pdCBjcmVkZW50aWFsc10KICAgIHN1Ym1pdCAtLT4gY2hlY2t7VmFsaWQ/fQogICAgY2hlY2sgLS0+fFllc3wgc2Vzc2lvbltDcmVhdGUgc2Vzc2lvbl0KICAgIGNoZWNrIC0tPnxOb3wgZXJyb3JbU2hvdyBlcnJvcl0KICAgIGVycm9yIC0tPiBsb2dpbgogICAgc2Vzc2lvbiAtLT4gZGFzaGJvYXJkKFtHbyB0byBkYXNoYm9hcmRdKQoKICAgIHN0eWxlIHN0YXJ0IGZpbGw6I2U3ZTdlNyxzdHJva2U6IzMzMwogICAgc3R5bGUgc2Vzc2lvbiBmaWxsOiNjNmRjZmYKICAgIHN0eWxlIGVycm9yIGZpbGw6I2ZmYzZjNgogICAgbGlua1N0eWxlIDMgc3Ryb2tlOiMyMmM1NWUsc3Ryb2tlLXdpZHRoOjJweAogICAgbGlua1N0eWxlIDQgc3Ryb2tlOiNlZjQ0NDQ="></div>
-
+<div class="mermaid-block" data-src-b64="Zmxvd2NoYXJ0IFRECiAgICBzdGFydChbVXNlciB2aXNpdHMgYXBwXSkgLS0+IGxvZ2luW0xvZ2luIGZvcm1dCiAgICBsb2dpbiAtLT4gc3VibWl0W1N1Ym1pdCBjcmVkZW50aWFsc10KICAgIHN1Ym1pdCAtLT4gY2hlY2t7VmFsaWQ/fQogICAgY2hlY2sgLS0+fFllc3wgc2Vzc2lvbltDcmVhdGUgc2Vzc2lvbl0KICAgIGNoZWNrIC0tPnxOb3wgZXJyb3JbU2hvdyBlcnJvcl0KICAgIGVycm9yIC0tPiBsb2dpbgogICAgc2Vzc2lvbiAtLT4gZGFzaGJvYXJkKFtHbyB0byBkYXNoYm9hcmRdKQoKICAgIHN0eWxlIHN0YXJ0IGZpbGw6I2I2NTQ0MixzdHJva2U6IzMzMwogICAgc3R5bGUgc2Vzc2lvbiBmaWxsOiM4M2IzZmYKICAgIHN0eWxlIGVycm9yIGZpbGw6I2VmNzY3NgogICAgbGlua1N0eWxlIDMgc3Ryb2tlOiMyMmM1NWUsc3Ryb2tlLXdpZHRoOjJweAogICAgbGlua1N0eWxlIDQgc3Ryb2tlOiNlZjQ0NDQ="></div>
 
 
 
