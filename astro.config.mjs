@@ -72,15 +72,17 @@ export default defineConfig({
         ],
       },
       workbox: {
+        skipWaiting: true,
+        clientsClaim: true,
         globPatterns: ["**/*.{js,css,html,ico,png,svg,woff2}"],
         globIgnores: ["**/admin/**", "**/vendor/mermaid/**"],
         navigateFallbackDenylist: [/^\/admin/],
         runtimeCaching: [
           {
-            urlPattern: /\/vendor\/mermaid\/.*/,
+            urlPattern: /\/vendor\/katex\/.*/,
             handler: "CacheFirst",
             options: {
-              cacheName: "mermaid-vendor-cache",
+              cacheName: "katex-vendor-cache",
               expiration: {
                 maxEntries: 60,
                 maxAgeSeconds: 30 * 24 * 60 * 60,

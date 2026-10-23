@@ -90,11 +90,4 @@ Tentu saja, seharusnya, setidaknya
 
 
 
-
-<div class="math-block" data-tex-b64="XGFscGhhLCBcYmV0YSwgXHRoZXRhLCBccGk="></div>
-
-
-
-
-
 <div class="mermaid-block" data-src-b64="Zmxvd2NoYXJ0IExSOyBBW011bGFpXSAtLT4gQltQcm9zZXNdOyBCIC0tPiBDW1NlbGVzYWldOw=="></div>

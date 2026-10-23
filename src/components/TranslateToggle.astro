@@ -28,71 +28,87 @@
     restoreContainer,
   } from '../scripts/translate/translate-dom';
 
-  const btn = document.getElementById('translate-toggle') as HTMLButtonElement | null;
-  const label = document.getElementById('translate-label');
-  const badge = document.getElementById('translate-badge');
-  const target = document.getElementById('note-content') as HTMLElement | null;
-
+  // State per halaman. Di-reset setiap kali navigasi terjadi.
   let originals: Map<Text, string> | null = null;
   let busy = false;
   let badgeTimer: number | undefined;
 
-  function setLabel(text: string) {
-    if (label) label.textContent = text;
+  function setupTranslateToggle() {
+    const btn = document.getElementById('translate-toggle') as HTMLButtonElement | null;
+    const label = document.getElementById('translate-label');
+    const badge = document.getElementById('translate-badge');
+
+    // Elemen tidak ada di halaman ini, atau sudah diinisialisasi
+    if (!btn || btn.dataset.ready === 'true') return;
+    btn.dataset.ready = 'true';
+
+    // Setiap navigasi menghasilkan DOM baru, jadi state lama dibuang
+    originals = null;
+    busy = false;
+
+    const setLabel = (text: string) => {
+      if (label) label.textContent = text;
+    };
+
+    const showBadge = () => {
+      if (!badge) return;
+      badge.hidden = false;
+      window.clearTimeout(badgeTimer);
+      badgeTimer = window.setTimeout(() => (badge.hidden = true), 15000);
+    };
+
+    // Tombol hanya muncul jika browser mendukung Translator API
+    (async () => {
+      if (!translatorSupported()) return;
+      try {
+        const status = await getAvailability();
+        if (status !== 'unavailable') btn.hidden = false;
+      } catch {
+        // Tombol tetap tersembunyi
+      }
+    })();
+
+    btn.addEventListener('click', async () => {
+      // Target dicari ulang saat klik, bukan saat inisialisasi
+      const target = document.getElementById('note-content') as HTMLElement | null;
+      if (busy || !target) return;
+
+      if (originals) {
+        restoreContainer(originals);
+        originals = null;
+        target.lang = 'id';
+        btn.setAttribute('aria-pressed', 'false');
+        setLabel('ID');
+        return;
+      }
+
+      // createTranslator harus menjadi pemanggilan pertama setelah klik
+      busy = true;
+      setLabel('…');
+      try {
+        const translator = await createTranslator((ratio) =>
+          setLabel(`${Math.round(ratio * 100)}%`)
+        );
+        originals = await translateContainer(target, translator);
+        translator.destroy?.();
+
+        target.lang = 'en';
+        btn.setAttribute('aria-pressed', 'true');
+        setLabel('EN');
+        showBadge();
+      } catch {
+        setLabel('ID');
+      } finally {
+        busy = false;
+      }
+    });
+
+    badge?.addEventListener('click', () => {
+      if (badge) badge.hidden = true;
+    });
   }
 
-  function showBadge() {
-    if (!badge) return;
-    badge.hidden = false;
-    window.clearTimeout(badgeTimer);
-    badgeTimer = window.setTimeout(() => (badge.hidden = true), 15000);
-  }
-
-  async function init() {
-    if (!btn || !target || !translatorSupported()) return;
-    try {
-      const status = await getAvailability();
-      if (status !== 'unavailable') btn.hidden = false;
-    } catch {
-      // Tombol tetap tersembunyi
-    }
-  }
-
-  btn?.addEventListener('click', async () => {
-    if (busy || !target || !btn) return;
-
-    // Kembali ke Indonesia
-    if (originals) {
-      restoreContainer(originals);
-      originals = null;
-      target.lang = 'id';
-      btn.setAttribute('aria-pressed', 'false');
-      setLabel('ID');
-      return;
-    }
-
-    // Panggilan createTranslator harus menjadi pemanggilan pertama setelah klik
-    busy = true;
-    setLabel('…');
-    try {
-      const translator = await createTranslator((ratio) =>
-        setLabel(`${Math.round(ratio * 100)}%`)
-      );
-      originals = await translateContainer(target, translator);
-      translator.destroy?.();
-
-      target.lang = 'en';
-      btn.setAttribute('aria-pressed', 'true');
-      setLabel('EN');
-      showBadge();
-    } catch {
-      setLabel('ID');
-    } finally {
-      busy = false;
-    }
-  });
-
-  badge?.addEventListener('click', () => (badge.hidden = true));
-
-  init();
+  // Halaman pertama dan setiap navigasi ClientRouter
+  setupTranslateToggle();
+  document.addEventListener('astro:page-load', setupTranslateToggle);
 </script>

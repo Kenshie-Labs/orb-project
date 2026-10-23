@@ -1,12 +1,16 @@
 // public/js/blocks.js
 // Merender blok rumus (KaTeX) dan diagram (Mermaid) di browser.
-// Semua aset diambil dari /vendor/ (self-host), sehingga cocok dengan CSP
-// script-src 'self' dan style-src 'self'. Berkas ini hanya memuat library
-// yang benar-benar dibutuhkan halaman.
+// Dijalankan ulang setiap navigasi ClientRouter (astro:page-load).
 (() => {
   const loadScript = (src) =>
     new Promise((resolve, reject) => {
-      if (document.querySelector(`script[src="${src}"]`)) return resolve();
+      if (window.katex) return resolve();
+      const existing = document.querySelector(`script[src="${src}"]`);
+      if (existing) {
+        existing.addEventListener('load', () => resolve(), { once: true });
+        existing.addEventListener('error', () => reject(new Error(`Gagal memuat ${src}`)), { once: true });
+        return;
+      }
       const s = document.createElement('script');
       s.src = src;
       s.onload = resolve;
@@ -22,14 +26,14 @@
     document.head.appendChild(link);
   };
 
-  // Sumber disimpan base64 (lihat b64encode di editor-components.js)
   const b64decode = (s) => {
     const bin = atob(s);
     return new TextDecoder().decode(Uint8Array.from(bin, (c) => c.charCodeAt(0)));
   };
 
+  // Hanya elemen yang belum diproses (tanpa data-rendered)
   async function renderMath() {
-    const els = document.querySelectorAll('.math-block[data-tex-b64]');
+    const els = document.querySelectorAll('.math-block[data-tex-b64]:not([data-rendered])');
     if (!els.length) return;
 
     loadStyle('/vendor/katex/katex.min.css');
@@ -39,29 +43,37 @@
       try {
         const tex = b64decode(el.dataset.texB64);
         window.katex.render(tex, el, { displayMode: true, throwOnError: false });
+        el.dataset.rendered = 'true';
       } catch (err) {
         console.error('[math] gagal render:', err);
       }
     });
   }
 
+  let mermaidPromise = null;
+  const getMermaid = () => {
+    mermaidPromise ??= import('/vendor/mermaid/mermaid.esm.min.mjs').then((m) => {
+      const dark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      m.default.initialize({
+        startOnLoad: false,
+        securityLevel: 'strict',
+        theme: dark ? 'dark' : 'default',
+      });
+      return m.default;
+    });
+    return mermaidPromise;
+  };
+
   async function renderMermaid() {
-    const blocks = document.querySelectorAll('.mermaid-block[data-src-b64]');
+    const blocks = document.querySelectorAll('.mermaid-block[data-src-b64]:not([data-rendered])');
     if (!blocks.length) return;
 
-    // Import dinamis: mermaid hanya diunduh di halaman yang memakainya
-    const { default: mermaid } = await import('/vendor/mermaid/mermaid.esm.min.mjs');
-
-    const dark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-    mermaid.initialize({
-      startOnLoad: false,
-      securityLevel: 'strict',
-      theme: dark ? 'dark' : 'default',
-    });
+    const mermaid = await getMermaid();
 
     const nodes = Array.from(blocks, (block) => {
       const div = document.createElement('div');
       div.className = 'mermaid';
+      div.dataset.rendered = 'true';
       div.textContent = b64decode(block.dataset.srcB64);
       block.replaceWith(div);
       return div;
@@ -75,6 +87,6 @@
     renderMermaid().catch((err) => console.error('[mermaid]', err));
   };
 
-  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', run);
-  else run();
+  run();
+  document.addEventListener('astro:page-load', run);
 })();

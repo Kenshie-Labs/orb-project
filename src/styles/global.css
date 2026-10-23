@@ -154,7 +154,10 @@
 
   h1,
   h2,
-  h3 {
+  h3,
+  h4,
+  h5,
+  h6 {
     font-weight: 800;
     font-family: var(--font-source-sans);
     letter-spacing: -0.02em;
@@ -168,6 +171,7 @@
     font-family: monospace !important;
     font-size: 0.9em !important;
     font-weight: 500;
+    overflow-wrap: anywhere;
   }
 
   pre {
@@ -185,31 +189,18 @@
     max-width: 100%;
     height: auto;
   }
+
+  table {
+    display: block;
+    max-width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  
 }
 
 /*Custom Components*/
 @layer components {
-  .custom-block {
-    @apply p-4 my-6 border-2 border-orb-dark shadow-brutal dark:shadow-brutal-onDarkMode;
-  }
-
-  .note {
-    @apply bg-blue-100;
-  }
-  .tip {
-    @apply bg-green-100;
-  }
-  .important {
-    @apply bg-purple-100;
-  }
-  .dangerous {
-    @apply bg-red-100;
-  }
-
-  /* Sesuaikan dengan mode gelap jika perlu */
-  .dark .custom-block {
-    @apply text-orb-dark;
-  }
 
   /* ====================================
   STYLING CUSTOM BLOCK SVELTIA EDITOR COMPONENTS
@@ -456,5 +447,32 @@
     margin-top: 0.5rem;
     font-size: 0.75rem;
     opacity: 0.7;
+  }
+
+  /* 2d diagram math */
+  .embed-plot {
+    margin: 1.5rem auto;
+    text-align: center;
+  }
+  
+  .embed-plot .plot-svg,
+  .plot-svg {
+    width: 100%;
+    max-width: 420px;
+    height: auto;
+    color: inherit;
+  }
+
+  /* 2d Charts diagram */
+  .embed-chart {
+    margin: 1.5rem auto;
+    text-align: center;
+  }
+  
+  .chart-svg {
+    width: 100%;
+    max-width: 420px;
+    height: auto;
+    color: inherit;
   }
 }

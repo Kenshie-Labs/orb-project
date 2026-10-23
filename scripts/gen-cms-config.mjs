@@ -30,7 +30,7 @@ const FIELDS = [
     editor_components: [
       "table", "callout", "youtube", "cdn-image", "cdn-grid", "link-card",
       "code-file", "terminal", "details", "code-diff", "cdn-video",
-      "iframe-embed", "math", "mermaid",
+      "iframe-embed", "math", "mermaid", "plot-2d", "chart-bar", "chart-donut", "chart-line", "chart-heatmap",
     ],
   },
 ];

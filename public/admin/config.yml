@@ -90,7 +90,12 @@
             "cdn-video",
             "iframe-embed",
             "math",
-            "mermaid"
+            "mermaid",
+            "plot-2d",
+            "chart-bar",
+            "chart-donut",
+            "chart-line",
+            "chart-heatmap"
           ]
         }
       ]
@@ -166,7 +171,12 @@
             "cdn-video",
             "iframe-embed",
             "math",
-            "mermaid"
+            "mermaid",
+            "plot-2d",
+            "chart-bar",
+            "chart-donut",
+            "chart-line",
+            "chart-heatmap"
           ]
         }
       ]
@@ -242,7 +252,12 @@
             "cdn-video",
             "iframe-embed",
             "math",
-            "mermaid"
+            "mermaid",
+            "plot-2d",
+            "chart-bar",
+            "chart-donut",
+            "chart-line",
+            "chart-heatmap"
           ]
         }
       ]
@@ -318,7 +333,12 @@
             "cdn-video",
             "iframe-embed",
             "math",
-            "mermaid"
+            "mermaid",
+            "plot-2d",
+            "chart-bar",
+            "chart-donut",
+            "chart-line",
+            "chart-heatmap"
           ]
         }
       ]
@@ -394,7 +414,12 @@
             "cdn-video",
             "iframe-embed",
             "math",
-            "mermaid"
+            "mermaid",
+            "plot-2d",
+            "chart-bar",
+            "chart-donut",
+            "chart-line",
+            "chart-heatmap"
           ]
         }
       ]
@@ -470,7 +495,12 @@
             "cdn-video",
             "iframe-embed",
             "math",
-            "mermaid"
+            "mermaid",
+            "plot-2d",
+            "chart-bar",
+            "chart-donut",
+            "chart-line",
+            "chart-heatmap"
           ]
         }
       ]
@@ -546,7 +576,12 @@
             "cdn-video",
             "iframe-embed",
             "math",
-            "mermaid"
+            "mermaid",
+            "plot-2d",
+            "chart-bar",
+            "chart-donut",
+            "chart-line",
+            "chart-heatmap"
           ]
         }
       ]
@@ -622,7 +657,12 @@
             "cdn-video",
             "iframe-embed",
             "math",
-            "mermaid"
+            "mermaid",
+            "plot-2d",
+            "chart-bar",
+            "chart-donut",
+            "chart-line",
+            "chart-heatmap"
           ]
         }
       ]
@@ -698,7 +738,12 @@
             "cdn-video",
             "iframe-embed",
             "math",
-            "mermaid"
+            "mermaid",
+            "plot-2d",
+            "chart-bar",
+            "chart-donut",
+            "chart-line",
+            "chart-heatmap"
           ]
         }
       ]
@@ -774,7 +819,12 @@
             "cdn-video",
             "iframe-embed",
             "math",
-            "mermaid"
+            "mermaid",
+            "plot-2d",
+            "chart-bar",
+            "chart-donut",
+            "chart-line",
+            "chart-heatmap"
           ]
         }
       ]
