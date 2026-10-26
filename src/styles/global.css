@@ -107,6 +107,96 @@
   p {
     @apply font-light font-source-sans;
   }
+
+  /* ===== Dock aksesibilitas ===== */
+  .dock {
+    position: fixed;
+    left: auto;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 40;
+    display: flex;
+    align-items: flex-end;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  
+  .dock-btn {
+    width: 2.25rem;
+    height: 2.25rem;
+    display: grid;
+    place-items: center;
+    border-radius: 0.75rem 0 0 0.75rem;
+    border: 2px solid var(--color-orb-dark, #1f1f1f);
+    background: var(--color-orb-tan, #edeadf);
+    color: var(--color-orb-dark, #1f1f1f);
+    opacity: 0.35;
+    transition: opacity 0.2s, transform 0.2s;
+  }
+  .dock-btn:hover,
+  .dock-btn:focus-visible,
+  .dock-btn:active {
+    opacity: 1;
+    transform: translateX(-3px);
+  }
+  
+  .dock-dialog {
+    margin: 0 0 0 auto;
+    height: 100vh;
+    max-height: 100dvh;
+    width: min(85vw, 22rem);
+    max-width: none;
+    padding: 0;
+    border: 2px solid var(--color-orb-dark, #1f1f1f);
+    border-left: 2px solid var(--color-orb-dark, #1f1f1f);
+    border-right: 0;
+    border-radius: 1rem 0 0 1rem;
+    background: var(--color-orb-tan, #edeadf);
+    color: var(--color-orb-dark, #1f1f1f);
+  }
+  .dock-dialog::backdrop {
+    background: rgb(0 0 0 / 0.4);
+  }
+  .dock-dialog[open] {
+    display: flex;
+    flex-direction: column;
+  }
+  .dock-dialog-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    border-bottom: 2px solid currentColor;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+  .dock-dialog-body {
+    flex: 1;
+    overflow-y: auto;
+    padding: 1rem;
+    scrollbar-width: thin;
+  }
+  .dock-link {
+    display: block;
+    padding: 0.5rem 0.75rem;
+    font-size: 0.875rem;
+    border-left: 2px solid transparent;
+  }
+  .dock-link:hover,
+  .dock-link:active {
+    border-left-color: currentColor;
+  }
+  .dock-close {
+    width: 2rem;
+    height: 2rem;
+  }
+  
+  @media (prefers-reduced-motion: reduce) {
+    .dock-btn { transition: none; }
+  }
 }
 
 /* Dark mode prose override */
@@ -165,7 +255,7 @@
 
   /* Ini hanya menargetkan inline code (yang tidak dibungkus <pre>) */
   .inline-code {
-    @apply bg-orb-dark/90! text-orb-tan! dark:bg-orb-tan/90! dark:text-orb-dark!;
+    @apply bg-orb-dark/90! text-[#F17778]! dark:bg-[#2D2D2D]!;
     padding: 2px 6px !important;
     border-radius: 4px !important;
     font-family: monospace !important;

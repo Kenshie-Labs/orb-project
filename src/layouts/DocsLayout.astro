@@ -234,6 +234,49 @@ if (currentId) {
           <slot />
         </div>
 
+        <!-- ===== Dock aksesibilitas: hanya mobile & tablet ===== -->
+        <div class="dock lg:hidden" data-dock>
+          <button type="button" class="dock-btn" data-open="pages" aria-label="Daftar halaman" aria-haspopup="dialog">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+          </button>
+          <button type="button" class="dock-btn" data-open="toc" aria-label="Daftar isi" aria-haspopup="dialog">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 5H3"/><path d="M16 12H3"/><path d="M16 19H3"/><path d="M21 5h.01"/><path d="M21 12h.01"/><path d="M21 19h.01"/></svg>
+          </button>
+        </div>
+        
+        <!-- Popup daftar halaman -->
+        <dialog class="dock-dialog" data-dialog="pages" aria-label="Daftar halaman">
+          <div class="dock-dialog-head">
+            <span>Browse {category.replace(/-/g, " ")}</span>
+            <button type="button" class="dock-close" data-close aria-label="Tutup">✕</button>
+          </div>
+          <nav class="dock-dialog-body">
+            <a href="/notes" class="dock-link">← All Notes</a>
+            <DocsSidebarNav category={category} grouped={grouped} currentId={currentId} />
+          </nav>
+        </dialog>
+        
+        <!-- Popup daftar isi -->
+        <dialog class="dock-dialog" data-dialog="toc" aria-label="Daftar isi">
+          <div class="dock-dialog-head">
+            <span>In This Guide</span>
+            <button type="button" class="dock-close" data-close aria-label="Tutup">✕</button>
+          </div>
+          <nav class="dock-dialog-body">
+            {tocHeadings.map((h) => (
+              <a
+                href={`#${h.slug}`}
+                data-toc-link
+                data-slug={h.slug}
+                data-close-on-click
+                class={["dock-link toc-link", h.depth === 2 ? "pl-2 font-bold" : "pl-5 text-xs"].join(" ")}
+              >
+                {h.text}
+              </a>
+            ))}
+          </nav>
+        </dialog>
+
         <!-- Pagination -->
         {currentPage && <DocsPagination currentPage={currentPage} prevPage={prevPage} nextPage={nextPage} client:load />}
       </main>
@@ -401,5 +444,40 @@ if (currentId) {
       document.addEventListener("astro:page-load", setupTocSpy);
     </script>
 
+    <!-- Accesibility Mini Dock TOC & Page list -->
+    <script>
+      function setupDock() {
+        const dock = document.querySelector<HTMLElement>("[data-dock]");
+        if (!dock || dock.dataset.ready === "true") return;
+        dock.dataset.ready = "true";
+    
+        const dialogs = new Map<string, HTMLDialogElement>();
+        document.querySelectorAll<HTMLDialogElement>("[data-dialog]").forEach((d) =>
+          dialogs.set(d.dataset.dialog!, d)
+        );
+    
+        dock.querySelectorAll<HTMLButtonElement>("[data-open]").forEach((btn) => {
+          btn.addEventListener("click", () => dialogs.get(btn.dataset.open!)?.showModal());
+        });
+    
+        dialogs.forEach((dlg) => {
+          dlg.querySelectorAll("[data-close]").forEach((b) =>
+            b.addEventListener("click", () => dlg.close())
+          );
+          // Klik di area backdrop (di luar kotak konten) menutup popup
+          dlg.addEventListener("click", (e) => {
+            if (e.target === dlg) dlg.close();
+          });
+          // Link TOC menutup popup setelah dipilih
+          dlg.querySelectorAll<HTMLAnchorElement>("[data-close-on-click]").forEach((a) =>
+            a.addEventListener("click", () => dlg.close())
+          );
+        });
+      }
+    
+      setupDock();
+      document.addEventListener("astro:page-load", setupDock);
+    </script>
+    
   </body>
 </html>

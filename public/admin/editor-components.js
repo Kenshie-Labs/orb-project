@@ -392,7 +392,7 @@ const renderCodePreview = ({ filename = '', language = 'text', code = '' } = {})
 CMS.registerEditorComponent({
   id: 'code-file',
   label: 'Kode dengan nama file',
-  icon: 'code',
+  icon: 'code_blocks',
   trigger: 'button',
   fields: [
     { name: 'filename', label: 'Nama file (contoh: astro.config.mjs)', widget: 'string', required: false },
