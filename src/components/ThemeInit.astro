@@ -1,15 +1,26 @@
 ---
 // Dijalankan sebelum paint — mencegah flash of unstyled content (FOUC).
+// untuk mencegah FOUC pada tema dan aksesibilitas.
 // Default SELALU light mode. Dark hanya jika user pernah toggle ke dark.
 ---
+
 <script is:inline>
   (function () {
     try {
-      const stored = window.localStorage.getItem("orb-theme");
-      if (stored === "dark") {
-        document.documentElement.classList.add("dark");
+      const root = document.documentElement;
+      if (window.localStorage.getItem("orb-theme") === "dark") {
+        root.classList.add("dark");
       }
-      // Tidak ada else: kalau tidak ada / 'light' → tidak tambah class apapun
+
+      const raw = window.localStorage.getItem("orb-a11y");
+      if (raw) {
+        const a11y = JSON.parse(raw);
+        if (a11y.textSize) root.dataset.textSize = a11y.textSize;
+        if (a11y.spacing) root.dataset.spacing = a11y.spacing;
+        if (a11y.contrast) root.dataset.contrast = a11y.contrast;
+        if (a11y.monochrome) root.dataset.monochrome = "true";
+        if (a11y.dyslexic) root.dataset.dyslexic = "true";
+      }
     } catch (_) {}
   })();
 </script>

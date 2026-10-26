@@ -1,5 +1,6 @@
 @import "tailwindcss";
 @plugin "@tailwindcss/typography";
+@import "@fontsource/opendyslexic/400.css";
 
 /* Self-hosted fonts untuk performa optimal */
 @font-face {
@@ -28,6 +29,14 @@
   size-adjust: 108%;
 }
 
+@font-face {
+  font-family: "OpenDyslexic";
+  src: url("/fonts/opendyslexic-latin-400-normal.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
 /* Dark mode: class-based — default is ALWAYS light, dark hanya dari toggle */
 @custom-variant dark (&:is(.dark, .dark *));
 
@@ -37,6 +46,7 @@
   --color-orb-dark: #1a1a1a;
   --font-petrona: "Petrona", ui-serif, Georgia, serif;
   --font-source-sans: "Source Sans 3", ui-sans-serif, Roboto, sans-serif;
+  --font-dyslexic: "OpenDyslexic", "Comic Sans MS", ui-sans-serif, sans-serif;
 
   --color-bg-light: var(--color-orb-tan);
   --color-bg-dark: var(--color-orb-dark);
@@ -142,18 +152,15 @@
   }
   
   .dock-dialog {
+    @apply bg-orb-tan text-orb-dark border-2 border-orb-dark border-l-orb-dark dark:bg-orb-dark dark:text-orb-tan dark:border-orb-tan dark:border-l-orb-tan;
     margin: 0 0 0 auto;
     height: 100vh;
     max-height: 100dvh;
     width: min(85vw, 22rem);
     max-width: none;
     padding: 0;
-    border: 2px solid var(--color-orb-dark, #1f1f1f);
-    border-left: 2px solid var(--color-orb-dark, #1f1f1f);
     border-right: 0;
     border-radius: 1rem 0 0 1rem;
-    background: var(--color-orb-tan, #edeadf);
-    color: var(--color-orb-dark, #1f1f1f);
   }
   .dock-dialog::backdrop {
     background: rgb(0 0 0 / 0.4);
@@ -197,6 +204,122 @@
   @media (prefers-reduced-motion: reduce) {
     .dock-btn { transition: none; }
   }
+
+  /* ===== Pengaturan aksesibilitas ===== */
+  
+  /* Ukuran teks: dua kategori. Normal (1) dan besar (1.25) */
+  html[data-text-size="large"] .prose {
+    font-size: 1.25em;
+  }
+  html[data-text-size="large"] p,
+  html[data-text-size="large"] li {
+    font-size: 1.125rem;
+  }
+  
+  /* Jarak huruf dan baris (WCAG 1.4.12) */
+  html[data-spacing="wide"] .prose {
+    letter-spacing: 0.04em;
+    word-spacing: 0.16em;
+    line-height: 1.9;
+  }
+  html[data-spacing="wide"] .prose p,
+  html[data-spacing="wide"] .prose li {
+    margin-bottom: 1em;
+  }
+  
+  /* Kontras tinggi: teks hitam pekat di latar putih, atau sebaliknya */
+  html[data-contrast="high"] {
+    --color-orb-tan: #ffffff;
+    --color-orb-dark: #000000;
+  }
+  html[data-contrast="high"] body {
+    background: #ffffff;
+    color: #000000;
+  }
+  html[data-contrast="high"].dark body {
+    background: #000000;
+    color: #ffffff;
+  }
+  
+  /* Monokrom: menghilangkan warna. Gambar dan chart tetap dibaca lewat kontras */
+  html[data-monochrome="true"] {
+    filter: grayscale(1);
+  }
+  
+  /* Font dyslexic: diterapkan ke seluruh teks konten */
+  html[data-dyslexic="true"] .prose,
+  html[data-dyslexic="true"] .prose * {
+    font-family: var(--font-dyslexic) !important;
+  }
+  html[data-dyslexic="true"] body {
+    font-family: var(--font-dyslexic);
+  }
+}
+
+/*
+====================================
+Gaya Khusus Popup dialog aksesibilitas
+====================================
+*/
+.a11y-body {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+.a11y-title {
+  margin-bottom: 0.5rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+.a11y-segment {
+  display: flex;
+  border: 2px solid currentColor;
+}
+.a11y-segment button {
+  flex: 1;
+  padding: 0.5rem;
+  background: transparent;
+  color: inherit;
+  border: 0;
+  cursor: pointer;
+}
+.a11y-segment button + button {
+  border-left: 2px solid currentColor;
+}
+.a11y-segment button[aria-checked="true"] {
+  background: var(--color-orb-dark);
+  color: var(--color-orb-tan);
+}
+.a11y-segment button:focus-visible,
+.a11y-toggle:focus-within,
+.a11y-reset:focus-visible {
+  outline: 2px solid #f97316;
+  outline-offset: 2px;
+}
+.a11y-toggle {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.25rem 0;
+  cursor: pointer;
+}
+.a11y-toggle input {
+  width: 1.1rem;
+  height: 1.1rem;
+  accent-color: #f97316;
+}
+.a11y-reset {
+  align-self: flex-start;
+  padding: 0.5rem 0.75rem;
+  border: 2px solid currentColor;
+  background: transparent;
+  color: inherit;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  cursor: pointer;
 }
 
 /* Dark mode prose override */
@@ -253,7 +376,7 @@
     letter-spacing: -0.02em;
   }
 
-  /* Ini hanya menargetkan inline code (yang tidak dibungkus <pre>) */
+  /* Ini hanya menargetkan inline code backticks (yang tidak dibungkus <pre>) */
   .inline-code {
     @apply bg-orb-dark/90! text-[#F17778]! dark:bg-[#2D2D2D]!;
     padding: 2px 6px !important;
@@ -273,7 +396,6 @@
   }
 
   /* Targetkan gambar bawaan Markdown ![alt](url) */
-
   img {
     @apply border-2 border-orb-dark shadow-brutal dark:shadow-brutal-onDarkMode my-8 block mx-auto;
     max-width: 100%;
@@ -289,7 +411,7 @@
   
 }
 
-/*Custom Components*/
+/*Custom Components block sveltia Editor rendering*/
 @layer components {
 
   /* ====================================
