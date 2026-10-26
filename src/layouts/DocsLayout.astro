@@ -332,7 +332,32 @@ if (currentId) {
                 <span>Font ramah disleksia</span>
               </label>
             </section>
-        
+
+            <!-- Bacaan suara (eksperimental) -->
+            <section class="a11y-group" data-tts-panel>
+              <h3 class="a11y-title">
+                Bacaan suara <span class="a11y-badge">Eksperimental</span>
+              </h3>
+              <p class="a11y-note mb-3">
+                Memakai suara bawaan perangkat. Dukungan bahasa dan kualitas suara bisa berbeda
+                di setiap browser dan perangkat.
+              </p>
+            
+              <div class="a11y-segment a11y-tts">
+                <button type="button" data-tts="play">Putar</button>
+                <button type="button" data-tts="pause" disabled>Jeda</button>
+                <button type="button" data-tts="resume" disabled>Lanjut</button>
+                <button type="button" data-tts="stop" disabled>Berhenti</button>
+              </div>
+            
+              <label class="a11y-slider">
+                <span>Kecepatan <output data-tts-rate-value>1.0</output>×</span>
+                <input type="range" value="1" data-tts-rate />
+              </label>
+            
+              <p class="a11y-status" data-tts-status aria-live="polite"></p>
+            </section>
+            
             <button type="button" class="a11y-reset" data-a11y-reset>Atur ulang</button>
           </div>
         </dialog>
@@ -645,6 +670,14 @@ if (currentId) {
     
       setupA11y();
       document.addEventListener("astro:page-load", setupA11y);
+    </script>
+
+    <!-- Accesibility Text to Speech Button Experimental -->
+    <script>
+      import { initTts } from "../scripts/tts";
+    
+      initTts();
+      document.addEventListener("astro:page-load", () => initTts());
     </script>
   </body>
 </html>

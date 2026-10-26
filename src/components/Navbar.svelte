@@ -4,7 +4,7 @@
   // 'slide' digunakan sebagai Svelte transition directive di template (transition:slide)
   // Warning Vite adalah false positive — Svelte compiler menangani ini secara internal
   void slide;
-  import { Grip, Sun, Moon, X } from "@lucide/svelte";
+  import { Grip, Sun, Moon, X, Accessibility } from "@lucide/svelte";
 
   // --- State (Svelte 5 runes) ---
   let isDark = $state(false);
@@ -39,6 +39,12 @@
     isMenuOpen = false;
   }
 
+  // Accesibility spawn handler
+  function openA11y() {
+    const dialog = document.querySelector<HTMLDialogElement>('[data-dialog="a11y"]');
+    dialog?.showModal();
+  }
+  
   onMount(() => {
     // Baca state dark dari DOM (sudah di-set oleh ThemeInit sebelum hydrate)
     isDark = document.documentElement.classList.contains("dark");
@@ -104,6 +110,22 @@
     <!-- Right controls -->
     <div class="flex items-center gap-3">
 
+      <!-- ── Accesibility (desktop only) ── -->
+      <button
+        type="button"
+        onclick={openA11y}
+        aria-label="Buka pengaturan aksesibilitas"
+        aria-haspopup="dialog"
+        class="hidden lg:flex items-center justify-center w-9 h-9 rounded-full border-2
+               border-orb-dark text-orb-dark bg-orb-tan
+               dark:border-orb-tan dark:text-orb-tan dark:bg-orb-dark
+               hover:bg-orb-dark hover:text-orb-tan
+               dark:hover:bg-orb-tan dark:hover:text-orb-dark
+               transition-colors"
+      >
+        <Accessibility size={16} strokeWidth={2} aria-hidden="true" />
+      </button>
+      
       <!-- ── Dark/Light Toggle Pill ── -->
       <button
         onclick={toggleDark}

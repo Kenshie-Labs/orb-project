@@ -17,7 +17,7 @@ jadikan belajar beberapa materi ini supaya jadi pengetahuan yang berguna untuk m
 
 belajar sesuatu sebagai keinginan jangka panjang, bukan beban kewajiban.
 
-Hitung-hitung nambah ilmu yang sebelumnya belum pernah punya.
+nambah ilmu yang sebelumnya belum punya.
 
 ---
 
@@ -129,7 +129,7 @@ Tetapkan:
 
 ---
 
-## FASE 4: Integrasi & HOTS
+### FASE 4: Integrasi & HOTS
 
 > **Fokus Utama:** Menyelesaikan soal pemecahan masalah tingkat tinggi (HOTS), pengujian kode/system debugging, serta evaluasi sintesis.
 

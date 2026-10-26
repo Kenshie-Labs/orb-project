@@ -322,6 +322,43 @@ Gaya Khusus Popup dialog aksesibilitas
   cursor: pointer;
 }
 
+/* ===== Text to speech accesibility ===== */
+.a11y-badge {
+  display: inline-block;
+  margin-left: 0.5rem;
+  padding: 0.125rem 0.375rem;
+  border: 1px solid currentColor;
+  font-size: 0.625rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  vertical-align: middle;
+}
+.a11y-note,
+.a11y-status {
+  font-size: 0.75rem;
+  opacity: 0.7;
+}
+.a11y-tts {
+  flex-wrap: wrap;
+}
+.a11y-tts button {
+  flex: 1 1 4.5rem;
+}
+.a11y-segment button:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+.a11y-slider {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  font-size: 0.875rem;
+}
+.a11y-slider input {
+  width: 100%;
+  accent-color: #f97316;
+}
+
 /* Dark mode prose override */
 @utility prose-dark {
   --tw-prose-body: var(--color-orb-tan);
