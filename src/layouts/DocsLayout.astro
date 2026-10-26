@@ -293,12 +293,8 @@ if (currentId) {
             <section class="a11y-group">
               <h3 class="a11y-title">Ukuran teks</h3>
               <div class="a11y-segment" role="radiogroup" aria-label="Ukuran teks">
-                <button type="button" role="radio" data-a11y="textSize" data-value="normal" aria-checked="true">
-                  <span class="text-sm">a</span>
-                </button>
-                <button type="button" role="radio" data-a11y="textSize" data-value="large" aria-checked="false">
-                  <span class="text-lg font-bold">A</span>
-                </button>
+                <button type="button" role="radio" data-a11y="textSize" data-value="normal" aria-checked="true"><span class="text-sm">a</span></button>
+                <button type="button" role="radio" data-a11y="textSize" data-value="large" aria-checked="false"><span class="text-lg font-bold">A</span></button>
               </div>
             </section>
         
@@ -320,7 +316,19 @@ if (currentId) {
               </div>
             </section>
         
-            <!-- Monokrom dan font -->
+            <!-- Filter warna -->
+            <section class="a11y-group">
+              <h3 class="a11y-title">Filter warna <span class="a11y-badge">Eksperimental</span></h3>
+              <p class="a11y-note">Membantu sebagian pengguna, belum tentu cocok untuk semua jenis buta warna.</p>
+              <div class="a11y-segment" role="radiogroup" aria-label="Filter warna">
+                <button type="button" role="radio" data-a11y="colorFilter" data-value="none" aria-checked="true">Normal</button>
+                <button type="button" role="radio" data-a11y="colorFilter" data-value="protanopia" aria-checked="false">Protan</button>
+                <button type="button" role="radio" data-a11y="colorFilter" data-value="deuteranopia" aria-checked="false">Deutan</button>
+                <button type="button" role="radio" data-a11y="colorFilter" data-value="tritanopia" aria-checked="false">Tritan</button>
+              </div>
+            </section>
+        
+            <!-- Tampilan -->
             <section class="a11y-group">
               <h3 class="a11y-title">Tampilan</h3>
               <label class="a11y-toggle">
@@ -331,34 +339,60 @@ if (currentId) {
                 <input type="checkbox" data-a11y="dyslexic" />
                 <span>Font ramah disleksia</span>
               </label>
+              <label class="a11y-toggle">
+                <input type="checkbox" data-a11y="readFocus" />
+                <span>Mode fokus membaca</span> <br/>
+                <span>Mode ini Hanya berlaku di PC</span>
+              </label>
             </section>
-
+        
+            <!-- Gerak -->
+            <section class="a11y-group">
+              <h3 class="a11y-title">Gerak</h3>
+              <label class="a11y-toggle">
+                <input type="checkbox" data-a11y="reduceMotion" />
+                <span>Kurangi animasi</span>
+              </label>
+            </section>
+        
             <!-- Bacaan suara (eksperimental) -->
             <section class="a11y-group" data-tts-panel>
               <h3 class="a11y-title">
                 Bacaan suara <span class="a11y-badge">Eksperimental</span>
               </h3>
-              <p class="a11y-note mb-3">
+              <p class="a11y-note">
                 Memakai suara bawaan perangkat. Dukungan bahasa dan kualitas suara bisa berbeda
                 di setiap browser dan perangkat.
               </p>
-            
+        
               <div class="a11y-segment a11y-tts">
                 <button type="button" data-tts="play">Putar</button>
                 <button type="button" data-tts="pause" disabled>Jeda</button>
                 <button type="button" data-tts="resume" disabled>Lanjut</button>
                 <button type="button" data-tts="stop" disabled>Berhenti</button>
               </div>
-            
+        
               <label class="a11y-slider">
                 <span>Kecepatan <output data-tts-rate-value>1.0</output>×</span>
                 <input type="range" value="1" data-tts-rate />
               </label>
-            
+        
+              <label class="a11y-slider">
+                <span>Suara</span>
+                <select class="a11y-select" data-tts-voice>
+                  <option value="">Otomatis (sesuai bahasa)</option>
+                </select>
+              </label>
+        
+              <label class="a11y-toggle">
+                <input type="checkbox" data-tts-title-only />
+                <span>Bacakan judul saja</span>
+              </label>
+        
               <p class="a11y-status" data-tts-status aria-live="polite"></p>
             </section>
-            
-            <button type="button" class="a11y-reset" data-a11y-reset>Atur ulang</button>
+        
+            <button type="button" class="a11y-reset" data-a11y-reset>Reset konfigurasi</button>
           </div>
         </dialog>
 
@@ -401,6 +435,22 @@ if (currentId) {
 
     </div>
 
+    <!-- Definisi filter warna (SVG). Dipanggil dari CSS lewat url(#...). -->
+    <!-- matriks di atas adalah simulasi cara penglihatan dengan defisiensi warna, bukan koreksi -->
+    <svg class="a11y-svg-defs" aria-hidden="true" focusable="false">
+      <defs>
+        <filter id="orb-cb-protanopia" color-interpolation-filters="sRGB">
+          <feColorMatrix type="matrix" values="0.152286 1.052583 -0.204868 0 0  0.114503 0.786281 0.099216 0 0  -0.003882 -0.048116 1.051998 0 0  0 0 0 1 0" />
+        </filter>
+        <filter id="orb-cb-deuteranopia" color-interpolation-filters="sRGB">
+          <feColorMatrix type="matrix" values="0.367322 0.860646 -0.227968 0 0  0.280085 0.672501 0.047413 0 0  -0.011820 0.042940 0.968881 0 0  0 0 0 1 0" />
+        </filter>
+        <filter id="orb-cb-tritanopia" color-interpolation-filters="sRGB">
+          <feColorMatrix type="matrix" values="1.255528 -0.076749 -0.178779 0 0  -0.078411 0.930809 0.147602 0 0  0.004733 0.691367 0.303900 0 0  0 0 0 1 0" />
+        </filter>
+      </defs>
+    </svg>
+    
     <!-- Hide scrollbar milik sidebar: hardcoded CSS, tidak bergantung pada plugin Tailwind -->
     <style is:global>
       .hide-scrollbar {
@@ -422,114 +472,7 @@ if (currentId) {
     <!-- Execute rendering KaTeX & Mermaid -->
     <script src="/js/blocks.js" data-astro-rerun></script>
 
-    <!-- TOC scroll-spy: highlight heading yang sedang tampil di viewport -->
-    <script>
-      const ACTIVE_CLASSES = [
-        "border-orange-400",
-        "font-semibold",
-        "text-orb-dark",
-        "dark:text-orb-tan",
-      ];
-      const IDLE_CLASSES = [
-        "border-transparent",
-        "text-orb-dark/55",
-        "dark:text-orb-tan/55",
-      ];
-
-      // Jarak dari atas viewport agar heading "aktif" tidak tertutup navbar (top-14 = 56px)
-      const BAND_TOP = 72;
-
-      let tocObserver: IntersectionObserver | null = null;
-
-      function setupTocSpy() {
-        tocObserver?.disconnect();
-        tocObserver = null;
-
-        const links = Array.from(
-          document.querySelectorAll<HTMLAnchorElement>("[data-toc-link]")
-        );
-        if (links.length === 0) return;
-
-        // Kelompokkan link berdasarkan slug (desktop & mobile bisa punya link yang sama)
-        const linksBySlug = new Map<string, HTMLAnchorElement[]>();
-        for (const link of links) {
-          const slug = link.dataset.slug ?? "";
-          linksBySlug.set(slug, [...(linksBySlug.get(slug) ?? []), link]);
-        }
-
-        // Ambil heading di DOM, urutkan sesuai posisi dokumen
-        const headings = Array.from(linksBySlug.keys())
-          .map((slug) => document.getElementById(slug))
-          .filter((el): el is HTMLElement => el !== null)
-          .sort((a, b) =>
-            a.compareDocumentPosition(b) & Node.DOCUMENT_POSITION_FOLLOWING ? -1 : 1
-          );
-
-        if (headings.length === 0) return;
-
-        const visible = new Set<HTMLElement>();
-        let activeId: string | null = null;
-
-        const setActive = (id: string | null) => {
-          if (id === activeId) return;
-          activeId = id;
-
-          linksBySlug.forEach((els, slug) => {
-            const on = slug === id;
-            els.forEach((el) => {
-              if (on) {
-                el.classList.remove(...IDLE_CLASSES);
-                el.classList.add(...ACTIVE_CLASSES);
-              } else {
-                el.classList.remove(...ACTIVE_CLASSES);
-                el.classList.add(...IDLE_CLASSES);
-              }
-            });
-          });
-
-          // Pastikan link aktif di sidebar desktop ikut terlihat (hanya di dalam <aside>)
-          if (id) {
-            const sidebarLink = linksBySlug.get(id)?.find((el) => el.closest("aside"));
-            sidebarLink?.scrollIntoView({ block: "nearest" });
-          }
-        };
-
-        const pickActive = (): string | null => {
-          // 1. Prioritaskan heading yang sedang berada di area baca (urutan dokumen)
-          const inView = headings.find((h) => visible.has(h));
-          if (inView) return inView.id;
-
-          // 2. Tidak ada yang terlihat: pakai heading terakhir yang sudah lewat di atas
-          const passed = headings.filter(
-            (h) => h.getBoundingClientRect().top < BAND_TOP
-          );
-          return passed.length ? passed[passed.length - 1].id : null;
-        };
-
-        tocObserver = new IntersectionObserver(
-          (entries) => {
-            for (const entry of entries) {
-              const el = entry.target as HTMLElement;
-              if (entry.isIntersecting) visible.add(el);
-              else visible.delete(el);
-            }
-            setActive(pickActive());
-          },
-          {
-            rootMargin: `-${BAND_TOP}px 0px -60% 0px`,
-            threshold: 0,
-          }
-        );
-
-        headings.forEach((h) => tocObserver!.observe(h));
-        setActive(pickActive());
-      }
-
-      setupTocSpy();
-      document.addEventListener("astro:page-load", setupTocSpy);
-    </script>
-
-    <!-- Accesibility Mini Dock TOC & Page list -->
+    <!-- Dock & dialog: buka, tutup, dan klik backdrop -->
     <script>
       function setupDock() {
         const dock = document.querySelector<HTMLElement>("[data-dock]");
@@ -541,15 +484,20 @@ if (currentId) {
           dialogs.set(d.dataset.dialog!, d)
         );
     
+        // Tombol pembuka di dock mobile
         dock.querySelectorAll<HTMLButtonElement>("[data-open]").forEach((btn) => {
-          btn.addEventListener("click", () => dialogs.get(btn.dataset.open!)?.showModal());
+          btn.addEventListener("click", () => {
+            const dlg = dialogs.get(btn.dataset.open!);
+            if (dlg && !dlg.open) dlg.showModal();
+          });
         });
     
         dialogs.forEach((dlg) => {
+          // Tombol ✕
           dlg.querySelectorAll("[data-close]").forEach((b) =>
             b.addEventListener("click", () => dlg.close())
           );
-          // Klik di area backdrop (di luar kotak konten) menutup popup
+          // Klik backdrop: target adalah dialog itu sendiri, bukan isinya
           dlg.addEventListener("click", (e) => {
             if (e.target === dlg) dlg.close();
           });
@@ -563,23 +511,29 @@ if (currentId) {
       setupDock();
       document.addEventListener("astro:page-load", setupDock);
     </script>
-
-    <!-- Acesibility function for disability dock -->
+    
+    <!-- TOC scroll-spy: highlight heading yang sedang tampil di viewport -->
     <script>
       type A11yState = {
         textSize: "normal" | "large";
         spacing: "normal" | "wide";
         contrast: "normal" | "high";
+        colorFilter: "none" | "protanopia" | "deuteranopia" | "tritanopia";
         monochrome: boolean;
         dyslexic: boolean;
+        reduceMotion: boolean;
+        readFocus: boolean;
       };
     
       const DEFAULTS: A11yState = {
         textSize: "normal",
         spacing: "normal",
         contrast: "normal",
+        colorFilter: "none",
         monochrome: false,
         dyslexic: false,
+        reduceMotion: false,
+        readFocus: false,
       };
     
       const KEY = "orb-a11y";
@@ -598,7 +552,7 @@ if (currentId) {
         } catch {}
       }
     
-      // Terapkan state ke <html> sebagai data-*. Nilai default menghapus atributnya.
+      // Nilai default menghapus atribut data-* dari <html>
       function apply(state: A11yState) {
         const root = document.documentElement;
         const set = (name: string, on: boolean, value: string) => {
@@ -608,11 +562,13 @@ if (currentId) {
         set("textSize", state.textSize !== "normal", state.textSize);
         set("spacing", state.spacing !== "normal", state.spacing);
         set("contrast", state.contrast !== "normal", state.contrast);
+        set("colorFilter", state.colorFilter !== "none", state.colorFilter);
         set("monochrome", state.monochrome, "true");
         set("dyslexic", state.dyslexic, "true");
+        set("reduceMotion", state.reduceMotion, "true");
+        set("readFocus", state.readFocus, "true");
       }
     
-      // Sinkronkan tampilan kontrol di dialog dengan state
       function syncControls(state: A11yState) {
         document.querySelectorAll<HTMLButtonElement>('[role="radio"][data-a11y]').forEach((btn) => {
           const key = btn.dataset.a11y as keyof A11yState;
@@ -627,7 +583,7 @@ if (currentId) {
       function setupA11y() {
         const dialog = document.querySelector<HTMLDialogElement>('[data-dialog="a11y"]');
         if (!dialog || dialog.dataset.ready === "true") {
-          // Tetap terapkan state saat navigasi, walau dialog sudah diinisialisasi
+          // Terapkan state di setiap navigasi, walau dialog sudah diinisialisasi
           apply(load());
           return;
         }
@@ -637,34 +593,29 @@ if (currentId) {
         apply(state);
         syncControls(state);
     
-        // Radio group: klik mengubah satu nilai
-        dialog.querySelectorAll<HTMLButtonElement>('[role="radio"][data-a11y]').forEach((btn) => {
-          btn.addEventListener("click", () => {
-            const key = btn.dataset.a11y as keyof A11yState;
-            state = { ...state, [key]: btn.dataset.value };
-            save(state);
-            apply(state);
-            syncControls(state);
-          });
-        });
-    
-        // Checkbox
-        dialog.querySelectorAll<HTMLInputElement>('input[type="checkbox"][data-a11y]').forEach((input) => {
-          input.addEventListener("change", () => {
-            const key = input.dataset.a11y as keyof A11yState;
-            state = { ...state, [key]: input.checked };
-            save(state);
-            apply(state);
-            syncControls(state);
-          });
-        });
-    
-        // Reset semua ke default
-        dialog.querySelector("[data-a11y-reset]")?.addEventListener("click", () => {
-          state = { ...DEFAULTS };
+        const update = (next: A11yState) => {
+          state = next;
           save(state);
           apply(state);
           syncControls(state);
+        };
+    
+        dialog.querySelectorAll<HTMLButtonElement>('[role="radio"][data-a11y]').forEach((btn) => {
+          btn.addEventListener("click", () => {
+            const key = btn.dataset.a11y as keyof A11yState;
+            update({ ...state, [key]: btn.dataset.value });
+          });
+        });
+    
+        dialog.querySelectorAll<HTMLInputElement>('input[type="checkbox"][data-a11y]').forEach((input) => {
+          input.addEventListener("change", () => {
+            const key = input.dataset.a11y as keyof A11yState;
+            update({ ...state, [key]: input.checked });
+          });
+        });
+    
+        dialog.querySelector("[data-a11y-reset]")?.addEventListener("click", () => {
+          update({ ...DEFAULTS });
         });
       }
     

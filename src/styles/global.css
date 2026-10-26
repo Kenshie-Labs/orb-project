@@ -359,6 +359,87 @@ Gaya Khusus Popup dialog aksesibilitas
   accent-color: #f97316;
 }
 
+/* ===== Fokus yang tegas (WCAG 2.4.7) ===== */
+:focus-visible {
+  outline: 3px solid #f97316;
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+.dark :focus-visible {
+  outline-color: #fdba74;
+}
+html[data-contrast="high"] :focus-visible {
+  outline: 4px solid currentColor;
+}
+
+/* ===== Kurangi animasi (WCAG 2.3.3) =====
+   Mengikuti preferensi sistem, dan juga toggle manual di dialog. */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  :root::view-transition-old(*),
+  :root::view-transition-new(*),
+  :root::view-transition-group(*) {
+    animation: none !important;
+  }
+}
+:root[data-reduce-motion="true"] *,
+:root[data-reduce-motion="true"] *::before,
+:root[data-reduce-motion="true"] *::after {
+  animation-duration: 0.01ms !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: 0.01ms !important;
+  scroll-behavior: auto !important;
+}
+:root[data-reduce-motion="true"]::view-transition-old(*),
+:root[data-reduce-motion="true"]::view-transition-new(*),
+:root[data-reduce-motion="true"]::view-transition-group(*) {
+  animation: none !important;
+}
+
+/* ===== Mode fokus membaca =====
+   Menyembunyikan sidebar kiri dan TOC kanan (keduanya <aside>), lalu melebarkan kolom teks. */
+html[data-read-focus="true"] aside {
+  display: none !important;
+}
+html[data-read-focus="true"] main {
+  max-width: 46rem;
+}
+
+/* ===== Filter warna ===== */
+.a11y-svg-defs {
+  position: absolute;
+  width: 0;
+  height: 0;
+  overflow: hidden;
+}
+html[data-color-filter="protanopia"] { filter: url(#orb-cb-protanopia); }
+html[data-color-filter="deuteranopia"] { filter: url(#orb-cb-deuteranopia); }
+html[data-color-filter="tritanopia"] { filter: url(#orb-cb-tritanopia); }
+
+/* Filter warna dan monokrom sama-sama memakai properti filter, jadi digabung dalam satu nilai */
+html[data-color-filter="protanopia"][data-monochrome="true"] { filter: url(#orb-cb-protanopia) grayscale(1); }
+html[data-color-filter="deuteranopia"][data-monochrome="true"] { filter: url(#orb-cb-deuteranopia) grayscale(1); }
+html[data-color-filter="tritanopia"][data-monochrome="true"] { filter: url(#orb-cb-tritanopia) grayscale(1); }
+
+/* Dropdown suara TTS */
+.a11y-select {
+  width: 100%;
+  padding: 0.375rem 0.5rem;
+  border: 2px solid currentColor;
+  background: var(--color-orb-tan);
+  color: var(--color-orb-dark);
+  font-size: 0.8rem;
+}
+.dark .a11y-select {
+  background: var(--color-orb-dark);
+  color: var(--color-orb-tan);
+}
+
 /* Dark mode prose override */
 @utility prose-dark {
   --tw-prose-body: var(--color-orb-tan);

@@ -3,7 +3,6 @@
 // untuk mencegah FOUC pada tema dan aksesibilitas.
 // Default SELALU light mode. Dark hanya jika user pernah toggle ke dark.
 ---
-
 <script is:inline>
   (function () {
     try {
@@ -15,11 +14,14 @@
       const raw = window.localStorage.getItem("orb-a11y");
       if (raw) {
         const a11y = JSON.parse(raw);
-        if (a11y.textSize) root.dataset.textSize = a11y.textSize;
-        if (a11y.spacing) root.dataset.spacing = a11y.spacing;
-        if (a11y.contrast) root.dataset.contrast = a11y.contrast;
+        if (a11y.textSize && a11y.textSize !== "normal") root.dataset.textSize = a11y.textSize;
+        if (a11y.spacing && a11y.spacing !== "normal") root.dataset.spacing = a11y.spacing;
+        if (a11y.contrast && a11y.contrast !== "normal") root.dataset.contrast = a11y.contrast;
+        if (a11y.colorFilter && a11y.colorFilter !== "none") root.dataset.colorFilter = a11y.colorFilter;
         if (a11y.monochrome) root.dataset.monochrome = "true";
         if (a11y.dyslexic) root.dataset.dyslexic = "true";
+        if (a11y.reduceMotion) root.dataset.reduceMotion = "true";
+        if (a11y.readFocus) root.dataset.readFocus = "true";
       }
     } catch (_) {}
   })();
