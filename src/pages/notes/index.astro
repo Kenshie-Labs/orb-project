@@ -1,10 +1,6 @@
 ---
 import { getCollection } from "astro:content";
-import "../../styles/global.css";
-import DocsLayout from "../../layouts/DocsLayout.astro";
-import Navbar from "../../components/Navbar.svelte";
-import ThemeInit from "../../components/ThemeInit.astro";
-import { ClientRouter } from "astro:transitions";
+import BaseLayout from "../../layouts/BaseLayout.astro";
 
 const allEntries = await getCollection("content");
 
@@ -13,23 +9,7 @@ const categories = [
 ].sort();
 ---
 
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <link rel="icon" href="/favicon.ico" />
-    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-    <meta name="viewport" content="width=device-width" />
-    <title>Archive — Orb</title>
-    <!-- pwa -->
-    <script src="../../pwa.ts"></script>
-    <ThemeInit />
-    <ClientRouter />
-  </head>
-  <body class="min-h-screen">
-
-    <Navbar client:idle transition:persist="navbar" />
+<BaseLayout title="Notes collection">
 
     <main class="max-w-5xl mx-auto px-7 py-14">
 
@@ -55,5 +35,4 @@ const categories = [
       </div>
 
     </main>
-  </body>
-</html>
+</BaseLayout>

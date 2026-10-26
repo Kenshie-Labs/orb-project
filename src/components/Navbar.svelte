@@ -116,25 +116,49 @@
         onclick={openA11y}
         aria-label="Buka pengaturan aksesibilitas"
         aria-haspopup="dialog"
-        class="hidden lg:flex items-center justify-center w-9 h-9 rounded-full border-2
+        class="flex items-center justify-center w-9 h-9 rounded-full border-2
                border-orb-dark text-orb-dark bg-orb-tan
                dark:border-orb-tan dark:text-orb-tan dark:bg-orb-dark
                hover:bg-orb-dark hover:text-orb-tan
                dark:hover:bg-orb-tan dark:hover:text-orb-dark
+               active:bg-orb-dark active:text-orb-tan
+               dark:active:bg-orb-tan dark:active:text-orb-dark
                transition-colors"
       >
         <Accessibility size={16} strokeWidth={2} aria-hidden="true" />
       </button>
       
       <!-- ── Dark/Light Toggle Pill ── -->
+      <!-- ── Mobile: tombol lingkaran tunggal (di bawah lg) ── -->
       <button
+        type="button"
         onclick={toggleDark}
         aria-label={isDark ? "Switch to light mode" : "Switch to dark mode"}
-        class="flex items-center gap-1 p-1 rounded-full border-2 transition-colors
+        class="lg:hidden flex items-center justify-center w-9 h-9 rounded-full border-2
+               border-orb-dark text-orb-dark
+               dark:border-orb-tan dark:text-orb-tan
+               hover:bg-orb-dark hover:text-orb-tan
+               dark:hover:bg-orb-tan dark:hover:text-orb-dark
+               active:bg-orb-dark active:text-orb-tan
+               dark:active:bg-orb-tan dark:active:text-orb-dark
+               transition-colors"
+      >
+        {#if isDark}
+          <Moon size={16} strokeWidth={2} aria-hidden="true" />
+        {:else}
+          <Sun size={16} strokeWidth={2} aria-hidden="true" />
+        {/if}
+      </button>
+      
+      <!-- ── Tablet & desktop: saklar (lg ke atas) ── -->
+      <button
+        type="button"
+        onclick={toggleDark}
+        aria-label={isDark ? "Switch to light mode" : "Switch to dark mode"}
+        class="hidden lg:flex items-center gap-1 p-1 rounded-full border-2 transition-colors
                border-orb-dark bg-orb-tan
                dark:border-orb-tan dark:bg-orb-dark"
       >
-        <!-- Sun (active in light) -->
         <span
           class="w-6 h-6 rounded-full flex items-center justify-center transition-colors
                  {isDark
@@ -143,7 +167,6 @@
         >
           <Sun size={13} strokeWidth={2} />
         </span>
-        <!-- Moon (active in dark) -->
         <span
           class="w-6 h-6 rounded-full flex items-center justify-center transition-colors
                  {isDark

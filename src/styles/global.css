@@ -261,6 +261,27 @@
 Gaya Khusus Popup dialog aksesibilitas
 ====================================
 */
+/* ===== Swap bahasa dialog aksesibilitas (id default, en via data-a11y-lang) ===== */
+dialog[data-dialog="a11y"]:not([data-a11y-lang="en"]) [data-lang="en"] {
+  display: none !important;
+}
+dialog[data-dialog="a11y"][data-a11y-lang="en"] [data-lang="id"] {
+  display: none !important;
+}
+
+.lang-toggle {
+  min-width: 2rem;
+  height: 2rem;
+  padding: 0 0.4rem;
+  border: 2px solid currentColor;
+  background: transparent;
+  color: inherit;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  cursor: pointer;
+}
+
 .a11y-body {
   display: flex;
   flex-direction: column;
@@ -275,6 +296,9 @@ Gaya Khusus Popup dialog aksesibilitas
 }
 .a11y-segment {
   display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 4px;
   border: 2px solid currentColor;
 }
 .a11y-segment button {
@@ -284,13 +308,11 @@ Gaya Khusus Popup dialog aksesibilitas
   color: inherit;
   border: 0;
   cursor: pointer;
+  border: 2px solid currentColor
 }
-.a11y-segment button + button {
-  border-left: 2px solid currentColor;
-}
+
 .a11y-segment button[aria-checked="true"] {
-  background: var(--color-orb-dark);
-  color: var(--color-orb-tan);
+  @apply bg-orb-dark text-orb-tan dark:bg-orb-tan dark:text-orb-dark;
 }
 .a11y-segment button:focus-visible,
 .a11y-toggle:focus-within,
@@ -335,6 +357,7 @@ Gaya Khusus Popup dialog aksesibilitas
 }
 .a11y-note,
 .a11y-status {
+  margin: 6px;
   font-size: 0.75rem;
   opacity: 0.7;
 }
@@ -343,9 +366,16 @@ Gaya Khusus Popup dialog aksesibilitas
 }
 .a11y-tts button {
   flex: 1 1 4.5rem;
+  @apply bg-orb-dark text-orb-tan dark:bg-orb-tan dark:text-orb-dark;
+}
+.a11y-tts button[data-tts="play"] {
+  @apply bg-green-500 text-orb-tan dark:text-orb-dark;
+}
+.a11y-tts button[data-tts="stop"] {
+  @apply bg-red-600 text-orb-tan dark:bg-red-700 dark:text-orb-dark;
 }
 .a11y-segment button:disabled {
-  opacity: 0.4;
+  opacity: 0.3;
   cursor: not-allowed;
 }
 .a11y-slider {

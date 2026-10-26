@@ -1,32 +1,13 @@
 ---
-import "../styles/global.css";
-import Navbar from "../components/Navbar.svelte";
 import CurrencyMarquee from '../components/currencyMarquee.svelte';
-import ThemeInit from "../components/ThemeInit.astro";
-import { ClientRouter } from "astro:transitions";
+import BaseLayout from '../layouts/BaseLayout.astro';
 ---
 
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
+<BaseLayout title="Landing Page">
 
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <link rel="icon" href="/favicon.ico" />
-    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-    <meta name="viewport" content="width=device-width" />
-    <meta name="generator" content={Astro.generator} />
-    <title>Orb Knownrie</title>
-    <!-- pwa -->
-    <script src="../pwa.ts"></script>
-    <ThemeInit />
-    <ClientRouter />
-  </head>
-  <body>
-    <Navbar client:idle transition:persist="navbar" />
-
-    <p class="text-center">Quick comparison of currency values to the dollar</p>
+    <p class="text-center">Quick comparison of currency values to the 1 dollar</p>
     <CurrencyMarquee client:only="svelte" />
-    
+
         <main class="max-w-4xl mx-auto px-6 py-16">
           <!-- HERO -->
           <section class="text-center py-12 border-b-2 border-orb-dark dark:border-orb-tan mb-16">
@@ -42,7 +23,7 @@ import { ClientRouter } from "astro:transitions";
               </a>
             </div>
           </section>
-    
+
           <!-- FEATURES / CATEGORIES -->
           <section class="grid md:grid-cols-2 gap-8 mb-20">
             <div class="p-6 border-2 border-orb-dark shadow-brutal dark:shadow-brutal-onDarkMode bg-white dark:bg-orb-dark/50">
@@ -55,10 +36,8 @@ import { ClientRouter } from "astro:transitions";
             </div>
           </section>
         </main>
-    
+
         <footer class="text-center py-10 border-t-2 border-orb-dark/20 text-sm">
           <p class="font-source-sans">© {new Date().getFullYear()} Orb Knownrie — Built by <a href="https://axelkenshi.my.id" class="text-blue-400">Axel</a></p>
         </footer>
-        
-  </body>
-</html>
+</BaseLayout>

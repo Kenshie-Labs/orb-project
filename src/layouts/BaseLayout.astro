@@ -1,0 +1,56 @@
+---
+import "../styles/global.css";
+import Navbar from "../components/Navbar.svelte";
+import ThemeInit from "../components/ThemeInit.astro";
+import AccessibilityDock from "../components/AccessibilityDock.astro";
+import { ClientRouter } from "astro:transitions";
+
+interface Props { title: string; }
+const { title } = Astro.props;
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="generator" content={Astro.generator} />
+    <!-- MetaIcons -->
+    <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <meta name="apple-mobile-web-app-title" content="Axel" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <title>{title} — Orb</title>
+    <!-- PWA activator -->
+    <script src="../pwa.ts"></script>
+    <!-- FOUC Prevention -->
+    <ThemeInit />
+    <!-- Smooth transition -->
+    <ClientRouter />
+  </head>
+  <body class="min-h-screen">
+    <Navbar client:idle transition:persist="navbar" />
+
+    <slot />
+
+    <AccessibilityDock />
+
+    <!-- call rendering function katex & mermaid library -->
+    <script src="/js/blocks.js" data-astro-rerun></script>
+
+    <!-- run accesibility dock core engine -->
+    <script>
+      import { setupDock, setupA11y } from "../scripts/a11y";
+      import { initTts } from "../scripts/tts";
+    
+      const init = () => {
+        setupDock();
+        setupA11y();
+        initTts();
+      };
+      init();
+      document.addEventListener("astro:page-load", init);
+    </script>
+  </body>
+</html>
