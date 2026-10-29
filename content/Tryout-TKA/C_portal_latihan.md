@@ -13,9 +13,11 @@ hintSystemLog: ''
 
 A. [Contoh soal resmi pusmendik TKA](https://pusmendik.kemendikdasmen.go.id/tka/tka/view/mata-pelajaran-wajib/sma/bahasa-indonesia) di situs resmi ini, lihat bagian menu contoh soal dan anda akan dapat gambaran bagaimana format soalnya (Bukan kisi-kisi).
 
-B. Sumber belajar:
+B. Video Literasi numerasi [Persiapan TKA](https://s.id/videolitnumsmk)
 
-[Materi pelajaran umum](https://pusmendik.kemendikdasmen.go.id/tka/tka/view/mata-pelajaran-wajib/sma/bahasa-indonesia)
+C. Sumber belajar:
+
+[Materi pelajaran umum](https://pusatinformasi.rumahpendidikan.kemendikdasmen.go.id/hc/id/articles/52341578607385-Materi-Sumber-Belajar-Jenjang-SMA-dan-SMK-Materi-Umum)
 
 dan
 
@@ -27,7 +29,7 @@ dan
 
 ![sticker](/../../media/sticker3.jpeg)
 
----
+***
 
 Jangan abaikan Artikel acuan disini, ini memperkaya konteks apa saja yang harus dicari.
 
