@@ -7,15 +7,36 @@ question: ''
 hintSystemLog: ''
 ---
 
-## Setelah masuk ke pendalaman materi, silahkan coba dulu latihan ringan disini
+## Sumber belajar platform All in one
 
-[Portal latihan tka](https://tka.onedumind.com/)
+1. Dari situs kemendikdasmen resmi
 
-[tryout nasional](https://www.tryoutnasional.id/)
+A. [Contoh soal resmi pusmendik TKA](https://pusmendik.kemendikdasmen.go.id/tka/tka/view/mata-pelajaran-wajib/sma/bahasa-indonesia) di situs resmi ini, lihat bagian menu contoh soal dan anda akan dapat gambaran bagaimana format soalnya (Bukan kisi-kisi).
 
-![gambar jadwal](/../../media/sticker3.jpeg)
+B. Sumber belajar:
 
-[1](https://rumah.pendidikan.go.id/ruang/murid)
-[2](https://pusatinformasi.rumahpendidikan.kemendikdasmen.go.id/hc/id/articles/52474934733209-Belajar-Lebih-Terarah-dengan-Kisi-Kisi-Resmi-TKA-untuk-Jenjang-SMA-MA-Sederajat-dan-SMK-MAK-dari-Pusmendik)
-[3](https://pusatinformasi.rumahpendidikan.kemendikdasmen.go.id/hc/id/articles/52474943320345-Sistem-Belajar-Nyicil-Tinggalkan-Sistem-Kebut-Semalam-Mulai-Belajar-Konsisten-Playlist-TKA-SMA-Tahun-2025)
-[4](https://pusatinformasi.rumahpendidikan.kemendikdasmen.go.id/hc/id/articles/55390563223065-Implementasi-Permendikdasmen-No-8-2026-Juknis-BOSP-2026-dalam-Penggunaan-Dana-BOSP-Reguler)
+[Materi pelajaran umum](https://pusmendik.kemendikdasmen.go.id/tka/tka/view/mata-pelajaran-wajib/sma/bahasa-indonesia)
+
+dan
+
+[materi Pelajaran kejuruan SMK](https://pusatinformasi.rumahpendidikan.kemendikdasmen.go.id/hc/id/articles/52341563052825-Materi-Sumber-Belajar-Jenjang-Sekolah-Menengah-Kejuruan-SMK)
+
+2. Saya rekomendasikan [Portal TKA OnEdumind](https://tka.onedumind.com/) ini adalah platform gratis yang punya beberapa materi dan latihan tryout yang lumayan lengkap, Pada situs itu sudah terdapat materi yang mencakup mapel pilihan dan kejuruan SMK.
+
+3. [tryout nasional](https://www.tryoutnasional.id/) Ini adalah platform untuk drilling latihan soal yang mungkin keluar di TKA. Tapi sistemnya hanya bisa dibuka tiap pukul 19.00 Wib.
+
+![sticker](/../../media/sticker3.jpeg)
+
+---
+
+Jangan abaikan Artikel acuan disini, ini memperkaya konteks apa saja yang harus dicari.
+
+## Referensi acuan rangkuman saya
+
+Terkait TKA, saya memperbanyak sumber untuk mendapat materi pendamping berkualitas di tengah waktu yang mepet ini:
+
+[1. Ruang Murid - Rumah Pendidikan](https://rumah.pendidikan.go.id/ruang/murid)
+
+[2. Artikel resmi kemendikdasmen 2026 - Belajar Terarah, Kisi-kisi Resmi!](https://pusatinformasi.rumahpendidikan.kemendikdasmen.go.id/hc/id/articles/52474934733209-Belajar-Lebih-Terarah-dengan-Kisi-Kisi-Resmi-TKA-untuk-Jenjang-SMA-MA-Sederajat-dan-SMK-MAK-dari-Pusmendik)
+
+[3. Artikel resmi kemendikdasmen 2026 - Cicil materi belajar disini!](https://pusatinformasi.rumahpendidikan.kemendikdasmen.go.id/hc/id/articles/63152679831321-Playlist-Sistem-Belajar-Nyicil-TKA-Jenjang-SMA-2026)

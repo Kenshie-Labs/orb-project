@@ -13,14 +13,6 @@ hintSystemLog: ''
 
 ---
 
-jadikan belajar beberapa materi ini supaya jadi pengetahuan yang berguna untuk masa depan kamu sendiri.  
-
-belajar sesuatu sebagai keinginan jangka panjang, bukan beban kewajiban.
-
-nambah ilmu yang sebelumnya belum punya.
-
----
-
 ## Beberapa fase belajar yang perlu dipahami
 
 Tetapkan:
