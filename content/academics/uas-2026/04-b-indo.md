@@ -2,6 +2,9 @@
 title: "ujian B. Indonesia"
 excerpt: "Tafsir kisi kisi Bu sitta."
 date: 2026-06-03
+isLocked: true
+question: "67"
+hintSystemLog: "676767"
 ---
 
 ## Overview

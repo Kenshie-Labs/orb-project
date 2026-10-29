@@ -2,6 +2,9 @@
 title: "ujian matematika"
 excerpt: "Prediksi mtk yang mungkin sudah diajarkan pak ramos."
 date: 2026-06-05
+isLocked: true
+question: "67"
+hintSystemLog: "676767"
 ---
 
 ## contoh soal

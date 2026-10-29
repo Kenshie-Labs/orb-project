@@ -2,6 +2,9 @@
 title: "ujian PPKN"
 excerpt: "Tafsir kisi kisi bu tris."
 date: 2026-06-02
+isLocked: true
+question: "67"
+hintSystemLog: "676767"
 ---
 
 ## Overview

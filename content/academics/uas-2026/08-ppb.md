@@ -2,6 +2,9 @@
 title: "ujian PPB"
 excerpt: "Pemrograman Perangkat Bergerak."
 date: 2026-06-04
+isLocked: true
+question: "67"
+hintSystemLog: "676767"
 ---
 
 ## Overview
