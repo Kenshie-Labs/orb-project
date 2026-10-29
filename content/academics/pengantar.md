@@ -1,7 +1,10 @@
 ---
-title: "Pengantar operasi PIUNMBM"
-excerpt: "singkatan: Pelajar Ingin Ujian Namun Malas Belajar Manual."
+title: Pengantar operasi PIUNMBM
+excerpt: 'singkatan: Pelajar Ingin Ujian Namun Malas Belajar Manual.'
 date: 2024-01-01
+isLocked: false
+question: fn?
+hintSystemLog: f12
 ---
 
 
